@@ -8,6 +8,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
+import re
 
 app = Flask(__name__)
 
@@ -44,7 +45,10 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token,message)
+    if re.match('股票資訊',message):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage('才不告訴你哩!'))
+    else:
+        line_bot_api.reply_message(event.reply_token,message)
 
 #主程式
 import os
