@@ -48,7 +48,7 @@ def handle_message(event):
     if re.match('股票資訊',message):
         line_bot_api.reply_message(event.reply_token,TextSendMessage('才不告訴你哩!'))
     else:
-        line_bot_api.reply_message(event.reply_token,message)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 
 #主程式
 import os
