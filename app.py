@@ -47,8 +47,9 @@ def callback():
 def handle_message(event):
     message = text=event.message.text
     if re.match('部落格',message):
+        # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
         flex_message = FlexSendMessage(
-            alt_text = '陳陳的嘉理'
+            alt_text = '陳陳的嘉理',
             contents = {
   "type": "bubble",
   "hero": {
