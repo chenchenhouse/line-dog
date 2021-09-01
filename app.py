@@ -13,7 +13,7 @@ import re
 
 #*********function*****************
 from blog import *
-from stock import *
+from stock import stock
 #*********function*****************
 
 app = Flask(__name__)
@@ -56,7 +56,9 @@ def handle_message(event):
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
     elif re.match('股票資訊',message):
-      line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_id))
+      s = stock(event.message.text)
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=s.scrape()))
+      
     else:
       line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 
