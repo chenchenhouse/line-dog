@@ -1,6 +1,7 @@
+from linebot.models import *
+
 def flex_message():
-    message = FlexSendMessage
-    (
+    message = FlexSendMessage(
             alt_text = '陳陳的嘉理',
             contents = 
     {
@@ -216,9 +217,9 @@ def flex_message():
             "uri": "https://chenchenhouse.com//"
             },
             "margin": "none"
+                    }
+                ]
+            }
         }
-        ]
-    }
-    }
     )
     return message
