@@ -13,6 +13,7 @@ import re
 
 #*********function*****************
 from blog import *
+from stock import *
 #*********function*****************
 
 app = Flask(__name__)
@@ -52,10 +53,12 @@ def handle_message(event):
     message = text=event.message.text
     if re.match('部落格',message):
         # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
-        flex_message = flex()
-        line_bot_api.reply_message(event.reply_token,flex_message)
+      flex_message = flex()
+      line_bot_api.reply_message(event.reply_token,flex_message)
+    elif re.match('股票資訊',message):
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_id))
     else:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 
 #主程式
 import os
