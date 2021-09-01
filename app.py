@@ -52,7 +52,7 @@ def handle_message(event):
     message = text=event.message.text
     if re.match('部落格',message):
         # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
-        flex_message = flex_message()
+        flex_message = flex()
         line_bot_api.reply_message(event.reply_token,flex_message)
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))

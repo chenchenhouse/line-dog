@@ -1,6 +1,6 @@
 from linebot.models import *
 
-def flex_message():
+def flex():
     message = FlexSendMessage(
             alt_text = '陳陳的嘉理',
             contents = {
