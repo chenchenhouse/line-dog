@@ -10,8 +10,6 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import re
-import requests
-from bs4 import BeautifulSoup 
 #*********function*****************
 from blog import *
 from stock import *
@@ -55,7 +53,6 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text = event.message.text
-    stock = found_name()
     if re.match('部落格',message):
         # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
       flex_message = flex()
