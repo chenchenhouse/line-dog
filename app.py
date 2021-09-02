@@ -14,8 +14,6 @@ import re
 #*********function*****************
 from blog import *
 from stock import *
-import pandas as pd
-import requests
 #*********function*****************
 
 app = Flask(__name__)
@@ -57,9 +55,9 @@ def handle_message(event):
         # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
-    elif re.match('台積電',message):
-        stock_message = '股票代號 : 2330'
-        line_bot_api.reply_message(event.reply_token,stock_message)
+    if re.match('台積電',message):
+        stock_message = stock_id(message)
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 
