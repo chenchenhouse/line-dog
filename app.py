@@ -57,9 +57,11 @@ def handle_message(event):
         # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
-    else:
-        stock_message = stock_id(message)
+    elif "股票" in message:
+        stock_message = stock_id(message[2:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
+    else:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 #主程式
 import os
 if __name__ == "__main__":
