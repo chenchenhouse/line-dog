@@ -18,18 +18,6 @@ from stock import *
 
 #*********function*****************
 
-#------------自訂function---------------
-def found_name():
-    url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
-    res = requests.get(url)
-    soup = BeautifulSoup(res.text,"html.parser")
-    soup1 = soup.find("table",{"class":"h4"})
-    s_name = []
-    for i in range(len(soup1.find_all("tr")[1:])):
-        s_name_ = soup1.find_all("tr")[i+1].text.split("\n")[4]
-        s_name.append(s_name_)
-    return s_name
-#------------自訂function---------------
 
 
 app = Flask(__name__)
@@ -67,17 +55,14 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     message = text = event.message.text
-
+    stock = found_name()
     if re.match('部落格',message):
         # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
-    elif message in found_name():
+    else:
         stock_message = stock_id(message)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
-    else:
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
-
 #主程式
 import os
 if __name__ == "__main__":
