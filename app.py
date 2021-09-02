@@ -10,10 +10,12 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import re
-
+import requests
+from bs4 import BeautifulSoup 
 #*********function*****************
 from blog import *
 from stock import *
+
 #*********function*****************
 
 #------------自訂function---------------
