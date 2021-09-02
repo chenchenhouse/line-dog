@@ -17,5 +17,5 @@ def stock_id():
     stock_id = pd.concat([data_listed,data_otc],axis = 0)
     stock = stock_id[stock_id["有價證券名稱"] == '台積電'] 
     s = stock.values[0,0]
-    message ="股票代號 :" + s
+    message ="股票代號 : 2330" 
     return message
