@@ -58,7 +58,7 @@ def handle_message(event):
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
     elif "股票 " in message:
-        stock_message = stock_id(str(message[3:]))
+        stock_message = stock_id(message[3:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
