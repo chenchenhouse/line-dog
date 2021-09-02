@@ -1,4 +1,3 @@
-from abc import ABC, abstractmethod
 import pandas as pd
 import requests
 
@@ -17,5 +16,5 @@ def stock_id(s_id):
     data_otc = data_otc.loc[:,"有價證券代號":"產業別"]
     stock_id = pd.concat([data_listed,data_otc],axis = 0)
     stock = stock_id[stock_id["有價證券名稱"] == s_id] 
-    content =print(f"股票代號 : {stock.values[0,0]} \n股票名稱 :{stock.values[0,1]} \n市場別 : {stock.values[0,2]} \n有價證券別 : {stock.values[0,3]} \n產業別 :{stock.values[0,4]}")
+    content ="股票代號 : {} \n股票名稱 :{} \n市場別 : {} \n有價證券別 : {} \n產業別 :{}".format(stock.values[0,0],stock.values[0,1],stock.values[0,2],stock.values[0,3],stock.values[0,4])
     return content
