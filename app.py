@@ -58,9 +58,8 @@ def handle_message(event):
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
     elif re.match('台積電',message):
-        stock_message = stock_id(message)
-        line_bot_api.reply_message(event.reply_token,stock_message)
-      
+        stock_message = '股票代號 : 2330'
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 
