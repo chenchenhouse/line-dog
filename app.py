@@ -50,14 +50,14 @@ def callback():
 ##### 基本上程式編輯都在這個function #####
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = text=event.message.text
+    message = event.message.text
     if re.match('部落格',message):
         # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
     if re.match('台積電',message):
         stock_message = stock_id(message)
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text = stock_message))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 
