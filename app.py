@@ -14,6 +14,7 @@ import re
 #*********function*****************
 from blog import *
 from stock import *
+import pandas as pd
 #*********function*****************
 
 app = Flask(__name__)
