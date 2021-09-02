@@ -56,8 +56,8 @@ def handle_message(event):
         # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
-    if re.match('台積電',message):
-        stock_message = stock_id()
+    if re.match('2330',message):
+        stock_message = stock_id(message)
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text = stock_message))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))

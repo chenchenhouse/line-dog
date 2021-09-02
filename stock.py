@@ -1,21 +1,15 @@
-import pandas as pd
 import requests
+from bs4 import BeautifulSoup 
 
-def stock_id():
-    stock_id_listed = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
-    stock_id_otc = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=2&issuetype=4&industry_code=&Page=1&chklike=Y"
-    data_listed = requests.get(stock_id_listed)
-    data_listed = pd.read_html(data_listed.text)[0]
-    data_listed.columns = data_listed.iloc[0]
-    data_listed = data_listed[1:]
-    data_listed = data_listed.loc[:,"有價證券代號":"產業別"]
-    data_otc = requests.get(stock_id_otc)
-    data_otc = pd.read_html(data_otc.text)[0]
-    data_otc.columns = data_otc.iloc[0]
-    data_otc = data_otc[1:]
-    data_otc = data_otc.loc[:,"有價證券代號":"產業別"]
-    stock_id = pd.concat([data_listed,data_otc],axis = 0)
-    stock = stock_id[stock_id["有價證券名稱"] == s_id] 
-    s = stock.values[0,0]
-    message ="股票代號 : {}".format(stock.values[0,0])
-    return message
+def stock_id(message):
+    url = "https://goodinfo.tw/StockInfo/StockDetail.asp?STOCK_ID=" + str(message)
+    headers = {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36"
+    }
+    res = requests.get(url,headers = headers)
+    res.encoding = "utf-8"
+    soup = BeautifulSoup(res.text,"html.parser")
+    soup1 = soup.find("table",{"class":"b1 p4_2 r10"})
+    soup2 = soup1.find("tr",{"align":"center"}).text.split(" ")[1:-1]
+    mes = "成交價 : {} \n昨收 : {} \n漲跌價 : {} \n漲跌幅 : {} \n振幅 : {} \n開盤 : {} \n最高 : {} \n最低 : {}".format(soup2[0],soup2[1],soup2[2],soup2[3],soup2[4],soup2[5],soup2[6],soup2[7])
+    return mes
