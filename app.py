@@ -14,6 +14,11 @@ import re
 from blog import *
 from stock import *
 from stock_title import *
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials as SAC
+import requests
+from bs4 import BeautifulSoup
+from datetime import datetime
 #*********function*****************
 
 
