@@ -32,7 +32,7 @@ def stock_name():
         Sheets.update(s_id)
     return "{} 更新完成".format(datetime.now().strftime('%Y-%m-%D %H:%M:%S'))
 
-
+    
 def found_id(stock):
     Json = 'stock-search-324803-9c7ec6c7c26c.json' # Json 的單引號內容請改成妳剛剛下載的那個金鑰
     Url = ['https://spreadsheets.google.com/feeds']

@@ -14,7 +14,6 @@ import re
 from blog import *
 from stock import *
 from stock_title import *
-from found_ import *
 #*********function*****************
 
 
@@ -63,7 +62,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(update))
     elif "股票 " in message:
         found = found_id(message[3:])
-        stock_message = stock_id(found)
+        stock_message = stock_id(str(found))
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
