@@ -1,5 +1,5 @@
 line-bot-sdk 
-bs4 
+bs4==4.9.1 
 flask 
 pymongo 
 datetime 
@@ -8,6 +8,6 @@ SnowNLP
 emoji 
 pyshorteners 
 scipy
-requests
+requests==2.22.0
 gspread==4.0.1
 oauth2client==4.1.3
