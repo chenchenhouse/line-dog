@@ -17,3 +17,5 @@ def stock_id(message):
     soup4 = soup3.find("a").text.split("\xa0")
     mes = "股票代號 :{} \n股票名稱 : {} \n成交價 : {} \n昨收 : {} \n漲跌價 : {} \n漲跌幅 : {} \n振幅 : {} \n開盤 : {} \n最高 : {} \n最低 : {}".format(soup4[0],soup4[1],soup2[0],soup2[1],soup2[2],soup2[3],soup2[4],soup2[5],soup2[6],soup2[7])
     return mes
+
+
