@@ -9,3 +9,5 @@ emoji
 pyshorteners 
 scipy
 requests
+gspread
+oauth2client.service_account
