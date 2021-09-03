@@ -3,7 +3,7 @@ bs4
 flask 
 pymongo 
 datetime 
-pandas==1.3.1 
+pandas
 SnowNLP 
 emoji 
 pyshorteners 
