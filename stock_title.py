@@ -1,7 +1,6 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials as SAC
 import requests
-import numpy as np
 from bs4 import BeautifulSoup
 from datetime import datetime
 
