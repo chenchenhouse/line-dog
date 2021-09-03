@@ -13,7 +13,7 @@ import re
 #*********function*****************
 from blog import *
 from stock import *
-
+from stock_title import *
 #*********function*****************
 
 
@@ -57,6 +57,9 @@ def handle_message(event):
         # Flex Message Simulator網頁：https://developers.line.biz/console/fx/
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
+    elif re.match('更新',message):
+        update = stock_name()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(update))
     elif "股票 " in message:
         stock_message = stock_id(message[3:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
