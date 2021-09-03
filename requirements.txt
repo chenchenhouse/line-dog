@@ -3,11 +3,9 @@ bs4
 flask 
 pymongo 
 datetime 
-pandas 
+pandas==1.3.1 
 SnowNLP 
 emoji 
 pyshorteners 
 scipy
-requests
-gspread
-oauth2client
+
