@@ -10,4 +10,4 @@ pyshorteners
 scipy
 requests
 gspread
-oauth2client.service_account
+oauth2client
