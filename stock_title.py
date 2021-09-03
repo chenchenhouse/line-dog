@@ -30,7 +30,7 @@ def stock_name():
     #     Sheets.append_rows(s_id)
     # else:
     #     Sheets.update(s_id)
-    return "{} 更新完成".format(datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    return "{} 更新完成".format(datetime.now().strftime('%Y/%m/%d %H:%M:%S'))
 
 
 
