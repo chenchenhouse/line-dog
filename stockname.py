@@ -1,5 +1,5 @@
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials as SAC
+#import gspread
+#from oauth2client.service_account import ServiceAccountCredentials as SAC
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -20,10 +20,10 @@ def stock_name():
     for i in range(len(soup3.find_all("tr"))):
         s_id_ = soup3.find_all("tr")[i].text.split("\n")[3:5]
         s_id.append(s_id_)
-    if len(Sheets.get_all_records()) == 0:
-        Sheets.append_rows(s_id)
-    else:
-        Sheets.update(s_id)
+    #if len(Sheets.get_all_records()) == 0:
+    #    Sheets.append_rows(s_id)
+    #else:
+    #    Sheets.update(s_id)
     return "{} 更新完成".format(datetime.now().strftime('%Y/%m/%d %H:%M:%S'))
 
 
