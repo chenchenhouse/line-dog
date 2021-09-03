@@ -59,7 +59,7 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,flex_message)
     elif re.match('更新',message):
         update = stock_name()
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(update))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage("更新完畢"))
     elif "股票 " in message:
         found = found_id(message[3:])
         stock_message = stock_id(str(found))
