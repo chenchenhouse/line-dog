@@ -13,7 +13,7 @@ import re
 #*********function*****************
 from blog import *
 from stock import *
-from stock_title import *
+from stockname import *
 #*********function*****************
 
 
