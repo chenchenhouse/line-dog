@@ -7,7 +7,7 @@ pandas
 SnowNLP 
 emoji 
 pyshorteners 
-scipy==1.5.0
-requests==2.22.0
+scipy
+requests
 gspread==4.0.1
 oauth2client==4.1.3
