@@ -13,7 +13,7 @@ import re
 #*********function*****************
 from blog import *
 from stock import *
-import stock_title
+from stock_title import *
 #*********function*****************
 
 
@@ -58,11 +58,11 @@ def handle_message(event):
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
     elif re.match('更新',message):
-        update = stock_title.stock_name()
+        update = stock_name()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(update))
     elif "股票 " in message:
-        found = stock_title.found_id(message[3:])
-        stock_message = stock_id(str(found))
+        #found = found_id(message[3:])
+        stock_message = stock_id(message[3:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
