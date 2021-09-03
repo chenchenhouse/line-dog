@@ -5,12 +5,6 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 def stock_name():
-    Json = 'stock-search-324803-9c7ec6c7c26c.json' # Json 的單引號內容請改成妳剛剛下載的那個金鑰
-    Url = ['https://spreadsheets.google.com/feeds']
-    Connect = SAC.from_json_keyfile_name(Json, Url)
-    GoogleSheets = gspread.authorize(Connect)
-    Sheet = GoogleSheets.open_by_key('1FBTfERDyv-EN8F_PsdCThEfwlDBWFkDiqghj-WqS-XY') # 這裡請輸入妳自己的試算表代號
-    Sheets = Sheet.sheet1
     url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     res = requests.get(url)
     soup = BeautifulSoup(res.text,"html.parser")
