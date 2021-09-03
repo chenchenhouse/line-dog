@@ -19,6 +19,10 @@ def stock_name():
     res2 = requests.get(url2)
     soup2 = BeautifulSoup(res2.text,"html.parser")
     soup3 = soup2.find("table",{"class":"h4"})
+    new_func(Sheets, soup1, soup3)
+    return "{} 更新完成".format(datetime.now().strftime('%Y-%m-%D %H:%M:%S'))
+
+def new_func(Sheets, soup1, soup3):
     s_id = []
     for i in range(len(soup1.find_all("tr"))):
         s_id_ = soup1.find_all("tr")[i].text.split("\n")[3:5]
@@ -30,7 +34,6 @@ def stock_name():
         Sheets.append_rows(s_id)
     else:
         Sheets.update(s_id)
-    return "{} 更新完成".format(datetime.now().strftime('%Y-%m-%D %H:%M:%S'))
 
     
 def found_id(stock):
