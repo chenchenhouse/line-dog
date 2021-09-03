@@ -1,5 +1,4 @@
 line-bot-sdk 
-bs4
 beautifulSoup4==4.9.1
 flask 
 pymongo 
