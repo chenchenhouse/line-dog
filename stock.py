@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup 
 import re
@@ -8,16 +8,16 @@ def stock_id(message):
     if not re.match(r'[+-]?\d+$', message):
         try:
             url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
-            df = pandas.read_html(requests.get(url).text)[0]
+            df = pd.read_html(requests.get(url).text)[0]
             df = df.iloc[:,2:7]
             df.columns = df.iloc[0,:]
             df = df[1:]
             url2 = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=2&issuetype=4&industry_code=&Page=1&chklike=Y"
-            df2 = pandas.read_html(requests.get(url2).text)[0]
+            df2 = pd.read_html(requests.get(url2).text)[0]
             df2 = df2.iloc[:,2:7]
             df2.columns = df2.iloc[0,:]
             df2 = df2[1:]
-            df3 = pandas.concat([df,df2])
+            df3 = pd.concat([df,df2])
             df4 = df3[df3["有價證券名稱"] == message]
             message = df4.values[0,0]
             return(message)
