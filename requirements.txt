@@ -12,3 +12,4 @@ oauth2client==4.1.3
 SnowNLP 
 emoji 
 pyshorteners
+pymongo
