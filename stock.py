@@ -7,7 +7,7 @@ import re
 def stock_id(message):
     if not re.match(r'[+-]?\d+$', message):
         url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
-        df = pd.read_html(requests.get(url).text)[0]
+        #df = pd.read_html(requests.get(url).text)[0]
         # df = df.iloc[:,2:7]
         # df.columns = df.iloc[0,:]
         # df = df[1:]
