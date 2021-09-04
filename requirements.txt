@@ -2,13 +2,9 @@ line-bot-sdk==1.19.0
 beautifulSoup4==4.9.1
 flask==1.1.2
 range
-pymongo 
 datetime 
-scipy==1.5.0
 numpy==1.20.3
-SnowNLP 
-emoji 
-pyshorteners
+scipy==1.5.0
 requests==2.22.0
 gspread==4.0.1
 oauth2client==4.1.3
