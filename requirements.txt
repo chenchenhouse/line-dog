@@ -1,8 +1,8 @@
-numpy
+numpy==1.19.5
 beautifulsoup4==4.6.3
 requests==2.20.1
 scipy
-pandas
+
 line-bot-sdk==1.19.0
 flask==1.1.2
 range
