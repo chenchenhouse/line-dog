@@ -40,11 +40,11 @@ def stock_new():
              PostbackAction( 
                 label="頭條新聞 TOP5",
                 display_text = "頭條新聞 TOP5",
-                data= headlines()),
+                data= "action=" + headlines()),
             PostbackAction(
                 label="台股新聞 TOP5",
                 display_text = "台股新聞 TOP5",
-                data= tw_stock()),
+                data= "action=" + tw_stock()),
             ] 
         ) 
     )
