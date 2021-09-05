@@ -69,6 +69,9 @@ def handle_message(event):
     elif re.match("台股新聞",message):
         news = tw_stock()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
+    elif re.match("國際新聞",message):
+        news = wd_stock()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 #主程式
