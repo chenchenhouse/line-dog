@@ -34,7 +34,9 @@ def stock_id(message):
         soup2 = soup1.find("tr",{"align":"center"}).text.split(" ")[1:-1]
         soup3 = soup.find("td",{"style":"padding:0 2px 5px 20px;width:10px;"})
         soup4 = soup3.find("a").text.split("\xa0")
-        mes = "股票代號 :{} \n股票名稱 : {} \n成交價 : {} \n昨收 : {} \n漲跌價 : {} \n漲跌幅 : {} \n振幅 : {} \n開盤 : {} \n最高 : {} \n最低 : {}".format(soup4[0],soup4[1],soup2[0],soup2[1],soup2[2],soup2[3],soup2[4],soup2[5],soup2[6],soup2[7])
+        soup_1 = soup.find("table",{"class":"b1 p4_4 r10"})
+        soup_2 = soup_1.find_all("td",{"bgcolor":"white"})
+        mes = "股票代號 :{} \n股票名稱 : {} \n成交價 : {} \n昨收 : {} \n漲跌價 : {} \n漲跌幅 : {} \n振幅 : {} \n開盤價 : {} \n最高價 : {} \n最低價 : {} \n產業別 : {} \n市場 : {} \n資本額 : {} \n市值 : {}".format(soup4[0],soup4[1],soup2[0],soup2[1],soup2[2],soup2[3],soup2[4],soup2[5],soup2[6],soup2[7],soup_2[1],soup_2[2],soup_2[4],soup_2[5])
         return mes
     except:
         return("請輸入正確的股票代號")
