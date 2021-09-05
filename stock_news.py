@@ -33,7 +33,7 @@ def stock_new():
     buttons_template_message = TemplateSendMessage( 
     alt_text = "股票新聞",
     template=ButtonsTemplate( 
-        thumbnail_image_url="https://s.yimg.com/ny/api/res/1.2/RqETwlh8PY7yrbaDIhyxdQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTM4MC40NDQ0NDQ0NDQ0NDQ0Ng--/https://s.yimg.com/uu/api/res/1.2/Vn5SfDtQIEZNmoxFT0hVQw--~B/aD0yMTQ7dz0zNjA7YXBwaWQ9eXRhY2h5b24-/https://media.zenfs.com/zh-tw/cnyes.com.tw/bfd0fd8921c2a100ac91dab8014a84af",
+        thumbnail_image_url="https://github.com/chenchenhouse/line-dog/blob/f889bc55d8217d12c0c14dc59b733cab335b1825/%E9%89%85%E4%BA%A8%E7%B6%B2.png",
         title="股市新聞", 
         text="請點選想查詢的新聞種類", 
         actions=[
