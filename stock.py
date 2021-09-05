@@ -41,15 +41,3 @@ def stock_id(message):
     except:
         return("請輸入正確的股票代號")
     
-def headlines():
-    url = "https://news.cnyes.com/news/cat/headline"
-    res = requests.get(url)
-    soup = BeautifulSoup(res.text,"html.parser")
-    soup1 = soup.find_all("a",{"class":"_1Zdp"},limit = 10)
-    base = "https://news.cnyes.com"
-    news =  ""
-    for i in soup1:
-        title = i.get("title")
-        address = base + i.get("href")
-        news += "新聞 : {} \n網址 : {} \n".format(title,address)
-    return news

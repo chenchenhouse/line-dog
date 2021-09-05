@@ -13,6 +13,7 @@ import re
 #*********function*****************
 from blog import *
 from stock import *
+from stock_news import *
 #*********function*****************
 
 
@@ -60,7 +61,7 @@ def handle_message(event):
         stock_message = stock_id(message[3:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
     elif re.match("頭條新聞",message):
-        news = headlines()
+        news = stock_new()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
