@@ -47,10 +47,9 @@ def headlines():
     soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("a",{"class":"_1Zdp"},limit = 10)
     base = "https://news.cnyes.com"
-    news =  []
+    news =  ""
     for i in soup1:
         title = i.get("title")
         address = base + i.get("href")
-        news.append("新聞 {} \n網址 {}".format(title,address))
+        news += "新聞 {} \n網址 {} \n".format(title,address)
     return news
-
