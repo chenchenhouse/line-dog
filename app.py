@@ -60,9 +60,15 @@ def handle_message(event):
     elif "股票 " in message:
         stock_message = stock_id(message[3:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
-    elif re.match("股市新聞",message):
+    elif re.match("新聞",message):
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)
+    elif re.match("頭條新聞",message):
+        news = headlines()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
+    elif re.match("台股新聞",message):
+        news = tw_stock()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 #主程式

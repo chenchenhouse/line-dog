@@ -37,14 +37,12 @@ def stock_new():
         title="股市新聞", 
         text="請點選想查詢的新聞種類", 
         actions=[
-             PostbackAction( 
+            MessageAction( 
                 label="頭條新聞 TOP5",
-                display_text = "頭條新聞 TOP5",
-                data= "action=" + headlines()),
-            PostbackAction(
+                text="頭條新聞"),
+            MessageAction( 
                 label="台股新聞 TOP5",
-                display_text = "台股新聞 TOP5",
-                data= "action=" + tw_stock()),
+                text="台股新聞")
             ] 
         ) 
     )
