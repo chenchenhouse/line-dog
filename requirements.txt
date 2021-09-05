@@ -1,6 +1,5 @@
 numpy
 beautifulsoup4==4.6.3
-pandas
 requests==2.20.1
 scipy
 line-bot-sdk==1.19.0
