@@ -40,10 +40,9 @@ def stock_new():
                 MessageAction( 
                     label="頭條新聞 TOP5",
                     text= headlines()),
-                    MessageAction( 
+                MessageAction( 
                     label="台股新聞 TOP5",
-                    text= tw_stock()
-                    ) 
+                    text= tw_stock()) 
                 ] 
             ) 
         )
