@@ -51,5 +51,5 @@ def headlines():
     for i in soup1:
         title = i.get("title")
         address = base + i.get("href")
-        news += "新聞 {} \n網址 {} \n".format(title,address)
+        news += "新聞 : {} \n網址 : {} \n".format(title,address)
     return news
