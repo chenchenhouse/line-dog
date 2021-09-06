@@ -58,8 +58,17 @@ def handle_message(event):
       flex_message = flex()
       line_bot_api.reply_message(event.reply_token,flex_message)
     elif "股票 " in message:
-        stock_message = stock_id(message[3:])
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_message))
+        stock_mes = stock_message(message[3:])
+        line_bot_api.reply_message(event.reply_token,stock_mes)
+    elif "個股資訊" in message:
+        stock_new = stock_id(message[:4])
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_new))
+    elif "同業比較" in message:
+        stock_one = compare_one(message[:4])
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_one))
+    elif "同業排名" in message:
+        stock_other = compare_other(message[:4])
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_other))   
     elif re.match("新聞",message):
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)

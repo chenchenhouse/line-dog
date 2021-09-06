@@ -2,9 +2,9 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup 
 import re
+from linebot.models import *
 
-
-def stock_id(message):
+def stock_change(message):
     if not re.match(r'[+-]?\d+$', message):
         try:
             url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
@@ -20,8 +20,13 @@ def stock_id(message):
             df3 = pd.concat([df,df2])
             df4 = df3[df3["有價證券名稱"] == message]
             message = df4.values[0,0]
+            return(message)
         except:
             return("請輸入正確的股票名稱")
+
+def stock_id(message):
+    if not re.match(r'[+-]?\d+$', message):
+        message = stock_change(message)
     try:
         url = "https://goodinfo.tw/StockInfo/StockDetail.asp?STOCK_ID=" + str(message)
         headers = {
@@ -41,3 +46,91 @@ def stock_id(message):
     except:
         return("請輸入正確的股票代號")
     
+def compare_one(message):
+    if not re.match(r'[+-]?\d+$', message):
+        message = stock_change(message)
+    try:
+        url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
+        headers = {
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+        }
+        res = requests.get(url,headers= headers)
+        res.encoding = "utf-8"
+        soup = BeautifulSoup(res.text,"html.parser")
+        while soup.text =="\n\n\n\n\n":
+            res = requests.get(url,headers= headers)
+            res.encoding = "utf-8"
+            soup = BeautifulSoup(res.text,"html.parser")
+        soup1 = soup.find("a",{"class":"D(ib) Fz(14px) Lh(20px) C($c-button) Mb(20px) Mb(16px)--mobile C($c-active-text):h Td(n)"}).text
+        soup2 = soup.find_all("span",{"class":"C(#000) Fz(24px) Fw(600)"})
+        message = "{} \n近一年漲跌幅 : 第{}名 \n近一年每股盈餘 : 第{}名 \n近一年殖利率 : 第{}名".format(soup1,soup2[0].text,soup2[1].text,soup2[2].text)
+        return message
+    except:
+        return("請輸入正確的股票代號")
+
+def compare_other(message):    
+    if not re.match(r'[+-]?\d+$', message):
+        message = stock_change(message)
+    try:
+        url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
+        headers = {
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+        }
+        res = requests.get(url,headers= headers)
+        res.encoding = "utf-8"
+        soup = BeautifulSoup(res.text,"html.parser")
+        while soup.text =="\n\n\n\n\n":
+            res = requests.get(url,headers= headers)
+            res.encoding = "utf-8"
+            soup = BeautifulSoup(res.text,"html.parser")
+        compare = "股票代號\t股票名稱\t近一月漲跌幅 \n"
+        stock_id_ = soup.find_all("span",{"class":"Fz(14px) C(#979ba7) Ell"})
+        stock_name = soup.find_all("div",{"class":"Lh(20px) Fw(600) Fz(16px) Ell"})
+        stock_quote = soup.find_all("div",{"class":"Fxg(1) Fxs(1) Fxb(0%) Ta(end) Mend($m-table-cell-space) Mend(0):lc Miw(100px) Bgc(t)"})
+        for i in range(len(stock_id)):
+            compare += "{}\t{}\t\t{} \n".format(stock_id_[i].text,stock_name[i].text,stock_quote[i].text)
+        return(compare)
+    except:
+        return("請輸入正確的股票代號")
+
+def stock_message(message):
+    if re.match(r'[+-]?\d+$', message):
+        try:
+            url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
+            df = pd.read_html(requests.get(url).text)[0]
+            df = df.iloc[:,2:7]
+            df.columns = df.iloc[0,:]
+            df = df[1:]
+            url2 = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=2&issuetype=4&industry_code=&Page=1&chklike=Y"
+            df2 = pd.read_html(requests.get(url2).text)[0]
+            df2 = df2.iloc[:,2:7]
+            df2.columns = df2.iloc[0,:]
+            df2 = df2[1:]
+            df3 = pd.concat([df,df2])
+            df4 = df3[df3["有價證券代號"] == message]
+            message = df4.values[0,1]
+        except:
+            return("請輸入正確的股票代號")   
+    try: 
+        buttons_template_message = TemplateSendMessage( 
+        alt_text = "股票資訊",
+        template=ButtonsTemplate( 
+            thumbnail_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
+            title= message + "股票資訊", 
+            text="請點選想查詢的股票資訊", 
+            actions=[
+                MessageAction( 
+                    label= message + "個股資訊",
+                    text= message + "個股資訊"),
+                MessageAction( 
+                    label= message + "同業比較",
+                    text= message + "同業比較"),
+                MessageAction( 
+                    label= message + "同業排名",
+                    text= message + "同業排名"),    
+                ] 
+            ) 
+        )
+        return buttons_template_message
+    except:
+        return("請輸入正確的股票名稱")
