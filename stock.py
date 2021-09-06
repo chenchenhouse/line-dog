@@ -20,6 +20,7 @@ def stock_change(message):
             df3 = pd.concat([df,df2])
             df4 = df3[df3["有價證券名稱"] == message]
             message = df4.values[0,0]
+            return(message)
         except:
             return("請輸入正確的股票名稱")
 
