@@ -125,13 +125,13 @@ def stock_message(message):
             actions=[
                 MessageAction( 
                     label= message + " 個股資訊",
-                    text= "個股資訊" + message),
+                    text= "個股資訊 " + message),
                 MessageAction( 
                     label= message + " 同業比較",
-                    text= "同業比較" + message),
+                    text= "同業比較 " + message),
                 MessageAction( 
                     label= message + " 同業排名",
-                    text= "同業排名" + message),    
+                    text= "同業排名 " + message),    
                 ] 
             ) 
         )
