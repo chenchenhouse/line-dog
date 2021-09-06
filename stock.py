@@ -60,7 +60,8 @@ def compare_one(message):
         res = requests.get(url,headers= headers)
         res.encoding = "utf-8"
         soup = BeautifulSoup(res.text,"html.parser")
-    soup1 = soup.find("a",{"class":"D(ib) Fz(14px) Lh(20px) C($c-button) Mb(20px) Mb(16px)--mobile C($c-active-text):h Td(n)"}).text
+    soup1 = soup.find("a",{"class":"D(ib) Fz(14px) Lh(20px) C($c-button) Mb(20px) Mb(16px)--mobile C($c-active-text):h Td(n)"})
+    soup1 = soup1.text
     soup2 = soup.find_all("span",{"class":"C(#000) Fz(24px) Fw(600)"})
     message = "{} \n近一年漲跌幅 : 第{}名 \n近一年每股盈餘 : 第{}名 \n近一年殖利率 : 第{}名".format(soup1,soup2[0].text,soup2[1].text,soup2[2].text)
     return message
@@ -83,7 +84,7 @@ def compare_other(message):
     stock_id_ = soup.find_all("span",{"class":"Fz(14px) C(#979ba7) Ell"})
     stock_name = soup.find_all("div",{"class":"Lh(20px) Fw(600) Fz(16px) Ell"})
     stock_quote = soup.find_all("div",{"class":"Fxg(1) Fxs(1) Fxb(0%) Ta(end) Mend($m-table-cell-space) Mend(0):lc Miw(100px) Bgc(t)"})
-    for i in range(len(message)):
+    for i in range(len(stock_id_)):
         compare += "{}\t{}\t\t{} \n".format(stock_id_[i].text,stock_name[i].text,stock_quote[i].text)
     return(compare)
 
