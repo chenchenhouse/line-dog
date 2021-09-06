@@ -60,14 +60,14 @@ def handle_message(event):
     elif "股票 " in message:
         stock_mes = stock_message(message[3:])
         line_bot_api.reply_message(event.reply_token,stock_mes)
-    elif "個股資訊" in message:
-        stock_n = stock_id(message[:3])
+    elif "個股資訊 " in message:
+        stock_n = stock_id(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_n))
-    elif "同業比較" in message:
-        stock_one = compare_one(message[:3])
+    elif "同業比較 " in message:
+        stock_one = compare_one(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_one))
-    elif "同業排名" in message:
-        stock_other = compare_other(message[:3])
+    elif "同業排名 " in message:
+        stock_other = compare_other(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_other))   
     elif re.match("新聞",message):
         news = stock_new()
