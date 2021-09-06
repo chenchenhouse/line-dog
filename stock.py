@@ -47,7 +47,7 @@ def stock_id(message):
         return("請輸入正確的股票代號")
     
 def compare_one(message):
-    if not re.match(r'[+-]?\d+$', message):
+    if re.match(r'[+-]?\d+$', message):
         message = stock_change(message)
     url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
     headers = {
@@ -67,7 +67,7 @@ def compare_one(message):
 
 
 def compare_other(message):
-    if not re.match(r'[+-]?\d+$', message):
+    if re.match(r'[+-]?\d+$', message):
         message = stock_change(message)
     url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
     headers = {
