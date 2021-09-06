@@ -116,18 +116,18 @@ def stock_message(message):
         alt_text = "股票資訊",
         template=ButtonsTemplate( 
             thumbnail_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
-            title= message + "股票資訊", 
+            title= message + " 股票資訊", 
             text="請點選想查詢的股票資訊", 
             actions=[
                 MessageAction( 
-                    label= message + "個股資訊",
-                    text= message + "個股資訊"),
+                    label= message + " 個股資訊",
+                    text= message + " 個股資訊"),
                 MessageAction( 
-                    label= message + "同業比較",
-                    text= message + "同業比較"),
+                    label= message + " 同業比較",
+                    text= message + " 同業比較"),
                 MessageAction( 
-                    label= message + "同業排名",
-                    text= message + "同業排名"),    
+                    label= message + " 同業排名",
+                    text= message + " 同業排名"),    
                 ] 
             ) 
         )
