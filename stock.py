@@ -125,7 +125,7 @@ def stock_message(message):
                     text= "同業比較 " + message),
                 MessageAction( 
                     label= message + " 同業排名",
-                    text= "同業排名" + message),    
+                    text= "同業排名 " + message),    
                 ] 
             ) 
         )
