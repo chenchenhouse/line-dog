@@ -71,27 +71,25 @@ def compare_one(message):
 def compare_other(message):    
     if not re.match(r'[+-]?\d+$', message):
         message = stock_change(message)
-    try:
-        url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
-        headers = {
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
-        }
+    url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
+    headers = {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+    }
+    res = requests.get(url,headers= headers)
+    res.encoding = "utf-8"
+    soup = BeautifulSoup(res.text,"html.parser")
+    while soup.text =="\n\n\n\n\n":
         res = requests.get(url,headers= headers)
         res.encoding = "utf-8"
         soup = BeautifulSoup(res.text,"html.parser")
-        while soup.text =="\n\n\n\n\n":
-            res = requests.get(url,headers= headers)
-            res.encoding = "utf-8"
-            soup = BeautifulSoup(res.text,"html.parser")
-        compare = "股票代號\t股票名稱\t近一月漲跌幅 \n"
-        stock_id_ = soup.find_all("span",{"class":"Fz(14px) C(#979ba7) Ell"})
-        stock_name = soup.find_all("div",{"class":"Lh(20px) Fw(600) Fz(16px) Ell"})
-        stock_quote = soup.find_all("div",{"class":"Fxg(1) Fxs(1) Fxb(0%) Ta(end) Mend($m-table-cell-space) Mend(0):lc Miw(100px) Bgc(t)"})
-        for i in range(len(stock_id)):
-            compare += "{}\t{}\t\t{} \n".format(stock_id_[i].text,stock_name[i].text,stock_quote[i].text)
-        return(compare)
-    except:
-        return("請輸入正確的股票代號")
+    compare = "股票代號\t股票名稱\t近一月漲跌幅 \n"
+    stock_id_ = soup.find_all("span",{"class":"Fz(14px) C(#979ba7) Ell"})
+    stock_name = soup.find_all("div",{"class":"Lh(20px) Fw(600) Fz(16px) Ell"})
+    stock_quote = soup.find_all("div",{"class":"Fxg(1) Fxs(1) Fxb(0%) Ta(end) Mend($m-table-cell-space) Mend(0):lc Miw(100px) Bgc(t)"})
+    for i in range(len(stock_id)):
+        compare += "{}\t{}\t\t{} \n".format(stock_id_[i].text,stock_name[i].text,stock_quote[i].text)
+    return(compare)
+
 
 def stock_message(message):
     if re.match(r'[+-]?\d+$', message):
@@ -121,13 +119,13 @@ def stock_message(message):
             actions=[
                 MessageAction( 
                     label= message + " 個股資訊",
-                    text= message + " 個股資訊"),
+                    text= "個股資訊 " + message),
                 MessageAction( 
                     label= message + " 同業比較",
-                    text= message + " 同業比較"),
+                    text= "同業比較 " + message),
                 MessageAction( 
                     label= message + " 同業排名",
-                    text= message + " 同業排名"),    
+                    text= "同業排名" + message),    
                 ] 
             ) 
         )
