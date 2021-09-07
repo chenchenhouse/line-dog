@@ -53,7 +53,7 @@ def compare_one(message):
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
     res = requests.get(url,headers= headers)
-    while str(res) != "<Response [404]>":
+    while str(res) != "<Response [200]>":
         res = requests.get(url,headers= headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
@@ -71,7 +71,7 @@ def compare_other(message):
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
     res = requests.get(url,headers= headers)
-    while str(res) != "<Response [404]>":
+    while str(res) != "<Response [200]>":
         res = requests.get(url,headers= headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
