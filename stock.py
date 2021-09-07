@@ -104,7 +104,7 @@ def compare_other(message):
 
 
 def stock_message(message):
-    if not re.match(r"[+-]?\d+$", message):
+    if re.match(r"[+-]?\d+$", message):
         try:
             url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
             df = pd.read_html(requests.get(url).text)[0]
