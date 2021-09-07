@@ -26,8 +26,6 @@ def stock_change(message):
 def stock_id(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    if message == "請輸入正確的股票名稱":
-        return("是我錯了")
     try:
         url = "https://goodinfo.tw/StockInfo/StockDetail.asp?STOCK_ID=" + str(message)
         headers = {
@@ -50,9 +48,7 @@ def stock_id(message):
 def compare_one(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    if message == "請輸入正確的股票名稱":
-        return("是我錯了")
-    url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
+    url = "https://tw.stock.yahoo.com/quote/" + message +"/compare"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
@@ -72,9 +68,7 @@ def compare_one(message):
 def compare_other(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    if message == "請輸入正確的股票名稱":
-        return("是我錯了")
-    url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
+    url = "https://tw.stock.yahoo.com/quote/" + message +"/compare"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
