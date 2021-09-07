@@ -46,20 +46,24 @@ def stock_id(message):
         return("請輸入正確的股票代號")
     
 def compare_one(message):
-    # if not re.match(r"[+-]?\d+$", message):
-    message = stock_change(message)
+    if not re.match(r"[+-]?\d+$", message):
+        message = stock_change(message)
     url = "https://tw.stock.yahoo.com/quote/" + str(message) +"/compare"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
-    res = requests.get(url,headers= headers)
-    res.encoding = "utf-8"
-    soup = BeautifulSoup(res.text,"html.parser")
-    while soup.text == "\n\n\n\n\n":
-        res = requests.get(url,headers= headers)
-        res.encoding = "utf-8"
-        soup = BeautifulSoup(res.text,"html.parser")
-    soup1 = soup.find("a",{"class":"D(ib) Fz(14px) Lh(20px) C($c-button) Mb(20px) Mb(16px)--mobile C($c-active-text):h Td(n)"}).text
+    while True:
+        try:
+            res = requests.get(url,headers= headers)
+            res.encoding = "utf-8"
+            soup = BeautifulSoup(res.text,"html.parser")
+            soup1 = soup.find("a",{"class":"D(ib) Fz(14px) Lh(20px) C($c-button) Mb(20px) Mb(16px)--mobile C($c-active-text):h Td(n)"}).text
+            break
+        except:
+            res = requests.get(url,headers= headers)
+            res.encoding = "utf-8"
+            soup = BeautifulSoup(res.text,"html.parser")
+            soup1 = soup.find("a",{"class":"D(ib) Fz(14px) Lh(20px) C($c-button) Mb(20px) Mb(16px)--mobile C($c-active-text):h Td(n)"}).text           
     soup2 = soup.find_all("span",{"class":"C(#000) Fz(24px) Fw(600)"})
     message = "{} \n近一年漲跌幅 : 第{}名 \n近一年每股盈餘 : 第{}名 \n近一年殖利率 : 第{}名".format(soup1,soup2[0].text,soup2[1].text,soup2[2].text)
     return message
