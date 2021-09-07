@@ -48,14 +48,14 @@ def stock_id(message):
 def compare_one(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    url = "https://tw.stock.yahoo.com/quote/" + message +"/compare"
+    url = "https://tw.stock.yahoo.com/quote/" + str(message) +"/compare"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
     res = requests.get(url,headers= headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
-    while soup.text =="\n\n\n\n\n":
+    while soup.text == r"\n\n\n\n\n":
         res = requests.get(url,headers= headers)
         res.encoding = "utf-8"
         soup = BeautifulSoup(res.text,"html.parser")
@@ -68,14 +68,14 @@ def compare_one(message):
 def compare_other(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    url = "https://tw.stock.yahoo.com/quote/" + message +"/compare"
+    url = "https://tw.stock.yahoo.com/quote/" + str(message) +"/compare"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
     res = requests.get(url,headers= headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
-    while soup.text =="\n\n\n\n\n":
+    while soup.text == r"\n\n\n\n\n":
         res = requests.get(url,headers= headers)
         res.encoding = "utf-8"
         soup = BeautifulSoup(res.text,"html.parser")
