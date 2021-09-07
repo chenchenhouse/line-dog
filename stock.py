@@ -102,10 +102,10 @@ def one_new(message):
         res = requests.get(url,headers = headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
-    soup1 = soup.find_all("h3",{"class":"Mt(0) Mb(8px)"},limit = 13)
+    soup1 = soup.find_all("h3",{"class":"Mt(0) Mb(8px)"},limit = 7)
     news = ""
     for i in range(len(soup1)):
-        if i != 1 and i != 5 and i != 9:
+        if i != 1 and i != 5:
             new_ = soup1[i].find("a").get("href")
             news += "新聞 : {} \n網址 : {} \n".format(soup1[i].text,new_)
     return news
