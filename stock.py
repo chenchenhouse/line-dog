@@ -75,7 +75,7 @@ def compare_other(message):
         res = requests.get(url,headers= headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
-    compare = "股票代號\t股票名稱\t近一月漲跌幅 \n"
+    compare = "股票代號 \t股票名稱 \t近一月漲跌幅 \n"
     stock_id = soup.find_all("span",{"class":"Fz(14px) C(#979ba7) Ell"})
     stock_name = soup.find_all("div",{"class":"Lh(20px) Fw(600) Fz(16px) Ell"})
     stock_quote = soup.find_all("div",{"class":"Fxg(1) Fxs(1) Fxb(0%) Ta(end) Mend($m-table-cell-space) Mend(0):lc Miw(100px) Bgc(t)"})
@@ -89,7 +89,7 @@ def compare_other(message):
                 ud = "-"
         except:
             ud = " "
-        compare += "{}\t{}\t {}\t{} \n".format(stock_id[i].text,stock_name[i].text,ud,stock_quote[i].text)
+        compare += "{} \t{} \t {}\t{} \n".format(stock_id[i].text,stock_name[i].text,ud,stock_quote[i].text)
     return compare
 
 
