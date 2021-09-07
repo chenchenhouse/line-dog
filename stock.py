@@ -92,6 +92,24 @@ def compare_other(message):
         compare += "{} \t{} \t {}\t{} \n".format(stock_id[i].text,stock_name[i].text,ud,stock_quote[i].text)
     return compare
 
+def one_new(message):
+    url = "https://tw.stock.yahoo.com/quote/"+str(message) +  "/news"
+    headers = {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+    }
+    res = requests.get(url,headers = headers)
+    while str(res) != "<Response [200]>":
+        res = requests.get(url,headers = headers)
+    res.encoding = "utf-8"
+    soup = BeautifulSoup(res.text,"html.parser")
+    soup1 = soup.find_all("h3",{"class":"Mt(0) Mb(8px)"},limit = 13)
+    news = ""
+    for i in range(len(soup1)):
+        if i != 1 and i != 5 and i != 9:
+            new_ = soup1[i].find("a").get("href")
+            news += "新聞 : {} \n網址 : {} \n".format(soup1[i].text,new_)
+    return news
+
 
 def stock_message(message):
     if re.match(r"[+-]?\d+$", message):
@@ -126,7 +144,7 @@ def stock_message(message):
                             text= "個股資訊 " + message),
                         MessageAction( 
                             label= message + " 個股新聞",
-                            text= "同業比較 " + message)     
+                            text= "個股新聞 " + message)     
                         ] 
                     ),
                     CarouselColumn( 
