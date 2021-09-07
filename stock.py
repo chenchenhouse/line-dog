@@ -112,25 +112,39 @@ def stock_message(message):
         except:
             return("請輸入正確的股票代號")   
     try: 
-        buttons_template_message = TemplateSendMessage( 
+        carousel_template_message  = TemplateSendMessage( 
         alt_text = "股票資訊",
-        template=ButtonsTemplate( 
-            thumbnail_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
-            title= message + " 股票資訊", 
-            text="請點選想查詢的股票資訊", 
-            actions=[
-                MessageAction( 
-                    label= message + " 個股資訊",
-                    text= "個股資訊 " + message),
-                MessageAction( 
-                    label= message + " 同業比較",
-                    text= "同業比較 " + message),
-                MessageAction( 
-                    label= message + " 同業排名",
-                    text= "同業排名 " + message),    
-                ] 
+        template=CarouselTemplate( 
+            columns=[ 
+                CarouselColumn( 
+                    thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
+                    title = message + " 股票資訊", 
+                    text ="請點選想查詢的股票資訊", 
+                    actions =[
+                        MessageAction( 
+                            label= message + " 個股資訊",
+                            text= "個股資訊 " + message),
+                        MessageAction( 
+                            label= message + " 個股新聞",
+                            text= "同業比較 " + message)     
+                        ] 
+                    ),
+                    CarouselColumn( 
+                        thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
+                        title = message + " 同業資訊", 
+                        text ="請點選想查詢的股票資訊", 
+                        actions =[
+                            MessageAction( 
+                                label= message + " 同業比較",
+                                text= "同業比較 " + message),
+                            MessageAction( 
+                                label= message + " 同業排名",
+                                text= "同業排名 " + message),
+                        ]
+                    )
+                ]
             ) 
         )
-        return buttons_template_message
+        return carousel_template_message
     except:
         return("請輸入正確的股票名稱")
