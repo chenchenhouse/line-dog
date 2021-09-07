@@ -55,6 +55,7 @@ def compare_one(message):
     res = requests.get(url,headers= headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
+    soup = soup.text
     # while soup.text == "\n\n\n\n\n":
     #     res = requests.get(url,headers= headers)
     #     res.encoding = "utf-8"
@@ -63,7 +64,7 @@ def compare_one(message):
     # soup2 = soup.find_all("span",{"class":"C(#000) Fz(24px) Fw(600)"})
     # message = "{} \n近一年漲跌幅 : 第{}名 \n近一年每股盈餘 : 第{}名 \n近一年殖利率 : 第{}名".format(soup1,soup2[0].text,soup2[1].text,soup2[2].text)
     # return message
-    return soup.text
+    return soup
 
 
 def compare_other(message):
