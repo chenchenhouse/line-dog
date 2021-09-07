@@ -55,7 +55,6 @@ def compare_one(message):
     res = requests.get(url,headers= headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
-    soup = soup.text
     while soup.text == "\n\n\n\n\n":
         res = requests.get(url,headers= headers)
         res.encoding = "utf-8"
