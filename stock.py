@@ -24,7 +24,7 @@ def stock_change(message):
         return("請輸入正確的股票名稱")
 
 def stock_id(message):
-    if not re.match(r'[+-]?\d+$', message):
+    if message.isdigit() == False:
         message = stock_change(message)
     try:
         url = "https://goodinfo.tw/StockInfo/StockDetail.asp?STOCK_ID=" + str(message)
@@ -46,7 +46,7 @@ def stock_id(message):
         return("請輸入正確的股票代號")
     
 def compare_one(message):
-    if not re.match(r'[+-]?\d+$', message):
+    if message.isdigit() == False:
         message = stock_change(message)
     url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
     headers = {
@@ -66,7 +66,7 @@ def compare_one(message):
 
 
 def compare_other(message):
-    if not re.match(r'[+-]?\d+$', message):
+    if message.isdigit() == False:
         message = stock_change(message)
     url = "https://tw.stock.yahoo.com/quote/" +str(message)+"/compare"
     headers = {
@@ -98,7 +98,7 @@ def compare_other(message):
 
 
 def stock_message(message):
-    if re.match(r'[+-]?\d+$', message):
+    if message.isdigit() == False:
         try:
             url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
             df = pd.read_html(requests.get(url).text)[0]
