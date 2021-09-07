@@ -93,6 +93,8 @@ def compare_other(message):
     return compare
 
 def one_new(message):
+    if not re.match(r"[+-]?\d+$", message):
+        message = stock_change(message)
     url = "https://tw.stock.yahoo.com/quote/"+str(message) +  "/news"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
@@ -102,10 +104,10 @@ def one_new(message):
         res = requests.get(url,headers = headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
-    soup1 = soup.find_all("h3",{"class":"Mt(0) Mb(8px)"},limit = 7)
+    soup1 = soup.find_all("h3",{"class":"Mt(0) Mb(8px)"},limit = 13)
     news = ""
     for i in range(len(soup1)):
-        if i != 1 and i != 5:
+        if i != 1 and i != 5 and i != 9:
             new_ = soup1[i].find("a").get("href")
             news += "新聞 : {} \n網址 : {} \n".format(soup1[i].text,new_)
     return news
