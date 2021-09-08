@@ -3,7 +3,8 @@ import requests
 from bs4 import BeautifulSoup 
 import re
 from linebot.models import *
-
+import matplotlib.pyplot as plt
+import pyimgur
 
 #股票名稱換代號
 def stock_change(message):
@@ -50,22 +51,38 @@ def stock_id(message):
         return("請輸入正確的股票代號")
 
 #平均股利
-def dividend(message):
+def average_dividend(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
     url = "https://goodinfo.tw/StockInfo/StockDividendPolicy.asp?STOCK_ID=" + str(message)
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
-    res = requests.get(url,headers=headers)
+    res = requests.get(url,headers=headers )
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("tr",{"align":"center","bgcolor":"white"})
-    message = "                   平均股利  平均增減  均填權息日  平均殖利率  連續分派年數\n"
+    title = ["類別","平均股利(元)","平均增減(元)","均填權息日數","平均殖利率(%)","連續分派年數"]
+    content = pd.DataFrame()
     for i in range(4,7):
-        soup2 = soup1[i].find_all("td")
-        message += "{}  :   {}元   {}元       {}日            {}%            {}\n".format(soup2[0].text,soup2[1].text,soup2[2].text,soup2[3].text,soup2[4].text,soup2[7].text)
-    return message
+            soup2 = soup1[i].find_all("td")
+            concent = concent.append([[soup2[0].text,soup2[1].text,soup2[2].text,soup2[3].text,soup2[4].text,soup2[7].text]])
+    concent.columns = title
+    concent.index = concent["類別"]
+    concent.drop("類別",axis=1,inplace = True)
+    plt.savefig(str(message) + "平均股利.png", bbox_inches = "tight")
+    CLIENT_ID = "0214ca80ccacfe5"
+
+    PATH =str(message) + "平均股利.png" #A Filepath to an image on your computer"
+    title = str(message) + "平均股利"
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title=title)
+    image_message = ImageSendMessage( 
+        original_content_url= uploaded_image, 
+        preview_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png")
+    return image_message
+
+
 
 #同業比較   
 def compare_one(message):
