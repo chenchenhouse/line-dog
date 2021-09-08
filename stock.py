@@ -66,10 +66,10 @@ def average_dividend(message):
     content = pd.DataFrame()
     for i in range(4,7):
             soup2 = soup1[i].find_all("td")
-            concent = concent.append([[soup2[0].text,soup2[1].text,soup2[2].text,soup2[3].text,soup2[4].text,soup2[7].text]])
-    concent.columns = title
-    concent.index = concent["類別"]
-    concent.drop("類別",axis=1,inplace = True)
+            content = content.append([[soup2[0].text,soup2[1].text,soup2[2].text,soup2[3].text,soup2[4].text,soup2[7].text]])
+    content.columns = title
+    content.index = content["類別"]
+    content.drop("類別",axis=1,inplace = True)
     plt.savefig(str(message) + "平均股利.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
 
