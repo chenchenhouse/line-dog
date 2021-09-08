@@ -4,6 +4,8 @@ from bs4 import BeautifulSoup
 import re
 from linebot.models import *
 
+
+#股票名稱換代號
 def stock_change(message):
     try:
         url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
@@ -23,6 +25,8 @@ def stock_change(message):
     except:
         return("請輸入正確的股票名稱")
 
+
+#個股資訊
 def stock_id(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
@@ -44,7 +48,24 @@ def stock_id(message):
         return mes
     except:
         return("請輸入正確的股票代號")
-    
+
+#平均股利
+def dividend(message):
+    url = "https://goodinfo.tw/StockInfo/StockDividendPolicy.asp?STOCK_ID=" + str(message)
+    headers = {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+    }
+    res = requests.get(url,headers=headers )
+    res.encoding = "utf-8"
+    soup = BeautifulSoup(res.text,"html.parser")
+    soup1 = soup.find_all("tr",{"align":"center","bgcolor":"white"})
+    message = "                   平均股利  平均增減  均填權息日  平均殖利率  連續分派年數\n"
+    for i in range(4,7):
+        soup2 = soup1[i].find_all("td")
+        message += "{}  :   {}元   {}元       {}日            {}%            {}\n".format(soup2[0].text,soup2[1].text,soup2[2].text,soup2[3].text,soup2[4].text,soup2[7].text)
+    return message
+
+#同業比較   
 def compare_one(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
@@ -63,6 +84,7 @@ def compare_one(message):
     return message
 
 
+#同業排名
 def compare_other(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
@@ -92,6 +114,7 @@ def compare_other(message):
         compare += "{} \t{} \t {}\t{} \n".format(stock_id[i].text,stock_name[i].text,ud,stock_quote[i].text)
     return compare
 
+#個股新聞
 def one_new(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
@@ -113,6 +136,7 @@ def one_new(message):
     return news
 
 
+#個股資訊統整
 def stock_message(message):
     if re.match(r"[+-]?\d+$", message):
         try:
@@ -136,18 +160,31 @@ def stock_message(message):
         alt_text = "股票資訊",
         template=CarouselTemplate( 
             columns=[ 
-                CarouselColumn( 
-                    thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
-                    title = message + " 股票資訊", 
-                    text ="請點選想查詢的股票資訊", 
-                    actions =[
-                        MessageAction( 
-                            label= message + " 個股資訊",
-                            text= "個股資訊 " + message),
-                        MessageAction( 
-                            label= message + " 個股新聞",
-                            text= "個股新聞 " + message)     
-                        ] 
+                    CarouselColumn( 
+                        thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
+                        title = message + " 股票資訊", 
+                        text ="請點選想查詢的股票資訊", 
+                        actions =[
+                            MessageAction( 
+                                label= message + " 個股資訊",
+                                text= "個股資訊 " + message),
+                            MessageAction( 
+                                label= message + " 個股新聞",
+                                text= "個股新聞 " + message) 
+                        ]
+                    ),
+                    CarouselColumn( 
+                        thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
+                        title = message + " 股利資訊", 
+                        text ="請點選想查詢的股票資訊", 
+                        actions =[
+                            MessageAction( 
+                                label= message + " 平均股利",
+                                text= "平均股利 " + message),
+                            MessageAction( 
+                                label= message + " 歷年股利",
+                                text= "歷年股利 " + message) 
+                        ]
                     ),
                     CarouselColumn( 
                         thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
