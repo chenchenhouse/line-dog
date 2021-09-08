@@ -70,15 +70,22 @@ def average_dividend(message):
     content.columns = title
     content.index = content["類別"]
     content.drop("類別",axis=1,inplace = True)
+    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+    plt.rcParams['axes.unicode_minus'] = False
+    plt.figure('平均股利')            # 視窗名稱
+    plt.figure(dpi = 500)
+    ax = plt.axes(frame_on=False)# 不要額外框線
+    ax.xaxis.set_visible(False)  # 隱藏X軸刻度線
+    ax.yaxis.set_visible(False)  # 隱藏Y軸刻度線
+    pd.plotting.table(ax, content, loc='center')
     plt.savefig(str(message) + "平均股利.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
-
-    PATH =str(message) + "平均股利.png" #A Filepath to an image on your computer"
+    PATH = str(message) + "平均股利.png" #A Filepath to an image on your computer"
     title = str(message) + "平均股利"
     im = pyimgur.Imgur(CLIENT_ID)
     uploaded_image = im.upload_image(PATH, title=title)
     image_message = ImageSendMessage( 
-        original_content_url= uploaded_image, 
+        original_content_url= uploaded_image.link, 
         preview_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png")
     return image_message
 
