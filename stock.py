@@ -85,8 +85,8 @@ def average_dividend(message):
     im = pyimgur.Imgur(CLIENT_ID)
     uploaded_image = im.upload_image(PATH, title=title)
     image_message = ImageSendMessage( 
-        original_content_url= uploaded_image.link)
-        #preview_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png")
+        original_content_url= uploaded_image.link,
+        preview_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png")
     return image_message
 
 
