@@ -86,7 +86,7 @@ def average_dividend(message):
     uploaded_image = im.upload_image(PATH, title=title)
     image_message = ImageSendMessage( 
         original_content_url= uploaded_image.link,
-        preview_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png")
+        preview_image_url= uploaded_image.link)
     return image_message
 
 
