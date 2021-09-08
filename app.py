@@ -66,7 +66,7 @@ def handle_message(event):
     elif "個股新聞 " in message:
         new_one = one_new(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(new_one))
-    elif "平均股利  " in message:
+    elif "平均股利 " in message:
         dividend_one = dividend(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(dividend_one))    
     elif "同業比較 " in message:
