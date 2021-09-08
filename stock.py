@@ -73,6 +73,8 @@ def average_dividend(message):
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     plt.figure('平均股利')            # 視窗名稱
+    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+    plt.rcParams['axes.unicode_minus'] = False
     plt.figure(dpi = 500)
     ax = plt.axes(frame_on=False)# 不要額外框線
     ax.xaxis.set_visible(False)  # 隱藏X軸刻度線
