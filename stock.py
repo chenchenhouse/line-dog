@@ -60,9 +60,10 @@ def dividend(message):
     soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("tr",{"align":"center","bgcolor":"white"})
     message = "           平均股利  平均增減  均填權息日  平均殖利率  連續分派年數\n"
-    for i in range(4,6):
-        soup2 = soup1[i].find_all("td")
-        message += "{}  :   {}元   {}元       {}日            {}%            {}\n".format(soup2[0].text,soup2[1].text,soup2[2].text,soup2[3].text,soup2[4].text,soup2[7].text)
+    message = soup1.text
+    # for i in range(4,7):
+    #     soup2 = soup1[i].find_all("td")
+    #     message += "{}  :   {}元   {}元       {}日            {}%            {}\n".format(soup2[0].text,soup2[1].text,soup2[2].text,soup2[3].text,soup2[4].text,soup2[7].text)
     return message
 
 #同業比較   
