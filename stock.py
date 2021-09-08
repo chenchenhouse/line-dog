@@ -73,8 +73,6 @@ def average_dividend(message):
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     plt.figure('平均股利')            # 視窗名稱
-    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
-    plt.rcParams['axes.unicode_minus'] = False
     plt.figure(dpi = 500)
     ax = plt.axes(frame_on=False)# 不要額外框線
     ax.xaxis.set_visible(False)  # 隱藏X軸刻度線
@@ -87,8 +85,8 @@ def average_dividend(message):
     im = pyimgur.Imgur(CLIENT_ID)
     uploaded_image = im.upload_image(PATH, title=title)
     image_message = ImageSendMessage( 
-        original_content_url= uploaded_image.link, 
-        preview_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png")
+        original_content_url= uploaded_image.link)
+        #preview_image_url="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png")
     return image_message
 
 
