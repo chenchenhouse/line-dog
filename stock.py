@@ -55,12 +55,12 @@ def dividend(message):
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
-    res = requests.get(url,headers=headers )
+    res = requests.get(url,headers=headers)
     res.encoding = "utf-8"
     soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("tr",{"align":"center","bgcolor":"white"})
     message = "           平均股利  平均增減  均填權息日  平均殖利率  連續分派年數\n"
-    message = soup1[-1].text
+    message = soup1[4].text
     # for i in range(4,7):
     #     soup2 = soup1[i].find_all("td")
     #     message += "{}  :   {}元   {}元       {}日            {}%            {}\n".format(soup2[0].text,soup2[1].text,soup2[2].text,soup2[3].text,soup2[4].text,soup2[7].text)
