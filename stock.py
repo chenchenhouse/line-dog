@@ -5,7 +5,7 @@ import re
 from linebot.models import *
 import matplotlib.pyplot as plt
 import pyimgur
-
+import pygame
 #股票名稱換代號
 def stock_change(message):
     try:
@@ -92,6 +92,8 @@ def average_dividend(message):
 
 #歷年股利
 def year_dividend(message):
+    if not re.match(r"[+-]?\d+$", message):
+        message = stock_change(message)
     url = "https://tw.stock.yahoo.com/quote/" + str(message) + "/dividend"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
