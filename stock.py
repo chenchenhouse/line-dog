@@ -161,6 +161,75 @@ def one_new(message):
             news += "新聞 : {} \n網址 : {} \n".format(soup1[i].text,new_)
     return news
 
+#分鐘圖
+def min_close(message):
+    if not re.match(r"[+-]?\d+$", message):
+        message = stock_change(message)
+    url = "https://tw.stock.yahoo.com/_td-stock/api/resource/FinanceChartService.ApacLibraCharts;autoRefresh=1631105443818;symbols=%5B%22" + str(message) +".TW%22%5D;type=tick?bkt=tw-qsp-exp-no4&device=desktop&ecma=modern&feature=ecmaModern%2CuseVersionSwitch%2CuseNewQuoteTabColor%2ChideMarketInfo&intl=tw&lang=zh-Hant-TW&partner=none&prid=3j6j761gjhcda&region=TW&site=finance&tz=Asia%2FTaipei&ver=1.2.1132&returnMeta=true"
+    res = requests.get(url)
+    jd = res.json()["data"][0]["chart"]["indicators"]["quote"][0]
+    open_ = jd["open"]
+    high = jd["high"]
+    low = jd["low"]
+    close = jd["close"]
+    volume = jd["volume"]
+    time = res.json()["data"][0]["chart"]["timestamp"]
+    df = pd.DataFrame({"timestamp" :  time , "open" : open_ , "high" : high , "low" : low , "close" : close , "volume" : volume})
+    time_ = pd.to_datetime(df["timestamp"] + 3600 * 8 , unit = "s")
+    df["timestamp"] = time_
+    df = df.fillna(method= "ffill")
+    df = df[1:]
+    close1 = []   #上漲
+    close2 = []   #下跌
+    o = df["open"].values[0]
+    for i in range(len(df)):
+        if df["close"].values[i] >  o:
+            close1.append(df["close"].values[i])
+        else:
+            close1.append(o)
+    for i in range(len(df)):
+        if df["close"].values[i] <  o:
+            close2.append(df["close"].values[i])
+        else:
+            close2.append(o)
+    df["close1"] = close1
+    df["close2"] = close2
+    df["open0"] = o
+    url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
+    df_ = pd.read_html(requests.get(url_).text)[0]
+    df_ = df_.iloc[:,2:7]
+    df_.columns = df_.iloc[0,:]
+    df_ = df_[1:]
+    url2 = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=2&issuetype=4&industry_code=&Page=1&chklike=Y"
+    df_2 = pd.read_html(requests.get(url2).text)[0]
+    df_2 = df_2.iloc[:,2:7]
+    df_2.columns = df_2.iloc[0,:]
+    df_2 = df_2[1:]
+    df_3 = pd.concat([df_,df_2])
+    df_4 = df_3[df_3["有價證券代號"] == message]
+    title = df_4.values[0,0] + " " + df_4.values[0,1]
+    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+    plt.rcParams['axes.unicode_minus'] = False
+    plt.subplots(figsize=(15, 5)) 
+    plt.title(title,fontsize = 15)
+    plt.xlabel('時段',fontsize = 15)
+    plt.ylabel('股價',fontsize = 15)
+    plt.grid()
+    plt.plot(df["timestamp"],df["close1"],"r")
+    plt.plot(df["timestamp"],df["close2"],"g")
+    plt.plot(df["timestamp"],df["open0"],"yellow")
+    plt.fill_between(df["timestamp"],df["close1"], df["open0"], color = 'lightcoral')
+    plt.fill_between(df["timestamp"],df["close2"], df["open0"], color = 'palegreen')
+    plt.savefig(str(message) + "分鐘圖.png", bbox_inches = "tight")
+    CLIENT_ID = "0214ca80ccacfe5"
+    PATH = str(message) + "分鐘圖.png" #A Filepath to an image on your computer"
+    title = str(message) + "分鐘圖"
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title=title)
+    image_message = ImageSendMessage( 
+        original_content_url= uploaded_image.link,
+        preview_image_url= uploaded_image.link)
+    return image_message
 
 #個股資訊統整
 def stock_message(message):
@@ -196,7 +265,10 @@ def stock_message(message):
                                 text= "個股資訊 " + message),
                             MessageAction( 
                                 label= message + " 個股新聞",
-                                text= "個股新聞 " + message) 
+                                text= "個股新聞 " + message),
+                            MessageAction( 
+                                label= message + " 最新分鐘圖",
+                                text= "最新分鐘圖 " + message)                            
                         ]
                     ),
                     CarouselColumn( 
