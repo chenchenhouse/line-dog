@@ -179,22 +179,23 @@ def min_close(message):
     df["timestamp"] = time_
     df = df.fillna(method= "ffill")
     df = df[1:]
+    jd_ = res.json()["data"][0]["chart"]["meta"]
+    previousClose = jd_["previousClose"]
     close1 = []   #上漲
     close2 = []   #下跌
-    o = df["open"].values[0]
     for i in range(len(df)):
-        if df["close"].values[i] >  o:
+        if df["close"].values[i] >=  previousClose:
             close1.append(df["close"].values[i])
         else:
-            close1.append(o)
+            close1.append(previousClose)
     for i in range(len(df)):
-        if df["close"].values[i] <  o:
+        if df["close"].values[i] <=  previousClose:
             close2.append(df["close"].values[i])
         else:
-            close2.append(o)
+            close2.append(previousClose)
     df["close1"] = close1
     df["close2"] = close2
-    df["open0"] = o
+    df["Previous"] = previousClose
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
     df_ = df_.iloc[:,2:7]
@@ -217,9 +218,9 @@ def min_close(message):
     plt.grid()
     plt.plot(df["timestamp"],df["close1"],"r")
     plt.plot(df["timestamp"],df["close2"],"g")
-    plt.plot(df["timestamp"],df["open0"],"yellow")
-    plt.fill_between(df["timestamp"],df["close1"], df["open0"], color = 'lightcoral')
-    plt.fill_between(df["timestamp"],df["close2"], df["open0"], color = 'palegreen')
+    plt.plot(df["timestamp"],df["Previous"],"yellow")
+    plt.fill_between(df["timestamp"],df["close1"], df["Previous"], color = 'lightcoral')
+    plt.fill_between(df["timestamp"],df["close2"], df["Previous"], color = 'palegreen')
     plt.savefig(str(message) + "分鐘圖.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
     PATH = str(message) + "分鐘圖.png" #A Filepath to an image on your computer"
