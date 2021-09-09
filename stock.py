@@ -265,10 +265,22 @@ def stock_message(message):
                                 text= "個股資訊 " + message),
                             MessageAction( 
                                 label= message + " 個股新聞",
-                                text= "個股新聞 " + message), 
+                                text= "個股新聞 " + message),
+                      
+                        ]
+                    ),
+                    CarouselColumn( 
+                        thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
+                        title = message + " 股票資訊", 
+                        text ="請點選想查詢的股票資訊", 
+                        actions =[
                             MessageAction( 
-                                label= message + " 最新分鐘",
-                                text= "最新分鐘 " + message)                      
+                                label= message + " 最新分鐘圖",
+                                text= "最新分鐘圖 " + message), 
+                            MessageAction( 
+                                label= message + " 日線圖",
+                                text= "日線圖 " + message),
+                      
                         ]
                     ),
                     CarouselColumn( 
