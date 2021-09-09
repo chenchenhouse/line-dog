@@ -268,7 +268,7 @@ def stock_message(message):
                                 text= "個股新聞 " + message),
                             MessageAction( 
                                 label= message + " 最新分鐘圖",
-                                text= "最新分鐘圖 " + message)                          
+                                text= "最新分鐘圖 " + message),                          
                         ]
                     ),
                     CarouselColumn( 
@@ -281,7 +281,7 @@ def stock_message(message):
                                 text= "平均股利 " + message),
                             MessageAction( 
                                 label= message + " 歷年股利",
-                                text= "歷年股利 " + message) 
+                                text= "歷年股利 " + message), 
                         ]
                     ),
                     CarouselColumn( 
@@ -294,7 +294,7 @@ def stock_message(message):
                                 text= "同業比較 " + message),
                             MessageAction( 
                                 label= message + " 同業排名",
-                                text= "同業排名 " + message)
+                                text= "同業排名 " + message),
                         ]
                     )
                 ]
