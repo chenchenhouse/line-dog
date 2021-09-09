@@ -5,7 +5,7 @@ import re
 from linebot.models import *
 import matplotlib.pyplot as plt
 import pyimgur
-import pygame
+
 #股票名稱換代號
 def stock_change(message):
     try:
