@@ -265,7 +265,10 @@ def stock_message(message):
                                 text= "個股資訊 " + message),
                             MessageAction( 
                                 label= message + " 個股新聞",
-                                text= "個股新聞 " + message),                        
+                                text= "個股新聞 " + message), 
+                            MessageAction( 
+                                label= message + " 最新分鐘",
+                                text= "最新分鐘 " + message)                      
                         ]
                     ),
                     CarouselColumn( 

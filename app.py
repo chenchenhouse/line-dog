@@ -63,8 +63,8 @@ def handle_message(event):
     elif "個股資訊 " in message:
         stock_n = stock_id(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_n))
-    elif "最新分鐘圖 " in message:
-        m = min_close(message[6:])
+    elif "最新分鐘 " in message:
+        m = min_close(message[5:])
         line_bot_api.reply_message(event.reply_token,m)
     elif "個股新聞 " in message:
         new_one = one_new(message[5:])
