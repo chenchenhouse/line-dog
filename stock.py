@@ -51,6 +51,19 @@ def stock_id(message):
         return("請輸入正確的股票代號")
 
 #平均股利1
+def contiun_dividend(message):
+    url = "https://tw.stock.yahoo.com/quote/" + str(message) + "/dividend"
+    headers = {
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
+    }
+    res = requests.get(url,headers= headers)
+    while str(res) != "<Response [200]>":
+        res = requests.get(url,headers= headers)
+    soup = BeautifulSoup(res.text,"html.parser")
+    soup1 = soup.find("p",{"class":"Mb(20px) Mb(12px)--mobile Fz(16px) Fz(18px)--mobile C($c-primary-text)"}).text
+    return soup1
+
+#平均股利2
 def average_dividend(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
@@ -88,19 +101,6 @@ def average_dividend(message):
         original_content_url= uploaded_image.link,
         preview_image_url= uploaded_image.link)
     return image_message
-
-#平均股利2
-def contiun_dividend(message):
-    url = "https://tw.stock.yahoo.com/quote/" + str(message) + "/dividend"
-    headers = {
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
-    }
-    res = requests.get(url,headers= headers)
-    while str(res) != "<Response [200]>":
-        res = requests.get(url,headers= headers)
-    soup = BeautifulSoup(res.text,"html.parser")
-    soup1 = soup.find("p",{"class":"Mb(20px) Mb(12px)--mobile Fz(16px) Fz(18px)--mobile C($c-primary-text)"}).text
-    return soup1
 
 
 #歷年股利
