@@ -70,8 +70,16 @@ def handle_message(event):
         new_one = one_new(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(new_one))
     elif "平均股利 " in message:
+        contiun = contiun_dividend(message[5:])
         dividend_one = average_dividend(message[5:])
-        line_bot_api.reply_message(event.reply_token,dividend_one)    
+        message1 = {
+        contiun
+        }
+        message2 = {
+        dividend_one
+        }
+        message_all = [message1, message2]
+        line_bot_api.reply_message(event.reply_token,message_all)    
     elif "歷年股利 " in message:
         dividend_year = year_dividend(message[5:])
         line_bot_api.reply_message(event.reply_token,dividend_year)      
