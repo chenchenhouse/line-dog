@@ -73,7 +73,7 @@ def handle_message(event):
         contiun = contiun_dividend(message[5:])
         dividend_one = average_dividend(message[5:])
         message1 = {
-        contiun
+        TextSendMessage(contiun)
         }
         message2 = {
         dividend_one
