@@ -52,6 +52,8 @@ def stock_id(message):
 
 #平均股利1
 def contiun_dividend(message):
+    if not re.match(r"[+-]?\d+$", message):
+        message = stock_change(message)
     url = "https://tw.stock.yahoo.com/quote/" + str(message) + "/dividend"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
