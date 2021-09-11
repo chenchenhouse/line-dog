@@ -12,6 +12,6 @@ gspread==4.0.1
 oauth2client==4.1.3
 pyimgur
 Ta-lib
--e git+https://github.com/numrut/heroku-buildpack-python-talib
+-e git + https://github.com/numrut/heroku-buildpack-python-talib
 mpl_finance
 twstock
