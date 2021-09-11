@@ -7,9 +7,10 @@ pandas==1.3.1
 lxml==4.5.2
 line-bot-sdk==1.19.0
 datetime 
+matplotlib
 gspread==4.0.1
 oauth2client==4.1.3
 pyimgur
-matplotlib
+mpl_finance
 talib
 twstock
