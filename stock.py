@@ -5,6 +5,11 @@ import re
 from linebot.models import *
 import matplotlib.pyplot as plt
 import pyimgur
+import mpl_finance as mpf
+import talib
+import twstock
+import datetime
+import numpy as np
 
 #股票名稱換代號
 def stock_change(message):
@@ -299,6 +304,62 @@ def min_close(message):
         preview_image_url= uploaded_image.link)
     return image_message
 
+#日線圖
+def stock_day(message):
+    if not re.match(r"[+-]?\d+$", message):
+        message = stock_change(message)
+    s = twstock.Stock(str(message))
+    t = (datetime.datetime.now() - datetime.timedelta(days=90)).strftime("%Y-%m").split("-")
+    df = pd.DataFrame(s.fetch_from(int(t[0]),int(t[1])))
+    df.index = df["date"]
+    df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
+    df.drop("date",axis = 1,inplace=True)
+    url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
+    df_ = pd.read_html(requests.get(url_).text)[0]
+    df_ = df_.iloc[:,2:7]
+    df_.columns = df_.iloc[0,:]
+    df_ = df_[1:]
+    url2 = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=2&issuetype=4&industry_code=&Page=1&chklike=Y"
+    df_2 = pd.read_html(requests.get(url2).text)[0]
+    df_2 = df_2.iloc[:,2:7]
+    df_2.columns = df_2.iloc[0,:]
+    df_2 = df_2[1:]
+    df_3 = pd.concat([df_,df_2])
+    df_4 = df_3[df_3["有價證券代號"] == "2330"]
+    title_ = df_4.values[0,0] + " " + df_4.values[0,1]
+    sma_10 = talib.SMA(np.array(df['close']), 10)
+    sma_20 = talib.SMA(np.array(df['close']), 20)
+    fig = plt.figure(figsize=(24, 15))
+    ax = fig.add_axes([0,0.2,1,0.5])
+    ax2 = fig.add_axes([0,0,1,0.2])
+    ax.set_xticks(range(0, len(df.index),10))
+    ax.set_title(title_,fontsize=30)
+    ax.yaxis.set_tick_params(labelsize=15)
+    ax.grid(True)
+    ax.set_xticklabels(df.index[::10])
+    mpf.candlestick2_ochl(ax, df['open'], df['close'], df['high'],
+                          df['low'], width=0.6, colorup='r', colordown='g', alpha=0.75); 
+    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+    plt.rcParams['axes.unicode_minus'] = False
+    ax.plot(sma_10, label='10日均線')
+    ax.plot(sma_20, label='20日均線')
+    mpf.volume_overlay(ax2, df['open'], df['close'], df['capacity'], colorup='r', colordown='g', width=0.5, alpha=0.8)
+    ax2.grid(True)
+    ax2.set_xticks(range(0, len(df.index), 10))
+    ax2.set_xticklabels(df.index[::10])
+    plt.xticks(rotation=45,fontsize=20)
+    plt.yticks(fontsize=15)
+    ax.legend(fontsize=20)
+    plt.savefig(str(message) + "日線圖.png", bbox_inches = "tight")
+    CLIENT_ID = "0214ca80ccacfe5"
+    PATH = str(message) + "日線圖.png" #A Filepath to an image on your computer"
+    title = str(message) + "日線圖"
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title=title)
+    image_message = ImageSendMessage( 
+        original_content_url= uploaded_image.link,
+        preview_image_url= uploaded_image.link)
+    return image_message
 #個股資訊統整
 def stock_message(message):
     if re.match(r"[+-]?\d+$", message):
