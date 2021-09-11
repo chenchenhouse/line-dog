@@ -11,7 +11,7 @@ matplotlib
 gspread==4.0.1
 oauth2client==4.1.3
 pyimgur
-pycrypto
+python-dev
 Ta-lib
 mpl_finance
 twstock
