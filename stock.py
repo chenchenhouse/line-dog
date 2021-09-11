@@ -349,7 +349,7 @@ def stock_day(message):
     ax2.set_xticklabels(df.index[::10])
     plt.xticks(rotation=45,fontsize=20)
     plt.yticks(fontsize=15)
-    ax.legend(fontsize=20)
+    ax.legend(fontsize=20,loc = "upper left")
     plt.savefig(str(message) + "日線圖.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
     PATH = str(message) + "日線圖.png" #A Filepath to an image on your computer"
