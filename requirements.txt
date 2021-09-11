@@ -11,7 +11,7 @@ matplotlib
 gspread==4.0.1
 oauth2client==4.1.3
 pyimgur
-sudo apt-get install python3-dev
+brew install ta-lib
 Ta-lib
 mpl_finance
 twstock
