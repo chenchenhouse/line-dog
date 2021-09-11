@@ -11,7 +11,7 @@ matplotlib
 gspread==4.0.1
 oauth2client==4.1.3
 pyimgur
-brew install ta-lib
+-e git+https://homebrew.bintray.com/bottles/ta-lib-0.4.0.mojave.bottle.1.tar.gz
 Ta-lib
 mpl_finance
 twstock
