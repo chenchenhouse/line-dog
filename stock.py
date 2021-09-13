@@ -321,10 +321,7 @@ def stock_day(message):
         t = arrow.now().shift(months = date).strftime("%Y%m")
         url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
         ip = choice(ip_url)
-        res = requests.get(url,proxies=ip)
-        while str(res) != "<Response [200]>":
-            ip = choice(ip_url)
-            res = requests.get(url,proxies=ip)
+        res = requests.get(url)
         s = json.loads(res.text)
         data = []
         for i in (s["data"]):
