@@ -84,7 +84,10 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_one))
     elif "同業排名 " in message:
         stock_other = compare_other(message[5:])
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_other))   
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_other))  
+    elif "最新法人買賣超 " in message:
+        inv = investors(message[8:])
+        line_bot_api.reply_message(event.reply_token,inv) 
     elif re.match("新聞",message):
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)
@@ -97,9 +100,6 @@ def handle_message(event):
     elif re.match("國際新聞",message):
         news = wd_stock()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
-    elif "最新法人買賣超 " in message:
-        inv = investors(message[8:])
-        line_bot_api.reply_message(event.reply_token,inv)
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 #主程式
