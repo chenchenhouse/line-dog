@@ -5,13 +5,13 @@ import re
 from linebot.models import *
 import matplotlib.pyplot as plt
 import pyimgur
-import mpl_finance as mpf
-import talib
-import json
+#import mpl_finance as mpf
+#import talib
+#import json
 import random 
-import time
-import arrow
-import numpy as np
+#import time
+#import arrow
+#import numpy as np
 
 #股票名稱換代號
 def stock_change(message):
