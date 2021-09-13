@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup 
 from linebot.models import *
+import pandas as pd
 
 
 def headlines():
@@ -9,12 +10,115 @@ def headlines():
     soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("a",{"class":"_1Zdp"},limit = 10)
     base = "https://news.cnyes.com"
-    news =  ""
+    title = []
+    address = []
+    picture = []
     for i in soup1:
-        title = i.get("title")
-        address = base + i.get("href")
-        news += "新聞 : {} \n網址 : {} \n".format(title,address)
-    return news
+        title_ = i.get("title")
+        address_ = base + i.get("href")
+        picture_ = i.find("img")["src"]
+        title.append(title_)
+        address.append(address_)
+        picture.append(picture_)
+    df = pd.DataFrame({"標題": title,"網址":address,"圖片":picture})
+    carousel_template_message  = TemplateSendMessage( 
+        alt_text = "股票資訊",
+        template=CarouselTemplate( 
+            columns=[ 
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[0][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[0][0], 
+                            uri=df.iloc[0][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[1][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[1][0], 
+                            uri=df.iloc[1][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[2][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[2][0], 
+                            uri=df.iloc[2][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[3][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[3][0], 
+                            uri=df.iloc[3][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[4][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[4][0], 
+                            uri=df.iloc[4][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[5][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[5][0], 
+                            uri=df.iloc[5][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[6][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[6][0], 
+                            uri=df.iloc[6][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[7][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[7][0], 
+                            uri=df.iloc[7][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[8][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[8][0], 
+                            uri=df.iloc[8][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[9][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[9][0], 
+                            uri=df.iloc[9][1])
+                        ]
+                    )
+                ]
+            ) 
+        )
+    return carousel_template_message
 
 def tw_stock():
     url = "https://news.cnyes.com/news/cat/tw_stock"
