@@ -52,13 +52,13 @@ def stock_new():
         text="請點選想查詢的新聞種類", 
         actions=[
             MessageAction( 
-                label="頭條新聞 TOP5",
+                label="頭條新聞 TOP10",
                 text="頭條新聞"),
             MessageAction( 
-                label="台股新聞 TOP5",
+                label="台股新聞 TOP10",
                 text="台股新聞"),
             MessageAction( 
-                label="國際新聞 TOP5",
+                label="國際新聞 TOP10",
                 text="國際新聞"),    
             ] 
         ) 
