@@ -24,17 +24,17 @@ def investors(message):
     soup1 = soup.find_all("div",{"style":"padding:0 12px 0 0"})[0:4]
     name = []
     buy = []
-    sell = []
-    b_s = []
-    contuin = []
+    #sell = []
+    #b_s = []
+    #contuin = []
     for i in soup1:
         soup2 = i.find_all("span")
         name.append(soup2[0].text)
         buy.append(soup2[1].text)
-        sell.append(soup2[2].text)
-        b_s.append(soup2[3].text)
+        #sell.append(soup2[2].text)
+        #b_s.append(soup2[3].text)
         #contuin.append(soup2[4].text)
-    df = pd.DataFrame({"單位(張)":name,"買進":buy,"賣出":sell,"買賣超":b_s})
+    df = pd.DataFrame({"單位(張)":name,"買進":buy})
     df.index = df["單位(張)"]
     df.drop("單位(張)",axis = 1,inplace = True)
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 

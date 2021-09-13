@@ -454,19 +454,19 @@ def stock_message(message):
                                 text= "歷年股利 " + message)
                         ]
                     ),
-                    # CarouselColumn( 
-                    #     thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
-                    #     title = message + " 同業資訊", 
-                    #     text ="請點選想查詢的股票資訊", 
-                    #     actions =[
-                    #         MessageAction( 
-                    #             label= message + " 同業比較",
-                    #             text= "同業比較 " + message),
-                    #         MessageAction( 
-                    #             label= message + " 同業排名",
-                    #             text= "同業排名 " + message)
-                    #     ]
-                    # ),
+                    CarouselColumn( 
+                        thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
+                        title = message + " 同業資訊", 
+                        text ="請點選想查詢的股票資訊", 
+                        actions =[
+                            MessageAction( 
+                                label= message + " 同業比較",
+                                text= "同業比較 " + message),
+                            MessageAction( 
+                                label= message + " 同業排名",
+                                text= "同業排名 " + message)
+                        ]
+                    ),
                     CarouselColumn( 
                         thumbnail_image_url ="https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png",
                         title = message + " 同業資訊", 
