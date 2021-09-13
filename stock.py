@@ -323,18 +323,15 @@ def stock_day(message):
         url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
         ip = choice(ip_url)
         res = requests.get(url,proxies=ip)
-        while str(res) != "<Response [200]>":
-            ip = choice(ip_url)
-            res = requests.get(url,proxies=ip)
         s = json.loads(res.text)
         data = []
         for i in (s["data"]):
             data.append(i)
-        df_ = pd.DataFrame(data,columns = s["fields"])
-        df = df.append(df_)
+        df_i = pd.DataFrame(data,columns = s["fields"])
+        df = df.append(df_i)
         time.sleep(3)
     for i in range(len(df)):
-        df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3]   ,  str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
+        df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3],str(  int( df["日期"].iloc[i][0:3] ) + 1911))
     df.index = pd.to_datetime(df["日期"])
     df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
     df.drop("日期",axis = 1,inplace=True)
