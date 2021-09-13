@@ -10,35 +10,12 @@ def headlines():
     soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("a",{"class":"_1Zdp"},limit = 10)
     base = "https://news.cnyes.com"
-    title = []
-    address = []
-    picture = []
+    news =  ""
     for i in soup1:
-        title_ = i.get("title")
-        address_ = base + i.get("href")
-        picture_ = i.find("img")["src"]
-        title.append(title_)
-        address.append(address_)
-        picture.append(picture_)
-    df = pd.DataFrame({"標題": title,"網址":address,"圖片":picture})
-    carousel_template_message  = TemplateSendMessage( 
-        alt_text = "股票資訊",
-        template=CarouselTemplate( 
-            columns=[ 
-                CarouselColumn( 
-                        thumbnail_image_url =df.iloc[0][2],
-                        title = "頭條新聞", 
-                        text ="有興趣請點新聞", 
-                        actions =[
-                            URIAction( 
-                                label= df.iloc[0][0], 
-                                uri=df.iloc[0][1]),
-                        ]
-                    )
-                ]
-            ) 
-        )
-    return carousel_template_message
+        title = i.get("title")
+        address = base + i.get("href")
+        news += "新聞 : {} \n網址 : {} \n".format(title,address)
+    return news
 
 def tw_stock():
     url = "https://news.cnyes.com/news/cat/tw_stock"
