@@ -87,7 +87,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_other))  
     elif "最新法人買賣超 " in message:
         inv = investors(message[8:])
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(inv))
+        line_bot_api.reply_message(event.reply_token,inv)
     elif re.match("新聞",message):
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)
