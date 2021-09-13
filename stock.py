@@ -308,8 +308,8 @@ def min_close(message):
 
 #日線圖
 def stock_day(message):
-    if not re.match(r"[+-]?\d+$", message):
-        message = stock_change(message)
+    # if not re.match(r"[+-]?\d+$", message):
+    #     message = stock_change(message)
     # ip_url = [{"http" : "110.74.208.154"},{"http" : "13.112.197.90"},{"http" : "47.254.75.151'"},{"http" : "181.192.2.233"},{"http" : "62.252.146.74"},
     # {"http" : "185.56.209.114"},{"http" : "109.86.182.203"},{"http" : "179.108.123.210"},{"http" : "202.158.15.146"},{"http" : "47.75.145.229"},
     # {"http" : "72.255.57.189"},{"http" : "195.91.221.230"},{"http" : "187.243.253.2"},{"http" : "158.140.167.148"},{"http" : "198.27.74.6:9300"},
