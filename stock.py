@@ -321,72 +321,72 @@ def stock_day(message):
     for date in range(-3,1):
         t = arrow.now().shift(months = date).strftime("%Y%m")
         url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
-        ip = choice(ip_url)
-    #     res = requests.get(url,proxies=ip)
-    #     s = json.loads(res.text)
-    #     data = []
-    #     for i in (s["data"]):
-    #         data.append(i)
-    #     df_i = pd.DataFrame(data,columns = s["fields"])
-    #     df = df.append(df_i)
-    #     time.sleep(3)
-    # for i in range(len(df)):
-    #     df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3],str(  int( df["日期"].iloc[i][0:3] ) + 1911))
-    # df.index = pd.to_datetime(df["日期"])
-    # df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
-    # df.drop("日期",axis = 1,inplace=True)
-    # int_ = ["成交股數","成交金額","成交筆數"]
-    # float_ = ["開盤價","最高價","最低價","收盤價"]
-    # for i in int_:
-    #     df[i] = df[i].apply(lambda x: x.replace(",","")).astype("int64")
-    # for i in float_:
-    #     df[i] = df[i].astype("float")
-    # url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
-    # df_ = pd.read_html(requests.get(url_).text)[0]
-    # df_ = df_.iloc[:,2:7]
-    # df_.columns = df_.iloc[0,:]
-    # df_ = df_[1:]
-    # url2 = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=2&issuetype=4&industry_code=&Page=1&chklike=Y"
-    # df_2 = pd.read_html(requests.get(url2).text)[0]
-    # df_2 = df_2.iloc[:,2:7]
-    # df_2.columns = df_2.iloc[0,:]
-    # df_2 = df_2[1:]
-    # df_3 = pd.concat([df_,df_2])
-    # df_4 = df_3[df_3["有價證券代號"] == "2330"]
-    # title_ = df_4.values[0,0] + " " + df_4.values[0,1]
-    # sma_10 = talib.SMA(np.array(df['最低價']), 10)
-    # sma_20 = talib.SMA(np.array(df['最低價']), 20)
-    # fig = plt.figure(figsize=(24, 15))
-    # ax = fig.add_axes([0,0.2,1,0.5])
-    # ax2 = fig.add_axes([0,0,1,0.2])
-    # ax.set_xticks(range(0, len(df.index),10))
-    # ax.set_title(title_,fontsize=30)
-    # ax.yaxis.set_tick_params(labelsize=15)
-    # ax.grid(True)
-    # ax.set_xticklabels(df.index[::10])
-    # mpf.candlestick2_ochl(ax, df['開盤價'], df['收盤價'], df['最高價'],
-    #                       df['最低價'], width=0.6, colorup='r', colordown='g', alpha=0.75); 
-    # plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
-    # plt.rcParams['axes.unicode_minus'] = False
-    # ax.plot(sma_10, label='10日均線')
-    # ax.plot(sma_20, label='20日均線')
-    # mpf.volume_overlay(ax2, df['開盤價'], df['收盤價'], df['成交股數'], colorup='r', colordown='g', width=0.5, alpha=0.8)
-    # ax2.grid(True)
-    # ax2.set_xticks(range(0, len(df.index), 10))
-    # ax2.set_xticklabels(df.index[::10])
-    # plt.xticks(rotation=45,fontsize=20)
-    # plt.yticks(fontsize=15)
-    # ax.legend(fontsize=20,loc = "upper left")
-    # plt.savefig(str(message) + "日線圖.png", bbox_inches = "tight")  
-    # CLIENT_ID = "0214ca80ccacfe5"
-    # PATH = str(message) + "日線圖.png" #A Filepath to an image on your computer"
-    # title = str(message) + "日線圖"
-    # im = pyimgur.Imgur(CLIENT_ID)
-    # uploaded_image = im.upload_image(PATH, title=title)
-    # image_message = ImageSendMessage( 
-    #     original_content_url= uploaded_image.link,
-    #     preview_image_url= uploaded_image.link)
-    return ip
+        #ip = choice(ip_url)
+        res = requests.get(url)
+        s = json.loads(res.text)
+        data = []
+        for i in (s["data"]):
+            data.append(i)
+        df_i = pd.DataFrame(data,columns = s["fields"])
+        df = df.append(df_i)
+        time.sleep(3)
+    for i in range(len(df)):
+        df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3],str(  int( df["日期"].iloc[i][0:3] ) + 1911))
+    df.index = pd.to_datetime(df["日期"])
+    df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
+    df.drop("日期",axis = 1,inplace=True)
+    int_ = ["成交股數","成交金額","成交筆數"]
+    float_ = ["開盤價","最高價","最低價","收盤價"]
+    for i in int_:
+        df[i] = df[i].apply(lambda x: x.replace(",","")).astype("int64")
+    for i in float_:
+        df[i] = df[i].astype("float")
+    url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
+    df_ = pd.read_html(requests.get(url_).text)[0]
+    df_ = df_.iloc[:,2:7]
+    df_.columns = df_.iloc[0,:]
+    df_ = df_[1:]
+    url2 = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=2&issuetype=4&industry_code=&Page=1&chklike=Y"
+    df_2 = pd.read_html(requests.get(url2).text)[0]
+    df_2 = df_2.iloc[:,2:7]
+    df_2.columns = df_2.iloc[0,:]
+    df_2 = df_2[1:]
+    df_3 = pd.concat([df_,df_2])
+    df_4 = df_3[df_3["有價證券代號"] == "2330"]
+    title_ = df_4.values[0,0] + " " + df_4.values[0,1]
+    sma_10 = talib.SMA(np.array(df['最低價']), 10)
+    sma_20 = talib.SMA(np.array(df['最低價']), 20)
+    fig = plt.figure(figsize=(24, 15))
+    ax = fig.add_axes([0,0.2,1,0.5])
+    ax2 = fig.add_axes([0,0,1,0.2])
+    ax.set_xticks(range(0, len(df.index),10))
+    ax.set_title(title_,fontsize=30)
+    ax.yaxis.set_tick_params(labelsize=15)
+    ax.grid(True)
+    ax.set_xticklabels(df.index[::10])
+    mpf.candlestick2_ochl(ax, df['開盤價'], df['收盤價'], df['最高價'],
+                          df['最低價'], width=0.6, colorup='r', colordown='g', alpha=0.75); 
+    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+    plt.rcParams['axes.unicode_minus'] = False
+    ax.plot(sma_10, label='10日均線')
+    ax.plot(sma_20, label='20日均線')
+    mpf.volume_overlay(ax2, df['開盤價'], df['收盤價'], df['成交股數'], colorup='r', colordown='g', width=0.5, alpha=0.8)
+    ax2.grid(True)
+    ax2.set_xticks(range(0, len(df.index), 10))
+    ax2.set_xticklabels(df.index[::10])
+    plt.xticks(rotation=45,fontsize=20)
+    plt.yticks(fontsize=15)
+    ax.legend(fontsize=20,loc = "upper left")
+    plt.savefig(str(message) + "日線圖.png", bbox_inches = "tight")  
+    CLIENT_ID = "0214ca80ccacfe5"
+    PATH = str(message) + "日線圖.png" #A Filepath to an image on your computer"
+    title = str(message) + "日線圖"
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title=title)
+    image_message = ImageSendMessage( 
+        original_content_url= uploaded_image.link,
+        preview_image_url= uploaded_image.link)
+    return image_message
 
 #個股資訊統整
 def stock_message(message):
