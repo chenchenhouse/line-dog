@@ -18,8 +18,8 @@ def investors(message):
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
     }
     res = requests.get(url,headers= headers)
-    while str(res) != "<Response [200]>":
-        res = requests.get(url,headers= headers)
+    # while str(res) != "<Response [200]>":
+    #     res = requests.get(url,headers= headers)
     # soup = BeautifulSoup(res.text)
     # soup1 = soup.find_all("div",{"style":"padding:0 12px 0 0"})[0:4]
     # name = []
@@ -54,4 +54,4 @@ def investors(message):
     # image_message = ImageSendMessage( 
     #     original_content_url= uploaded_image.link,
     #     preview_image_url= uploaded_image.link)
-    return res
+    return str(res)
