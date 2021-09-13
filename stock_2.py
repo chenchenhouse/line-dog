@@ -33,8 +33,8 @@ def investors(message):
         buy.append(soup2[1].text)
         sell.append(soup2[2].text)
         b_s.append(soup2[3].text)
-        contuin.append(soup2[4].text)
-    df = pd.DataFrame({"單位(張)":name,"買進":buy,"賣出":sell,"買賣超":b_s,"連續買賣超":contuin})
+        #contuin.append(soup2[4].text)
+    df = pd.DataFrame({"單位(張)":name,"買進":buy,"賣出":sell,"買賣超":b_s})
     df.index = df["單位(張)"]
     df.drop("單位(張)",axis = 1,inplace = True)
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
