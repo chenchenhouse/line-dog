@@ -68,7 +68,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,m)
     elif "日線圖 " in message:
         d = stock_day(message[4:])
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(d))
+        line_bot_api.reply_message(event.reply_token,d)
     elif "個股新聞 " in message:
         new_one = one_new(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(new_one))
