@@ -32,7 +32,51 @@ def headlines():
                         actions =[
                             URIAction( label= df.iloc[0][0], 
                             uri=df.iloc[0][1]),
-
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[1][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[1][0], 
+                            uri=df.iloc[1][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[2][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[2][0], 
+                            uri=df.iloc[2][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[3][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[3][0], 
+                            uri=df.iloc[3][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[4][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[4][0], 
+                            uri=df.iloc[4][1]),
+                    ]
+                ),
+                CarouselColumn( 
+                        thumbnail_image_url =df.iloc[5][2],
+                        title = "頭條新聞", 
+                        text ="有興趣請點新聞", 
+                        actions =[
+                            URIAction( label= df.iloc[5][0], 
+                            uri=df.iloc[5][1]),
                         ]
                     )
                 ]
