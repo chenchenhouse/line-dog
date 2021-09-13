@@ -14,6 +14,7 @@ import re
 from blog import *
 from stock import *
 from stock_news import *
+from stock_2 import *
 #*********function*****************
 
 
