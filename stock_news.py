@@ -77,42 +77,6 @@ def headlines():
                         actions =[
                             URIAction( label= df.iloc[5][0], 
                             uri=df.iloc[5][1]),
-                    ]
-                ),
-                CarouselColumn( 
-                        thumbnail_image_url =df.iloc[6][2],
-                        title = "頭條新聞", 
-                        text ="有興趣請點新聞", 
-                        actions =[
-                            URIAction( label= df.iloc[6][0], 
-                            uri=df.iloc[6][1]),
-                    ]
-                ),
-                CarouselColumn( 
-                        thumbnail_image_url =df.iloc[7][2],
-                        title = "頭條新聞", 
-                        text ="有興趣請點新聞", 
-                        actions =[
-                            URIAction( label= df.iloc[7][0], 
-                            uri=df.iloc[7][1]),
-                    ]
-                ),
-                CarouselColumn( 
-                        thumbnail_image_url =df.iloc[8][2],
-                        title = "頭條新聞", 
-                        text ="有興趣請點新聞", 
-                        actions =[
-                            URIAction( label= df.iloc[8][0], 
-                            uri=df.iloc[8][1]),
-                    ]
-                ),
-                CarouselColumn( 
-                        thumbnail_image_url =df.iloc[9][2],
-                        title = "頭條新聞", 
-                        text ="有興趣請點新聞", 
-                        actions =[
-                            URIAction( label= df.iloc[9][0], 
-                            uri=df.iloc[9][1])
                         ]
                     )
                 ]
