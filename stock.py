@@ -538,7 +538,7 @@ def total_data(message):
     return image_message
 
 #外資買賣超
-def foreign_inv(message,t_m):
+def foreign_inv(message,s_p,t_m):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
@@ -558,19 +558,25 @@ def foreign_inv(message,t_m):
     u = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] >= 0], [5]))
     p = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] <= 0], [50]))
     df2 = t_m.loc[:t].sort_index()
+    df3 = s_p[t:]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
-    plt.subplots(figsize=(15, 5)) 
-    plt.grid(True)
+    fig,ax = plt.subplots(figsize=(15, 5)) 
     plt.xticks(rotation=45,fontsize=10)
-    plt.title(title_,fontsize=15)
-    plt.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
-    plt.legend(loc = "upper left")
+    ax.set_title(title_,fontsize=15)
+    ax.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
+    ax.legend(loc = "upper left")
     for a,b,c in zip(df2.index,df2["外資(張)"],range(len(df2.index))):
         if c % 5 == 0 and b > 0:
             plt.text(a, b +u , '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "r")
         elif c % 5 == 0 and b < 0:
             plt.text(a, b + p, '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "darkgreen")
+    ax.grid(True)
+    ax2 = ax.twinx()
+    ax2.set_xticks(range(0, len(df3.index), 5))
+    ax2.set_xticklabels(df3.index[::5])
+    ax2.plot(df3.index,df3["收盤價"],color = "orange",label = "股價")
+    ax2.legend(loc = "lower left")
     plt.savefig(str(message) + "外資買賣超.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
     PATH = str(message) + "外資買賣超.png" #A Filepath to an image on your computer"
