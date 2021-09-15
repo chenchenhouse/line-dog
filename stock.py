@@ -58,6 +58,8 @@ def stock_id(message):
         return("請輸入正確的股票代號")
 #歷史股價資訊
 def stock_price(message,m):
+    if not re.match(r"[+-]?\d+$", message):
+        message = stock_change(message)
     ip_url = [{"http" : "http://110.74.208.154"},{"http" : "http://13.112.197.90"},
          {"http" : "http://47.254.75.151'"},{"http" : "http://181.192.2.233"},{"http" : "http://62.252.146.74"},{"http" : "http://185.56.209.114"},{"http" : "http://109.86.182.203"},
          {"http" : "http://179.108.123.210"},{"http" : "http://202.158.15.146"},{"http" : "http://47.75.145.229"},{"http" : "http://72.255.57.189"},
