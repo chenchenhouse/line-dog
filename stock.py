@@ -93,25 +93,7 @@ def stock_price(message,m):
         df[i] = df[i].astype("float")
     df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
     df["漲跌價差"] = df["漲跌價差"].astype(float)
-    df = df.iloc[:,:3]
-    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
-    plt.rcParams['axes.unicode_minus'] = False
-    plt.figure('歷年股利')            # 視窗名稱
-    plt.figure(dpi = 500)
-    ax = plt.axes(frame_on=False)# 不要額外框線
-    ax.xaxis.set_visible(False)  # 隱藏X軸刻度線
-    ax.yaxis.set_visible(False)  # 隱藏Y軸刻度線
-    pd.plotting.table(ax, df, loc='center')
-    plt.savefig(str(message) + "股價.png", bbox_inches = "tight")
-    CLIENT_ID = "0214ca80ccacfe5"
-    PATH = str(message) + "股價.png" #A Filepath to an image on your computer"
-    title = str(message) + "股價"
-    im = pyimgur.Imgur(CLIENT_ID)
-    uploaded_image = im.upload_image(PATH, title=title)
-    image_message = ImageSendMessage( 
-        original_content_url= uploaded_image.link,
-        preview_image_url= uploaded_image.link)
-    return image_message
+    return df
 
 #平均股利1
 def contiun_dividend(message):
@@ -557,7 +539,6 @@ def total_data(message):
 def foreign_inv(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    s_p = stock_price(message,-3)
     t_m = total_major(message)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
@@ -571,30 +552,24 @@ def foreign_inv(message):
     df_2 = df_2[1:]
     df_3 = pd.concat([df_,df_2])
     df_4 = df_3[df_3["有價證券代號"] == str(message)]
-    title_ = df_4.values[0,0] + " " + df_4.values[0,1] + " 外資買賣超"
+    title_ = df_4.values[0,0] + " " + df_4.values[0,1] + "外資買賣"
     t = arrow.now().shift(months = -3).strftime("%Y-%m-%d")
     u = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] >= 0], [5]))
     p = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] <= 0], [50]))
     df2 = t_m.loc[:t].sort_index()
-    df3 = s_p[t:]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
-    fig,ax = plt.subplots(figsize=(15, 5)) 
+    plt.subplots(figsize=(15, 5)) 
+    plt.grid(True)
     plt.xticks(rotation=45,fontsize=10)
-    ax.set_title(title_,fontsize=15)
-    ax.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
-    ax.legend(loc = "upper left")
+    plt.title(title_,fontsize=15)
+    plt.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
+    plt.legend(loc = "upper left")
     for a,b,c in zip(df2.index,df2["外資(張)"],range(len(df2.index))):
         if c % 5 == 0 and b > 0:
             plt.text(a, b +u , '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "r")
         elif c % 5 == 0 and b < 0:
             plt.text(a, b + p, '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "darkgreen")
-    ax.grid(True)
-    ax2 = ax.twinx()
-    ax2.set_xticks(range(0, len(df3.index), 5))
-    ax2.set_xticklabels(df3.index[::5])
-    ax2.plot(df3.index,df3["收盤價"],color = "orange",label = "股價")
-    ax2.legend(loc = "lower left")
     plt.savefig(str(message) + "外資買賣超.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
     PATH = str(message) + "外資買賣超.png" #A Filepath to an image on your computer"

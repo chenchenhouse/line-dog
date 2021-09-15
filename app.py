@@ -90,12 +90,11 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,inv)
     elif "歷年法人買賣超 " in message:
         # t_d = total_data(message[8:])
-        s = stock_price(message[8:],-3)
-        # f_i = foreign_inv(message[8:])
+        f_i = foreign_inv(message[8:])
         # c_i = credit_inv(message[8:])
         # s_i = self_employed_inv(message[8:])
         # m_i = major_inv(message[8:])
-        line_bot_api.reply_message(event.reply_token,s)
+        line_bot_api.reply_message(event.reply_token,f_i)
     elif re.match("新聞",message):
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)
