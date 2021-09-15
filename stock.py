@@ -538,10 +538,9 @@ def total_data(message):
     return image_message
 
 #外資買賣超
-def foreign_inv(message):
+def foreign_inv(message,t_m):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    t_m = total_major(message)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
     df_ = df_.iloc[:,2:7]
