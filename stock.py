@@ -540,7 +540,7 @@ def total_data(message):
     return image_message
 
 #外資買賣超
-def foreign_inv(message,s_p,t_m):
+def foreign_inv(message,t_m):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
     ip_url = [{"http" : "http://110.74.208.154"},{"http" : "http://13.112.197.90"},
