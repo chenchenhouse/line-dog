@@ -89,7 +89,7 @@ def handle_message(event):
         inv = investors(message[8:])
         line_bot_api.reply_message(event.reply_token,inv)
     elif "歷年法人買賣超 " in message:
-        t_m = total_major(message)
+        t_m = total_major(message[8:])
         #t_d = total_data(message[8:])
         f_i = foreign_inv(message[8:],t_m)
         # c_i = credit_inv(message[8:])
