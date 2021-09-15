@@ -539,7 +539,7 @@ def total_data(message):
 def foreign_inv(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    s_p = stock_price(message,-3)
+    #s_p = stock_price(message,-3)
     t_m = total_major(message)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
@@ -558,7 +558,8 @@ def foreign_inv(message):
     u = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] >= 0], [5]))
     p = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] <= 0], [50]))
     df2 = t_m.loc[:t].sort_index()
-    df3 = s_p[t:]
+    #df3 = s_p[t:]
+    df3 = df2
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     fig,ax = plt.subplots(figsize=(15, 5)) 
