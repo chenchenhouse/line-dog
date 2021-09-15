@@ -56,44 +56,6 @@ def stock_id(message):
         return mes
     except:
         return("請輸入正確的股票代號")
-#歷史股價資訊
-def stock_price(message,m):
-    if not re.match(r"[+-]?\d+$", message):
-        message = stock_change(message)
-    ip_url = [{"http" : "http://110.74.208.154"},{"http" : "http://13.112.197.90"},
-         {"http" : "http://47.254.75.151'"},{"http" : "http://181.192.2.233"},{"http" : "http://62.252.146.74"},{"http" : "http://185.56.209.114"},{"http" : "http://109.86.182.203"},
-         {"http" : "http://179.108.123.210"},{"http" : "http://202.158.15.146"},{"http" : "http://47.75.145.229"},{"http" : "http://72.255.57.189"},
-         {"http" : "http://195.91.221.230"},{"http" : "http://187.243.253.2"},{"http" : "http://158.140.167.148"},{"http" : "http://198.27.74.6:9300"},
-         {"http" : "http://20.82.200.229:3128"},{"http" : "http://45.70.15.3:8080"},{"http" : "http://183.87.153.98:49602"},{"http" : "http://41.231.54.37:8888"},
-         {"http" : "http://221.141.87.130:808"},{"http" : "http://188.225.253.222:8080"},{"http" : "http://80.154.203.122:8080"},{"http" : "http://212.42.62.69:8080"},
-         {"http" : "http://14.161.252.185:55443"},{"http" : "http://194.233.67.98:443"},{"http" : "http://89.222.182.144:3128"},{"http" : "http://148.251.249.243:3128"}]
-    df = pd.DataFrame()
-    for date in range(m,1):
-        t = arrow.now().shift(months = date).strftime("%Y%m")
-        url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
-        ip = choice(ip_url)
-        res = requests.get(url,proxies=ip)
-        s = json.loads(res.text)
-        data = []
-        for i in (s["data"]):
-            data.append(i)
-        df_ = pd.DataFrame(data,columns = s["fields"])
-        df = df.append(df_)
-        time.sleep(2)
-    for i in range(len(df)):
-        df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3],str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
-    df.index = pd.to_datetime(df["日期"])
-    df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
-    df.drop("日期",axis = 1,inplace=True)
-    int_ = ["成交股數","成交金額","成交筆數"]
-    float_ = ["開盤價","最高價","最低價","收盤價"]
-    for i in int_:
-        df[i] = df[i].apply(lambda x: x.replace(",","")).astype("int64")
-    for i in float_:
-        df[i] = df[i].astype("float")
-    df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
-    df["漲跌價差"] = df["漲跌價差"].astype(float)
-    return df
 
 #平均股利1
 def contiun_dividend(message):
@@ -624,11 +586,42 @@ def foreign_inv(message,t_m):
     return image_message
 
 #投信買賣超
-def credit_inv(message):
+def credit_inv(message,t_m):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    s_p = stock_price(message,-3)
-    t_m = total_major(message)
+    ip_url = [{"http" : "http://110.74.208.154"},{"http" : "http://13.112.197.90"},
+         {"http" : "http://47.254.75.151'"},{"http" : "http://181.192.2.233"},{"http" : "http://62.252.146.74"},{"http" : "http://185.56.209.114"},{"http" : "http://109.86.182.203"},
+         {"http" : "http://179.108.123.210"},{"http" : "http://202.158.15.146"},{"http" : "http://47.75.145.229"},{"http" : "http://72.255.57.189"},
+         {"http" : "http://195.91.221.230"},{"http" : "http://187.243.253.2"},{"http" : "http://158.140.167.148"},{"http" : "http://198.27.74.6:9300"},
+         {"http" : "http://20.82.200.229:3128"},{"http" : "http://45.70.15.3:8080"},{"http" : "http://183.87.153.98:49602"},{"http" : "http://41.231.54.37:8888"},
+         {"http" : "http://221.141.87.130:808"},{"http" : "http://188.225.253.222:8080"},{"http" : "http://80.154.203.122:8080"},{"http" : "http://212.42.62.69:8080"},
+         {"http" : "http://14.161.252.185:55443"},{"http" : "http://194.233.67.98:443"},{"http" : "http://89.222.182.144:3128"},{"http" : "http://148.251.249.243:3128"}]
+    s_p = pd.DataFrame()
+    for date in range(-3,1):
+        t = arrow.now().shift(months = date).strftime("%Y%m")
+        url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
+        ip = choice(ip_url)
+        res = requests.get(url,proxies=ip)
+        s = json.loads(res.text)
+        data = []
+        for i in (s["data"]):
+            data.append(i)
+        da = pd.DataFrame(data,columns = s["fields"])
+        s_p = s_p.append(da)
+        #time.sleep(2)
+    for i in range(len(s_p)):
+        s_p["日期"].iloc[i]=s_p["日期"].iloc[i].replace(s_p["日期"].iloc[i][0:3],str(  int(s_p["日期"].iloc[i][0:3] ) + 1911 ))
+    s_p.index = pd.to_datetime(s_p["日期"])
+    s_p.index = s_p.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
+    s_p.drop("日期",axis = 1,inplace=True)
+    int_ = ["成交股數","成交金額","成交筆數"]
+    float_ = ["開盤價","最高價","最低價","收盤價"]
+    for i in int_:
+        s_p[i] = s_p[i].apply(lambda x: x.replace(",","")).astype("int64")
+    for i in float_:
+        s_p[i] = s_p[i].astype("float")
+    s_p["漲跌價差"] = s_p["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
+    s_p["漲跌價差"] = s_p["漲跌價差"].astype(float)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
     df_ = df_.iloc[:,2:7]
@@ -677,11 +670,42 @@ def credit_inv(message):
     return image_message
 
 #自營商買賣超
-def self_employed_inv(message):
+def self_employed_inv(message,t_m):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    s_p = stock_price(message,-3)
-    t_m = total_major(message)
+    ip_url = [{"http" : "http://110.74.208.154"},{"http" : "http://13.112.197.90"},
+         {"http" : "http://47.254.75.151'"},{"http" : "http://181.192.2.233"},{"http" : "http://62.252.146.74"},{"http" : "http://185.56.209.114"},{"http" : "http://109.86.182.203"},
+         {"http" : "http://179.108.123.210"},{"http" : "http://202.158.15.146"},{"http" : "http://47.75.145.229"},{"http" : "http://72.255.57.189"},
+         {"http" : "http://195.91.221.230"},{"http" : "http://187.243.253.2"},{"http" : "http://158.140.167.148"},{"http" : "http://198.27.74.6:9300"},
+         {"http" : "http://20.82.200.229:3128"},{"http" : "http://45.70.15.3:8080"},{"http" : "http://183.87.153.98:49602"},{"http" : "http://41.231.54.37:8888"},
+         {"http" : "http://221.141.87.130:808"},{"http" : "http://188.225.253.222:8080"},{"http" : "http://80.154.203.122:8080"},{"http" : "http://212.42.62.69:8080"},
+         {"http" : "http://14.161.252.185:55443"},{"http" : "http://194.233.67.98:443"},{"http" : "http://89.222.182.144:3128"},{"http" : "http://148.251.249.243:3128"}]
+    s_p = pd.DataFrame()
+    for date in range(-3,1):
+        t = arrow.now().shift(months = date).strftime("%Y%m")
+        url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
+        ip = choice(ip_url)
+        res = requests.get(url,proxies=ip)
+        s = json.loads(res.text)
+        data = []
+        for i in (s["data"]):
+            data.append(i)
+        da = pd.DataFrame(data,columns = s["fields"])
+        s_p = s_p.append(da)
+        #time.sleep(2)
+    for i in range(len(s_p)):
+        s_p["日期"].iloc[i]=s_p["日期"].iloc[i].replace(s_p["日期"].iloc[i][0:3],str(  int(s_p["日期"].iloc[i][0:3] ) + 1911 ))
+    s_p.index = pd.to_datetime(s_p["日期"])
+    s_p.index = s_p.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
+    s_p.drop("日期",axis = 1,inplace=True)
+    int_ = ["成交股數","成交金額","成交筆數"]
+    float_ = ["開盤價","最高價","最低價","收盤價"]
+    for i in int_:
+        s_p[i] = s_p[i].apply(lambda x: x.replace(",","")).astype("int64")
+    for i in float_:
+        s_p[i] = s_p[i].astype("float")
+    s_p["漲跌價差"] = s_p["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
+    s_p["漲跌價差"] = s_p["漲跌價差"].astype(float)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
     df_ = df_.iloc[:,2:7]
@@ -730,11 +754,42 @@ def self_employed_inv(message):
     return image_message
 
 #三大法人買賣超
-def major_inv(message):
+def major_inv(message,t_m):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    s_p = stock_price(message,-3)
-    t_m = total_major(message)
+    ip_url = [{"http" : "http://110.74.208.154"},{"http" : "http://13.112.197.90"},
+         {"http" : "http://47.254.75.151'"},{"http" : "http://181.192.2.233"},{"http" : "http://62.252.146.74"},{"http" : "http://185.56.209.114"},{"http" : "http://109.86.182.203"},
+         {"http" : "http://179.108.123.210"},{"http" : "http://202.158.15.146"},{"http" : "http://47.75.145.229"},{"http" : "http://72.255.57.189"},
+         {"http" : "http://195.91.221.230"},{"http" : "http://187.243.253.2"},{"http" : "http://158.140.167.148"},{"http" : "http://198.27.74.6:9300"},
+         {"http" : "http://20.82.200.229:3128"},{"http" : "http://45.70.15.3:8080"},{"http" : "http://183.87.153.98:49602"},{"http" : "http://41.231.54.37:8888"},
+         {"http" : "http://221.141.87.130:808"},{"http" : "http://188.225.253.222:8080"},{"http" : "http://80.154.203.122:8080"},{"http" : "http://212.42.62.69:8080"},
+         {"http" : "http://14.161.252.185:55443"},{"http" : "http://194.233.67.98:443"},{"http" : "http://89.222.182.144:3128"},{"http" : "http://148.251.249.243:3128"}]
+    s_p = pd.DataFrame()
+    for date in range(-3,1):
+        t = arrow.now().shift(months = date).strftime("%Y%m")
+        url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
+        ip = choice(ip_url)
+        res = requests.get(url,proxies=ip)
+        s = json.loads(res.text)
+        data = []
+        for i in (s["data"]):
+            data.append(i)
+        da = pd.DataFrame(data,columns = s["fields"])
+        s_p = s_p.append(da)
+        #time.sleep(2)
+    for i in range(len(s_p)):
+        s_p["日期"].iloc[i]=s_p["日期"].iloc[i].replace(s_p["日期"].iloc[i][0:3],str(  int(s_p["日期"].iloc[i][0:3] ) + 1911 ))
+    s_p.index = pd.to_datetime(s_p["日期"])
+    s_p.index = s_p.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
+    s_p.drop("日期",axis = 1,inplace=True)
+    int_ = ["成交股數","成交金額","成交筆數"]
+    float_ = ["開盤價","最高價","最低價","收盤價"]
+    for i in int_:
+        s_p[i] = s_p[i].apply(lambda x: x.replace(",","")).astype("int64")
+    for i in float_:
+        s_p[i] = s_p[i].astype("float")
+    s_p["漲跌價差"] = s_p["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
+    s_p["漲跌價差"] = s_p["漲跌價差"].astype(float)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
     df_ = df_.iloc[:,2:7]
