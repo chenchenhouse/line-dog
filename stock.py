@@ -522,10 +522,10 @@ def total_data(message):
     ax.xaxis.set_visible(False)  # 隱藏X軸刻度線
     ax.yaxis.set_visible(False)  # 隱藏Y軸刻度線
     pd.plotting.table(ax, df, loc='center')
-    plt.savefig(str(message) + "三大法人買賣超.png", bbox_inches = "tight")
+    plt.savefig(str(message) + "三大法人.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
-    PATH = str(message) + "三大法人買賣超.png" #A Filepath to an image on your computer"
-    title = str(message) + "三大法人買賣超"
+    PATH = str(message) + "三大法人.png" #A Filepath to an image on your computer"
+    title = str(message) + "三大法人"
     im = pyimgur.Imgur(CLIENT_ID)
     uploaded_image = im.upload_image(PATH, title=title)
     image_message = ImageSendMessage( 

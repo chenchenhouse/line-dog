@@ -94,7 +94,7 @@ def handle_message(event):
         # c_i = credit_inv(message[8:])
         # s_i = self_employed_inv(message[8:])
         # m_i = major_inv(message[8:])
-        line_bot_api.reply_message(event.reply_token,[t_d])
+        line_bot_api.reply_message(event.reply_token,t_d)
     elif re.match("新聞",message):
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)
