@@ -68,32 +68,32 @@ def stock_price(message,m):
          {"http" : "http://221.141.87.130:808"},{"http" : "http://188.225.253.222:8080"},{"http" : "http://80.154.203.122:8080"},{"http" : "http://212.42.62.69:8080"},
          {"http" : "http://14.161.252.185:55443"},{"http" : "http://194.233.67.98:443"},{"http" : "http://89.222.182.144:3128"},{"http" : "http://148.251.249.243:3128"}]
     ip = choice(ip_url).values()
-    df = pd.DataFrame()
-    for date in range(m,1):
-        t = arrow.now().shift(months = date).strftime("%Y%m")
-        url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
-        ip = choice(ip_url)
-        res = requests.get(url,proxies=ip)
-        s = json.loads(res.text)
-        data = []
-        for i in (s["data"]):
-            data.append(i)
-        df_ = pd.DataFrame(data,columns = s["fields"])
-        df = df.append(df_)
-        time.sleep(3)
-    for i in range(len(df)):
-        df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3]   ,  str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
-    df.index = pd.to_datetime(df["日期"])
-    df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
-    df.drop("日期",axis = 1,inplace=True)
-    int_ = ["成交股數","成交金額","成交筆數"]
-    float_ = ["開盤價","最高價","最低價","收盤價"]
-    for i in int_:
-        df[i] = df[i].apply(lambda x: x.replace(",","")).astype("int64")
-    for i in float_:
-        df[i] = df[i].astype("float")
-    df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
-    df["漲跌價差"] = df["漲跌價差"].astype(float)
+    # df = pd.DataFrame()
+    # for date in range(m,1):
+    t = arrow.now().shift(months = -3).strftime("%Y%m")
+    url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
+    ip = choice(ip_url)
+    res = requests.get(url,proxies=ip)
+        # s = json.loads(res.text)
+    #     data = []
+    #     for i in (s["data"]):
+    #         data.append(i)
+    #     df_ = pd.DataFrame(data,columns = s["fields"])
+    #     df = df.append(df_)
+    #     time.sleep(3)
+    # for i in range(len(df)):
+    #     df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3]   ,  str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
+    # df.index = pd.to_datetime(df["日期"])
+    # df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
+    # df.drop("日期",axis = 1,inplace=True)
+    # int_ = ["成交股數","成交金額","成交筆數"]
+    # float_ = ["開盤價","最高價","最低價","收盤價"]
+    # for i in int_:
+    #     df[i] = df[i].apply(lambda x: x.replace(",","")).astype("int64")
+    # for i in float_:
+    #     df[i] = df[i].astype("float")
+    # df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
+    # df["漲跌價差"] = df["漲跌價差"].astype(float)
     return res
 
 #平均股利1
