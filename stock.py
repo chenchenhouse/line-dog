@@ -440,7 +440,7 @@ def investors(message):
     res = requests.get(url,headers= headers)
     while str(res) != "<Response [200]>":
         res = requests.get(url,headers= headers)
-    soup = BeautifulSoup(res.text)
+    soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("div",{"style":"padding:0 12px 0 0"})[0:4]
     name = []
     buy = []
