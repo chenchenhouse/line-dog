@@ -514,6 +514,8 @@ def total_data(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
     df = total_major(message)
+    t = arrow.now().shift(months = -3).strftime("%Y-%m-%d")
+    df = df.loc[:t].sort_index()
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     plt.figure('三大法人買賣超')            # 視窗名稱
