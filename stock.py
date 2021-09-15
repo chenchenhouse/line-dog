@@ -93,6 +93,7 @@ def stock_price(message,m):
         df[i] = df[i].astype("float")
     df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
     df["漲跌價差"] = df["漲跌價差"].astype(float)
+    df = df.iloc[:,:3]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     plt.figure('歷年股利')            # 視窗名稱
