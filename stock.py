@@ -71,7 +71,7 @@ def stock_price(message,m):
     url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
     ip = choice(ip_url)
     res = requests.get(url,proxies=ip)
-    s = json.loads(res.text)
+    # s = json.loads(res.text)
     #     data = []
     #     for i in (s["data"]):
     #         data.append(i)
@@ -91,7 +91,7 @@ def stock_price(message,m):
     #     df[i] = df[i].astype("float")
     # df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
     # df["漲跌價差"] = df["漲跌價差"].astype(float)
-    return s
+    return str(res)
 
 #平均股利1
 def contiun_dividend(message):
