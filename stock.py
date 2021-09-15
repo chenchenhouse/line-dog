@@ -93,7 +93,24 @@ def stock_price(message,m):
         df[i] = df[i].astype("float")
     df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
     df["漲跌價差"] = df["漲跌價差"].astype(float)
-    return df
+    plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
+    plt.rcParams['axes.unicode_minus'] = False
+    plt.figure('歷年股利')            # 視窗名稱
+    plt.figure(dpi = 500)
+    ax = plt.axes(frame_on=False)# 不要額外框線
+    ax.xaxis.set_visible(False)  # 隱藏X軸刻度線
+    ax.yaxis.set_visible(False)  # 隱藏Y軸刻度線
+    pd.plotting.table(ax, df, loc='center')
+    plt.savefig(str(message) + "股價.png", bbox_inches = "tight")
+    CLIENT_ID = "0214ca80ccacfe5"
+    PATH = str(message) + "股價.png" #A Filepath to an image on your computer"
+    title = str(message) + "股價"
+    im = pyimgur.Imgur(CLIENT_ID)
+    uploaded_image = im.upload_image(PATH, title=title)
+    image_message = ImageSendMessage( 
+        original_content_url= uploaded_image.link,
+        preview_image_url= uploaded_image.link)
+    return image_message
 
 #平均股利1
 def contiun_dividend(message):
@@ -539,7 +556,7 @@ def total_data(message):
 def foreign_inv(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    #s_p = stock_price(message,-3)
+    s_p = stock_price(message,-3)
     t_m = total_major(message)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
@@ -558,8 +575,7 @@ def foreign_inv(message):
     u = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] >= 0], [5]))
     p = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] <= 0], [50]))
     df2 = t_m.loc[:t].sort_index()
-    #df3 = s_p[t:]
-    df3 = df2
+    df3 = s_p[t:]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     fig,ax = plt.subplots(figsize=(15, 5)) 
