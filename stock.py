@@ -67,7 +67,6 @@ def stock_price(message,m):
          {"http" : "http://20.82.200.229:3128"},{"http" : "http://45.70.15.3:8080"},{"http" : "http://183.87.153.98:49602"},{"http" : "http://41.231.54.37:8888"},
          {"http" : "http://221.141.87.130:808"},{"http" : "http://188.225.253.222:8080"},{"http" : "http://80.154.203.122:8080"},{"http" : "http://212.42.62.69:8080"},
          {"http" : "http://14.161.252.185:55443"},{"http" : "http://194.233.67.98:443"},{"http" : "http://89.222.182.144:3128"},{"http" : "http://148.251.249.243:3128"}]
-    ip = choice(ip_url).values()
     # df = pd.DataFrame()
     # for date in range(m,1):
     t = arrow.now().shift(months = -3).strftime("%Y%m")
