@@ -93,7 +93,7 @@ def stock_price(message,m):
     #     df[i] = df[i].astype("float")
     # df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
     # df["漲跌價差"] = df["漲跌價差"].astype(float)
-    return res
+    return str(res)
 
 #平均股利1
 def contiun_dividend(message):
