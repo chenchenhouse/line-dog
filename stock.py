@@ -57,7 +57,7 @@ def stock_id(message):
     except:
         return("請輸入正確的股票代號")
 #歷史股價資訊
-def stock_price(message,m):
+def stock_price(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
     ip_url = [{"http" : ""},{"http" : "110.74.208.154"},{"http" : "13.112.197.90"},
@@ -67,33 +67,34 @@ def stock_price(message,m):
          {"http" : "20.82.200.229:3128"},{"http" : "45.70.15.3:8080"},{"http" : "183.87.153.98:49602"},{"http" : "41.231.54.37:8888"},
          {"http" : "221.141.87.130:808"},{"http" : "188.225.253.222:8080"},{"http" : "80.154.203.122:8080"},{"http" : "212.42.62.69:8080"},
          {"http" : "14.161.252.185:55443"},{"http" : "194.233.67.98:443"},{"http" : "89.222.182.144:3128"},{"http" : "148.251.249.243:3128"}]
-    df = pd.DataFrame()
-    for date in range(m,1):
-        t = arrow.now().shift(months = date).strftime("%Y%m")
-        url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
-        ip = choice(ip_url)
-        res = requests.get(url,proxies=ip)
-        s = json.loads(res.text)
-        data = []
-        for i in (s["data"]):
-            data.append(i)
-        df_ = pd.DataFrame(data,columns = s["fields"])
-        df = df.append(df_)
-        time.sleep(3)
-    for i in range(len(df)):
-        df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3]   ,  str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
-    df.index = pd.to_datetime(df["日期"])
-    df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
-    df.drop("日期",axis = 1,inplace=True)
-    int_ = ["成交股數","成交金額","成交筆數"]
-    float_ = ["開盤價","最高價","最低價","收盤價"]
-    for i in int_:
-        df[i] = df[i].apply(lambda x: x.replace(",","")).astype("int64")
-    for i in float_:
-        df[i] = df[i].astype("float")
-    df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
-    df["漲跌價差"] = df["漲跌價差"].astype(float)
-    return df
+    ip = choice(ip_url)
+    # df = pd.DataFrame()
+    # for date in range(m,1):
+    #     t = arrow.now().shift(months = date).strftime("%Y%m")
+    #     url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
+    #     ip = choice(ip_url)
+    #     res = requests.get(url,proxies=ip)
+    #     s = json.loads(res.text)
+    #     data = []
+    #     for i in (s["data"]):
+    #         data.append(i)
+    #     df_ = pd.DataFrame(data,columns = s["fields"])
+    #     df = df.append(df_)
+    #     time.sleep(3)
+    # for i in range(len(df)):
+    #     df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3]   ,  str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
+    # df.index = pd.to_datetime(df["日期"])
+    # df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
+    # df.drop("日期",axis = 1,inplace=True)
+    # int_ = ["成交股數","成交金額","成交筆數"]
+    # float_ = ["開盤價","最高價","最低價","收盤價"]
+    # for i in int_:
+    #     df[i] = df[i].apply(lambda x: x.replace(",","")).astype("int64")
+    # for i in float_:
+    #     df[i] = df[i].astype("float")
+    # df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
+    # df["漲跌價差"] = df["漲跌價差"].astype(float)
+    return ip
 
 #平均股利1
 def contiun_dividend(message):
@@ -348,12 +349,12 @@ def min_close(message):
 def stock_day(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    ip_url = [{"https" : "110.74.208.154"},{"https" : "13.112.197.90"},{"https" : "47.254.75.151'"},{"https" : "181.192.2.233"},{"https" : "62.252.146.74"},
-    {"https" : "185.56.209.114"},{"https" : "109.86.182.203"},{"https" : "179.108.123.210"},{"https" : "202.158.15.146"},{"https" : "47.75.145.229"},
-    {"https" : "72.255.57.189"},{"https" : "195.91.221.230"},{"https" : "187.243.253.2"},{"https" : "158.140.167.148"},{"https" : "198.27.74.6:9300"},
-    {"https" : "20.82.200.229:3128"},{"https" : "45.70.15.3:8080"},{"https" : "183.87.153.98:49602"},{"https" : "41.231.54.37:8888"},{"https" : "221.141.87.130:808"},
-    {"https" : "188.225.253.222:8080"},{"https" : "80.154.203.122:8080"},{"https" : "212.42.62.69:8080"},{"https" : "14.161.252.185:55443"},{"https" : "194.233.67.98:443"},
-    {"https" : "89.222.182.144:3128"},{"https" : "148.251.249.243:3128"}]
+    ip_url = [{"http" : "110.74.208.154"},{"http" : "13.112.197.90"},{"http" : "47.254.75.151'"},{"http" : "181.192.2.233"},{"http" : "62.252.146.74"},
+    {"http" : "185.56.209.114"},{"http" : "109.86.182.203"},{"http" : "179.108.123.210"},{"http" : "202.158.15.146"},{"http" : "47.75.145.229"},
+    {"http" : "72.255.57.189"},{"http" : "195.91.221.230"},{"http" : "187.243.253.2"},{"http" : "158.140.167.148"},{"http" : "198.27.74.6:9300"},
+    {"http" : "20.82.200.229:3128"},{"http" : "45.70.15.3:8080"},{"http" : "183.87.153.98:49602"},{"http" : "41.231.54.37:8888"},{"http" : "221.141.87.130:808"},
+    {"http" : "188.225.253.222:8080"},{"http" : "80.154.203.122:8080"},{"http" : "212.42.62.69:8080"},{"http" : "14.161.252.185:55443"},{"http" : "194.233.67.98:443"},
+    {"http" : "89.222.182.144:3128"},{"http" : "148.251.249.243:3128"}]
     df = pd.DataFrame()
     for date in range(-3,1):
         t = arrow.now().shift(months = date).strftime("%Y%m")
