@@ -77,9 +77,9 @@ def stock_price(message,m):
             data.append(i)
         df_ = pd.DataFrame(data,columns = s["fields"])
         df = df.append(df_)
-        time.sleep(3)
+        time.sleep(2)
     for i in range(len(df)):
-        df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3]   ,  str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
+        df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3],str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
     df.index = pd.to_datetime(df["日期"])
     df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
     df.drop("日期",axis = 1,inplace=True)
@@ -365,7 +365,7 @@ def stock_day(message):
             data.append(i)
         df_ = pd.DataFrame(data,columns = s["fields"])
         df = df.append(df_)
-        time.sleep(3)
+        time.sleep(2)
     for i in range(len(df)):
         df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3]   ,  str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
     df.index = pd.to_datetime(df["日期"])
