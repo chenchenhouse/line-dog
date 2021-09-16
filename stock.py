@@ -570,9 +570,9 @@ def foreign_inv(message,t_m):
         elif c % 5 == 0 and b < 0:
             plt.text(a, b + p, '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "darkgreen")
     ax2 = ax.twinx()
+    ax2.set_xticklabels(df3.index[::5])
     ax2.set_xticks(range(0, len(df3.index), 5))
     ax2.plot(df3.index,df3["收盤價"],color = "orange",label = "股價")
-    ax2.set_xticklabels(df3.index[::5])
     ax2.legend(loc = "lower left")
     plt.savefig(str(message) + "外資買賣超.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
