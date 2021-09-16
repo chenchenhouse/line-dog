@@ -561,6 +561,7 @@ def foreign_inv(message,t_m):
     fig,ax = plt.subplots(figsize=(20, 5))
     ax.grid(True) 
     ax.set_title(title_,fontsize=15)
+    plt.xticks(rotation=45,fontsize=10)
     ax.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
     ax.legend(loc = "upper left")
     for a,b,c in zip(df2.index,df2["外資(張)"],range(len(df2.index))):
@@ -569,7 +570,6 @@ def foreign_inv(message,t_m):
         elif c % 5 == 0 and b < 0:
             plt.text(a, b + p, '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "darkgreen")
     ax2 = ax.twinx()
-    plt.xticks(rotation=45,fontsize=10)
     ax2.set_xticks(range(0, len(df3.index), 5))
     ax2.set_xticklabels(df3.index[::5])
     ax2.plot(df3.index,df3["收盤價"],color = "orange",label = "股價")
