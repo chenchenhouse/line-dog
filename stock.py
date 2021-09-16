@@ -560,7 +560,6 @@ def foreign_inv(message,t_m):
     plt.rcParams['axes.unicode_minus'] = False
     fig,ax = plt.subplots(figsize=(20, 5))
     ax.grid(True) 
-    plt.xticks(rotation=45,fontsize=10)
     ax.set_title(title_,fontsize=15)
     ax.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
     ax.legend(loc = "upper left")
@@ -570,8 +569,9 @@ def foreign_inv(message,t_m):
         elif c % 5 == 0 and b < 0:
             plt.text(a, b + p, '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "darkgreen")
     ax2 = ax.twinx()
-    ax2.set_xticklabels(df3.index[::5])
     ax2.set_xticks(range(0, len(df3.index), 5))
+    ax2.set_xticklabels(df3.index[::5])
+    plt.xticks(rotation=45,fontsize=10)
     ax2.plot(df3.index,df3["收盤價"],color = "orange",label = "股價")
     ax2.legend(loc = "lower left")
     plt.savefig(str(message) + "外資買賣超.png", bbox_inches = "tight")
@@ -642,7 +642,7 @@ def credit_inv(message,t_m):
     df_2 = s_p[t:]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
-    fig,ax = plt.subplots(figsize=(15, 5)) 
+    fig,ax = plt.subplots(figsize=(20, 5)) 
     plt.xticks(rotation=45,fontsize=10)
     ax.set_title(title_,fontsize=15)
     ax.bar(df2.index,df2["投信(張)"],color = "rosybrown",label = "投信買賣超")
