@@ -558,7 +558,8 @@ def foreign_inv(message,t_m):
     df3 = s_p[t:]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
-    fig,ax = plt.subplots(figsize=(15, 5)) 
+    fig,ax = plt.subplots(figsize=(15, 5))
+    ax.grid(True) 
     plt.xticks(rotation=45,fontsize=10)
     ax.set_title(title_,fontsize=15)
     ax.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
@@ -568,7 +569,6 @@ def foreign_inv(message,t_m):
             plt.text(a, b +u , '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "r")
         elif c % 5 == 0 and b < 0:
             plt.text(a, b + p, '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "darkgreen")
-    ax.grid(True)
     ax2 = ax.twinx()
     ax2.set_xticks(range(0, len(df3.index), 5))
     ax2.set_xticklabels(df3.index[::5])
