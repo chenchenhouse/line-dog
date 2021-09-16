@@ -91,11 +91,11 @@ def handle_message(event):
     elif "歷年法人買賣超 " in message:
         t_m = total_major(message[8:])
         # t_d = total_data(message[8:])
-        f_i = foreign_inv(message[8:],t_m)
-        # c_i = credit_inv(message[8:],t_m)
+        #f_i = foreign_inv(message[8:],t_m)
+         c_i = credit_inv(message[8:],t_m)
         # s_i = self_employed_inv(message[8:],t_m)
         # m_i = major_inv(message[8:],t_m)
-        line_bot_api.reply_message(event.reply_token,f_i)
+        line_bot_api.reply_message(event.reply_token,c_i)
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)
     elif re.match("頭條新聞",message):
