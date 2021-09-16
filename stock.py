@@ -526,7 +526,7 @@ def foreign_inv(message,t_m):
         s_p = s_p.append(da)
         #time.sleep(2)
     for i in range(len(s_p)):
-        s_p["日期"].iloc[i]=s_p["日期"].iloc[i].replace(s_p["日期"].iloc[i][0:3],str(  int(s_p["日期"].iloc[i][0:3] ) + 1911 ))
+        s_p["日期"].iloc[i]=s_p["日期"].iloc[i].replace(s_p["日期"].iloc[i][0:3],str(int(s_p["日期"].iloc[i][0:3] ) + 1911))
     s_p.index = pd.to_datetime(s_p["日期"])
     s_p.index = s_p.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
     s_p.drop("日期",axis = 1,inplace=True)
@@ -558,7 +558,7 @@ def foreign_inv(message,t_m):
     df3 = s_p[t:]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
-    fig,ax = plt.subplots(figsize=(15, 5))
+    fig,ax = plt.subplots(figsize=(20, 5))
     ax.grid(True) 
     plt.xticks(rotation=45,fontsize=10)
     ax.set_title(title_,fontsize=15)
