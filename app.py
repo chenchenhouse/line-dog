@@ -86,7 +86,7 @@ def handle_message(event):
         stock_other = compare_other(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_other))  
     elif "大戶籌碼 " in message:
-        st = message[6:]
+        st = message[5:]
         flex_message = TextSendMessage(text="請選擇要顯示的買賣超資訊", 
                                     quick_reply=QuickReply(items=[ 
                                         QuickReplyButton(action=MessageAction(label="最新法人", text="最新法人買賣超 " + st)),
