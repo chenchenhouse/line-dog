@@ -85,17 +85,41 @@ def handle_message(event):
     elif "同業排名 " in message:
         stock_other = compare_other(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_other))  
+    elif "法人買賣超 " in message:
+        st = message[6:]
+        flex_message = TextSendMessage(text="法人買賣超", 
+                                    quick_reply=QuickReply(items=[ 
+                                        QuickReplyButton(action=MessageAction(label="最新法人", text="最新法人買賣超 " + st)),
+                                        QuickReplyButton(action=MessageAction(label="歷年法人", text="歷年法人買賣超 " + st)),
+                                        QuickReplyButton(action=MessageAction(label="外資", text="外資買賣超 " + st)),
+                                        QuickReplyButton(action=MessageAction(label="投信", text="投信買賣超 " + st)),
+                                        QuickReplyButton(action=MessageAction(label="自營商", text="自營商買賣超 " + st)),
+                                        QuickReplyButton(action=MessageAction(label="三大法人", text="三大法人買賣超 " + st))
+                                    ]))
+
     elif "最新法人買賣超 " in message:
         inv = investors(message[8:])
         line_bot_api.reply_message(event.reply_token,inv)
     elif "歷年法人買賣超 " in message:
-        t_m = total_major(message[8:])
-        # t_d = total_data(message[8:])
-        f_i = foreign_inv(message[8:],t_m)
-        #c_i = credit_inv(message[8:],t_m)
-        # s_i = self_employed_inv(message[8:],t_m)
-        # m_i = major_inv(message[8:],t_m)
+        t_d = total_data(message[8:])
+        line_bot_api.reply_message(event.reply_token,t_d)
+    elif "外資買賣超 " in message:
+        t_m = total_major(message[6:])
+        f_i = foreign_inv(message[6:],t_m)
         line_bot_api.reply_message(event.reply_token,f_i)
+    elif "投信買賣超 " in message:
+        t_m = total_major(message[6:])
+        c_i = credit_inv(message[6:],t_m)
+        line_bot_api.reply_message(event.reply_token,c_i)
+    elif "自營商買賣超 " in message:
+        t_m = total_major(message[7:])
+        s_i = self_employed_inv(message[7:],t_m)
+        line_bot_api.reply_message(event.reply_token,s_i)      
+    elif "三大法人買賣超 " in message:
+        t_m = total_major(message[8:])
+        m_i = major_inv(message[8:],t_m)
+        line_bot_api.reply_message(event.reply_token,m_i)  
+    elif re.match("新聞",message):
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)
     elif re.match("頭條新聞",message):
