@@ -96,7 +96,7 @@ def handle_message(event):
                                         QuickReplyButton(action=MessageAction(label="自營商", text="自營商買賣超 " + st)),
                                         QuickReplyButton(action=MessageAction(label="三大法人", text="三大法人買賣超 " + st))
                                     ]))
-
+        line_bot_api.reply_message(event.reply_token,flex_message)
     elif "最新法人買賣超 " in message:
         inv = investors(message[8:])
         line_bot_api.reply_message(event.reply_token,inv)
