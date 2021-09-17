@@ -85,7 +85,7 @@ def handle_message(event):
     elif "同業排名 " in message:
         stock_other = compare_other(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_other))  
-    elif "法人買賣超 " in message:
+    elif "大戶籌碼 " in message:
         st = message[6:]
         flex_message = TextSendMessage(text="請選擇要顯示的買賣超資訊", 
                                     quick_reply=QuickReply(items=[ 

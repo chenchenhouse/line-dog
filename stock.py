@@ -921,8 +921,8 @@ def stock_message(message):
                         text ="請點選想查詢的股票資訊", 
                         actions =[
                             MessageAction( 
-                                label= message + " 法人買賣超",
-                                text= "法人買賣超 " + message),
+                                label= message + " 大戶籌碼",
+                                text= "大戶籌碼 " + message),
                             MessageAction( 
                                 label= message + " 同業排名",
                                 text= "同業排名 " + message)   
