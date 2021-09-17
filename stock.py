@@ -922,7 +922,10 @@ def stock_message(message):
                         actions =[
                             MessageAction( 
                                 label= message + " 法人買賣超",
-                                text= "法人買賣超 " + message)
+                                text= "法人買賣超 " + message),
+                            MessageAction( 
+                                label= message + " 同業排名",
+                                text= "同業排名 " + message)   
                          ]
                     ),                               
                 ]
