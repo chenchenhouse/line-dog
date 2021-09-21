@@ -522,6 +522,7 @@ def foreign_inv(message,t_m):
     fig,ax = plt.subplots(figsize=(20, 5))
     ax.grid(True) 
     ax.set_title(title_,fontsize=15)
+    ax.set_xticks(range(0, len(df3.index), 5))
     plt.xticks(rotation=45,fontsize=10)
     ax.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
     ax.legend(loc = "upper left")
@@ -573,6 +574,7 @@ def credit_inv(message,t_m):
     fig,ax = plt.subplots(figsize=(20, 5)) 
     plt.xticks(rotation=45,fontsize=10)
     ax.set_title(title_,fontsize=15)
+    ax.set_xticks(range(0, len(df3.index), 5))
     ax.bar(df2.index,df2["投信(張)"],color = "rosybrown",label = "投信買賣超")
     ax.legend(loc = "upper left")
     for a,b,c in zip(df2.index,df2["投信(張)"],range(len(df2.index))):
@@ -624,6 +626,7 @@ def self_employed_inv(message,t_m):
     fig,ax = plt.subplots(figsize=(15, 5)) 
     plt.xticks(rotation=45,fontsize=10)
     ax.set_title(title_,fontsize=15)
+    ax.set_xticks(range(0, len(df3.index), 5))
     ax.bar(df2.index,df2["自營商(張)"],color = "orchid",label = "自營商買賣超")
     ax.legend(loc = "upper left")
     for a,b,c in zip(df2.index,df2["自營商(張)"],range(len(df2.index))):
@@ -675,6 +678,7 @@ def major_inv(message,t_m):
     fig,ax = plt.subplots(figsize=(15, 5)) 
     plt.xticks(rotation=45,fontsize=10)
     ax.set_title(title_,fontsize=15)
+    ax.set_xticks(range(0, len(df3.index), 5))
     ax.bar(df2.index,df2["自營商(張)"],color = "orchid",label = "自營商買賣超")
     ax.bar(df2.index,df2["投信(張)"],color = "rosybrown",label = "投信買賣超")
     ax.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
