@@ -669,8 +669,8 @@ def major_inv(message,t_m):
     df_4 = df_3[df_3["有價證券代號"] == str(message)]
     title_ = df_4.values[0,0] + " " + df_4.values[0,1] + "三大法人買賣"
     t = arrow.now().shift(months = -3).strftime("%Y-%m-%d")
-    u = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] >= 0], [5]))
-    p = int(np.percentile(t_m["外資(張)"][t_m["外資(張)"] <= 0], [50]))
+    u = int(np.percentile(t_m["合計(張)"][t_m["合計(張)"] >= 0], [5]))
+    p = int(np.percentile(t_m["合計(張)"][t_m["合計(張)"] <= 0], [50]))
     df2 = t_m.loc[:t].sort_index()
     df3 = s_p[t:]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
@@ -683,7 +683,7 @@ def major_inv(message,t_m):
     ax.bar(df2.index,df2["投信(張)"],color = "rosybrown",label = "投信買賣超")
     ax.bar(df2.index,df2["外資(張)"],color = "dodgerblue",label = "外資買賣超")
     ax.legend(loc = "upper left")
-    for a,b,c in zip(df2.index,df2["外資(張)"],range(len(df2.index))):
+    for a,b,c in zip(df2.index,df2["合計(張)"],range(len(df2.index))):
         if c % 5 == 0 and b > 0:
             plt.text(a, b + u , '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "r")
         elif c % 5 == 0 and b < 0:
