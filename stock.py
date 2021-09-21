@@ -568,7 +568,7 @@ def credit_inv(message,t_m):
     u = int(np.percentile(t_m["投信(張)"][t_m["投信(張)"] >= 0], [5]))
     p = int(np.percentile(t_m["投信(張)"][t_m["投信(張)"] <= 0], [50]))
     df2 = t_m.loc[:t].sort_index()
-    df_2 = s_p[t:]
+    df3 = s_p[t:]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     fig,ax = plt.subplots(figsize=(20, 5)) 
@@ -584,8 +584,8 @@ def credit_inv(message,t_m):
             plt.text(a, b + p, '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "darkgreen")
     ax.grid(True)
     ax2 = ax.twinx()
-    ax2.set_xticks(range(0, len(df_2.index), 5))
-    ax2.plot(df_2.index,df_2["收盤價"],color = "orange",label = "股價")
+    ax2.set_xticks(range(0, len(df3.index), 5))
+    ax2.plot(df3.index,df3["收盤價"],color = "orange",label = "股價")
     ax2.legend(loc = "lower left")
     plt.savefig(str(message) + "投信買賣超.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
@@ -620,7 +620,7 @@ def self_employed_inv(message,t_m):
     u = int(np.percentile(t_m["自營商(張)"][t_m["自營商(張)"] >= 0], [5]))
     p = int(np.percentile(t_m["自營商(張)"][t_m["自營商(張)"] <= 0], [50]))
     df2 = t_m.loc[:t].sort_index()
-    df_2 = s_p[t:]
+    df3 = s_p[t:]
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     fig,ax = plt.subplots(figsize=(15, 5)) 
@@ -636,8 +636,8 @@ def self_employed_inv(message,t_m):
             plt.text(a, b + p, '%.0f' % b, ha='center', va= 'bottom',fontsize=10,color = "darkgreen")
     ax.grid(True)
     ax2 = ax.twinx()
-    ax2.set_xticks(range(0, len(df_2.index), 5))
-    ax2.plot(df_2.index,df_2["收盤價"],color = "orange",label = "股價")
+    ax2.set_xticks(range(0, len(df3.index), 5))
+    ax2.plot(df3.index,df3["收盤價"],color = "orange",label = "股價")
     ax2.legend(loc = "lower left")
     plt.savefig(str(message) + "自營商買賣超.png", bbox_inches = "tight")
     CLIENT_ID = "0214ca80ccacfe5"
