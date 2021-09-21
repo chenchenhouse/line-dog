@@ -310,40 +310,28 @@ def min_close(message):
 def stock_day(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    ip_url = [{"http" : "http://110.74.208.154"},{"http" : "http://13.112.197.90"},
-         {"http" : "http://47.254.75.151'"},{"http" : "http://181.192.2.233"},{"http" : "http://62.252.146.74"},{"http" : "http://185.56.209.114"},{"http" : "http://109.86.182.203"},
-         {"http" : "http://179.108.123.210"},{"http" : "http://202.158.15.146"},{"http" : "http://47.75.145.229"},{"http" : "http://72.255.57.189"},
-         {"http" : "http://195.91.221.230"},{"http" : "http://187.243.253.2"},{"http" : "http://158.140.167.148"},{"http" : "http://198.27.74.6:9300"},
-         {"http" : "http://20.82.200.229:3128"},{"http" : "http://45.70.15.3:8080"},{"http" : "http://183.87.153.98:49602"},{"http" : "http://41.231.54.37:8888"},
-         {"http" : "http://221.141.87.130:808"},{"http" : "http://188.225.253.222:8080"},{"http" : "http://80.154.203.122:8080"},{"http" : "http://212.42.62.69:8080"},
-         {"http" : "http://14.161.252.185:55443"},{"http" : "http://194.233.67.98:443"},{"http" : "http://89.222.182.144:3128"},{"http" : "http://148.251.249.243:3128"}]
-    df = pd.DataFrame()
-    for date in range(-3,1):
-        t = arrow.now().shift(months = date).strftime("%Y%m")
-        url = "https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=" + str(t) + "01&stockNo=" + str(message)
-        ip = choice(ip_url)
-        res = requests.get(url,proxies=ip)
-        s = json.loads(res.text)
-        data = []
-        for i in (s["data"]):
-            data.append(i)
-        df_ = pd.DataFrame(data,columns = s["fields"])
-        df = df.append(df_)
-        time.sleep(2)
+    start = int(time.mktime(time.strptime(arrow.now().shift(months = 1).strftime("%Y-%m-%d"),"%Y-%m-%d")))
+    end = int(time.mktime(time.strptime(arrow.now().shift(months = -3).strftime("%Y-%m-%d"),"%Y-%m-%d")))
+    url = "https://ws.api.cnyes.com/ws/api/v1/charting/history?resolution=D&symbol=TWS:2330:STOCK&from=" +str(start) + "&to="+str(end) + "&quote=1"
+    res = requests.get(url)
+    s = json.loads(res.text)
+    t = []
+    o = []
+    h = []
+    l = []
+    c = []
+    v = []
+    name = [t,o,h,l,c,v]
+    lis = ["t","o","h","l","c","v"]
+    for n,lis in zip(name,lis):
+        for d in (s["data"][lis]):
+            n.append(d)
+    df = pd.DataFrame({"日期":t,"開盤價":o,"最高價":h,"最低價":l,"收盤價":c,"成交量":v})    
     for i in range(len(df)):
-        df["日期"].iloc[i]=df["日期"].iloc[i].replace(df["日期"].iloc[i][0:3]   ,  str(  int( df["日期"].iloc[i][0:3] ) + 1911 ))
+        df["日期"][i] = time.strftime("%Y-%m-%d", time.localtime(df["日期"][i]))
     df.index = pd.to_datetime(df["日期"])
     df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
     df.drop("日期",axis = 1,inplace=True)
-    int_ = ["成交股數","成交金額","成交筆數"]
-    float_ = ["開盤價","最高價","最低價","收盤價"]
-    for i in int_:
-        df[i] = df[i].apply(lambda x: x.replace(",","")).astype("int64")
-    for i in float_:
-        df[i] = df[i].astype("float")
-    df["漲跌價差"] = df["漲跌價差"].apply(lambda x: x.replace("X0.00","0.00"))
-    df["漲跌價差"] = df["漲跌價差"].astype(float)
-    #df = stock_price(message,-3)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
     df_ = df_.iloc[:,2:7]
@@ -355,7 +343,7 @@ def stock_day(message):
     df_2.columns = df_2.iloc[0,:]
     df_2 = df_2[1:]
     df_3 = pd.concat([df_,df_2])
-    df_4 = df_3[df_3["有價證券代號"] == str(message)]
+    df_4 = df_3[df_3["有價證券代號"] == message]
     title_ = df_4.values[0,0] + " " + df_4.values[0,1]
     sma_10 = talib.SMA(np.array(df['最低價']), 10)
     sma_20 = talib.SMA(np.array(df['最低價']), 20)
@@ -368,19 +356,19 @@ def stock_day(message):
     ax.grid(True)
     ax.set_xticklabels(df.index[::10])
     mpf.candlestick2_ochl(ax, df['開盤價'], df['收盤價'], df['最高價'],
-                          df['最低價'], width=0.6, colorup='r', colordown='g', alpha=0.75); 
+                        df['最低價'], width=0.6, colorup='r', colordown='g', alpha=0.75); 
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     ax.plot(sma_10, label='10日均線')
     ax.plot(sma_20, label='20日均線')
-    mpf.volume_overlay(ax2, df['開盤價'], df['收盤價'], df['成交股數'], colorup='r', colordown='g', width=0.5, alpha=0.8)
+    mpf.volume_overlay(ax2, df['開盤價'], df['收盤價'], df['成交量'], colorup='r', colordown='g', width=0.5, alpha=0.8)
     ax2.grid(True)
     ax2.set_xticks(range(0, len(df.index), 10))
     ax2.set_xticklabels(df.index[::10])
     plt.xticks(rotation=45,fontsize=20)
     plt.yticks(fontsize=15)
     ax.legend(fontsize=20,loc = "upper left")
-    plt.savefig(str(message) + "日線圖.png", bbox_inches = "tight")  
+    plt.savefig(str(message) + "日線圖.png", bbox_inches = "tight") 
     CLIENT_ID = "0214ca80ccacfe5"
     PATH = str(message) + "日線圖.png" #A Filepath to an image on your computer"
     title = str(message) + "日線圖"
