@@ -330,6 +330,7 @@ def stock_l(message):
     df.index = pd.to_datetime(df["日期"])
     df.index = df.index.format(formatter=lambda x: x.strftime('%Y-%m-%d')) 
     df.drop("日期",axis = 1,inplace=True)
+    df = df.sort_index()
     return df
 #日線圖
 def stock_day(message):
