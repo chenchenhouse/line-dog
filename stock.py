@@ -725,6 +725,18 @@ def stock_message(message):
         except:
             return("請輸入正確的股票代號")   
     try: 
+        url = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
+        df = pd.read_html(requests.get(url).text)[0]
+        df = df.iloc[:,2:7]
+        df.columns = df.iloc[0,:]
+        df = df[1:]
+        url2 = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=2&issuetype=4&industry_code=&Page=1&chklike=Y"
+        df2 = pd.read_html(requests.get(url2).text)[0]
+        df2 = df2.iloc[:,2:7]
+        df2.columns = df2.iloc[0,:]
+        df2 = df2[1:]
+        df3 = pd.concat([df,df2])
+        df4 = df3[df3["有價證券代號"] == message]
         carousel_template_message  = TemplateSendMessage( 
         alt_text = "股票資訊",
         template=CarouselTemplate( 
@@ -799,4 +811,24 @@ def stock_message(message):
         )
         return carousel_template_message
     except:
-        return("請輸入正確的股票名稱")
+        return(TextSendMessage("請輸入正確的股票名稱"))
+
+
+#繼續查詢
+def continue_after(message):
+    confirm_template_message = TemplateSendMessage( 
+    alt_text="繼續查詢", 
+    template=ConfirmTemplate( 
+        text="是否繼續查詢" + message(), 
+        actions=[ 
+            PostbackAction( 
+                label="繼續", 
+                display_text= "股票 " + message, 
+            ),
+            MessageAction( 
+                label="不用了", 
+                text="退出" 
+            ) 
+        ]    
+    ) )
+    return(confirm_template_message)

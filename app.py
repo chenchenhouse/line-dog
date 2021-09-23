@@ -62,29 +62,37 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,stock_mes)
     elif "個股資訊 " in message:
         stock_n = stock_id(message[5:])
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_n))
+        cont = continue_after(message[5:])
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(stock_n),cont])
     elif "最新分鐘圖 " in message:
         m = min_close(message[6:])
-        line_bot_api.reply_message(event.reply_token,m)
+        cont = continue_after(message[6:])
+        line_bot_api.reply_message(event.reply_token,[m,cont])
     elif "日線圖 " in message:
         d = stock_day(message[4:])
-        line_bot_api.reply_message(event.reply_token,d)
+        cont = continue_after(message[4:])
+        line_bot_api.reply_message(event.reply_token,[d,cont])
     elif "個股新聞 " in message:
         new_one = one_new(message[5:])
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(new_one))
+        cont = continue_after(message[5:])
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(new_one),cont])
     elif "平均股利 " in message:
         contiun = contiun_dividend(message[5:])
         dividend_one = average_dividend(message[5:])
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(contiun),dividend_one])    
+        cont = continue_after(message[5:])
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(contiun),dividend_one,cont])    
     elif "歷年股利 " in message:
         dividend_year = year_dividend(message[5:])
-        line_bot_api.reply_message(event.reply_token,dividend_year)      
+        cont = continue_after(message[5:])
+        line_bot_api.reply_message(event.reply_token,[dividend_year,cont])     
     elif "同業比較 " in message:
         stock_one = compare_one(message[5:])
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_one))
+        cont = continue_after(message[5:])
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(stock_one),cont])
     elif "同業排名 " in message:
         stock_other = compare_other(message[5:])
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(stock_other))  
+        cont = continue_after(message[5:])
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(stock_other),cont])  
     elif "大戶籌碼 " in message:
         st = message[5:]
         flex_message = TextSendMessage(text="請選擇要顯示的買賣超資訊", 
@@ -99,26 +107,32 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,flex_message)
     elif "最新法人買賣超 " in message:
         inv = investors(message[8:])
-        line_bot_api.reply_message(event.reply_token,inv)
+        cont = continue_after(message[8:])
+        line_bot_api.reply_message(event.reply_token,[inv,cont])
     elif "歷年法人買賣超 " in message:
         t_d = total_data(message[8:])
-        line_bot_api.reply_message(event.reply_token,t_d)
+        cont = continue_after(message[8:])
+        line_bot_api.reply_message(event.reply_token,[t_d,cont])
     elif "外資買賣超 " in message:
         t_m = total_major(message[6:])
         f_i = foreign_inv(message[6:],t_m)
-        line_bot_api.reply_message(event.reply_token,f_i)
+        cont = continue_after(message[6:])
+        line_bot_api.reply_message(event.reply_token,[f_i,cont])
     elif "投信買賣超 " in message:
         t_m = total_major(message[6:])
         c_i = credit_inv(message[6:],t_m)
-        line_bot_api.reply_message(event.reply_token,c_i)
+        cont = continue_after(message[6:])
+        line_bot_api.reply_message(event.reply_token,[c_i,cont])
     elif "自營商買賣超 " in message:
         t_m = total_major(message[7:])
         s_i = self_employed_inv(message[7:],t_m)
-        line_bot_api.reply_message(event.reply_token,s_i)      
+        cont = continue_after(message[7:])
+        line_bot_api.reply_message(event.reply_token,[s_i,cont])      
     elif "三大法人買賣超 " in message:
         t_m = total_major(message[8:])
         m_i = major_inv(message[8:],t_m)
-        line_bot_api.reply_message(event.reply_token,m_i)  
+        cont = continue_after(message[8:])
+        line_bot_api.reply_message(event.reply_token,[m_i,cont])  
     elif re.match("新聞",message):
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)
@@ -131,6 +145,8 @@ def handle_message(event):
     elif re.match("國際新聞",message):
         news = wd_stock()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
+    elif re.match("退出",message):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage("那我先休息囉!!"))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(message))
 #主程式
