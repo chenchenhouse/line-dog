@@ -819,7 +819,7 @@ def continue_after(message):
     confirm_template_message = TemplateSendMessage( 
     alt_text="繼續查詢", 
     template=ConfirmTemplate( 
-        text="是否繼續查詢" + message(), 
+        text="是否繼續查詢" + message, 
         actions=[ 
             PostbackAction( 
                 label="繼續", 
