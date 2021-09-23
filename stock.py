@@ -823,7 +823,7 @@ def continue_after(message):
         actions=[ 
             MessageAction( 
                 label="繼續", 
-                text="股票" + message 
+                text="股票 " + message 
             ),
             MessageAction( 
                 label="不用了", 
