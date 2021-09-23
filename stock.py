@@ -821,9 +821,9 @@ def continue_after(message):
     template=ConfirmTemplate( 
         text="是否繼續查詢" + message, 
         actions=[ 
-            PostbackAction( 
+            MessageAction( 
                 label="繼續", 
-                display_text= "股票 " + message, 
+                text="股票" + message 
             ),
             MessageAction( 
                 label="不用了", 
