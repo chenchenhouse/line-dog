@@ -14,6 +14,7 @@ import re
 from blog import *
 from stock import *
 from stock_news import *
+from stock_select import *
 #*********function*****************
 
 
@@ -145,6 +146,9 @@ def handle_message(event):
     elif re.match("國際新聞",message):
         news = wd_stock()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
+    elif re.match("選股1",message):
+        sel = select_1()
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(sel))
     elif re.match("退出",message):
         line_bot_api.reply_message(event.reply_token,TextSendMessage("那我先休息囉!!"))
     else:
