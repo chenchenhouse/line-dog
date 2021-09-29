@@ -9,7 +9,7 @@ def base_3(message):
     target = message[:4]
     stock_n = message[5:]
     if not re.match(r"[+-]?\d+$", stock_n):
-        message = stock_change(stock_n)
+        stock_n = stock_change(stock_n)
     url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
     df_ = pd.read_html(requests.get(url_).text)[0]
     df_ = df_.iloc[:,2:7]
