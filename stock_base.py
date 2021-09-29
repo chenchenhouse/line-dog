@@ -379,4 +379,4 @@ def base_3(message):
         }
         }
     )
-    return f[0].text
+    return message
