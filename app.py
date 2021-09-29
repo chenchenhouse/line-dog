@@ -151,7 +151,7 @@ def handle_message(event):
         sel = select_1()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(sel))
     elif "獲利能力 " in message:
-        base = base_3(message)
+        base = base_3(message[5:])
         line_bot_api.reply_message(event.reply_token,base)
     elif re.match("退出",message):
         line_bot_api.reply_message(event.reply_token,TextSendMessage("那我先休息囉!!"))
