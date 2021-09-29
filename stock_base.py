@@ -84,7 +84,6 @@ def base_3(message):
                         "text": "期別",
                         "size": "xl",
                         "color": "#000000",
-                        "flex": 0,
                         "weight": "bold"
                     },
                     {
