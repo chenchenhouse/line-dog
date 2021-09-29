@@ -53,14 +53,14 @@ def base_3(message):
             "contents": [
             {
                 "type": "text",
-                "text": title_,
+                "text": str(title_),
                 "weight": "bold",
                 "color": "#1DB446",
                 "size": "md"
             },
             {
                 "type": "text",
-                "text": title[0].text,
+                "text": str(title[0].text),
                 "weight": "bold",
                 "size": "xxl",
                 "margin": "md"
@@ -88,7 +88,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": title[3].text,
+                        "text": str(title[3].text),
                         "size": "xl",
                         "color": "#000000",
                         "align": "center",
@@ -97,7 +97,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": title[2].text,
+                        "text": str(title[2].text),
                         "size": "xl",
                         "color": "#000000",
                         "align": "center",
@@ -106,7 +106,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": title[1].text,
+                        "text": str(title[1].text),
                         "size": "xl",
                         "color": "#000000",
                         "align": "center",
@@ -123,7 +123,7 @@ def base_3(message):
                     "contents": [
                     {
                         "type": "text",
-                        "text": a[0].text,
+                        "text": str(a[0].text),
                         "size": "md",
                         "color": "#555555",
                         "align": "start",
@@ -132,7 +132,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": a[3].text,
+                        "text": str(a[3].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -140,7 +140,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": a[2].text,
+                        "text": str(a[2].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -148,7 +148,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": a[1].text,
+                        "text": str(a[1].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -164,7 +164,7 @@ def base_3(message):
                     "contents": [
                     {
                         "type": "text",
-                        "text": b[0].text,
+                        "text": str(b[0].text),
                         "size": "md",
                         "color": "#555555",
                         "margin": "none",
@@ -174,7 +174,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": b[3].text,
+                        "text": str(b[3].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -182,7 +182,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": b[2].text,
+                        "text": str(b[2].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -190,7 +190,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": b[1].text,
+                        "text": str(b[1].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -205,7 +205,7 @@ def base_3(message):
                     "contents": [
                     {
                         "type": "text",
-                        "text": c[0].text,
+                        "text": str(c[0].text),
                         "size": "md",
                         "color": "#555555",
                         "margin": "none",
@@ -215,7 +215,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": c[3].text,
+                        "text": str(c[3].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -223,7 +223,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": c[2].text,
+                        "text": str(c[2].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -231,7 +231,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": c[1].text,
+                        "text": str(c[1].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -246,7 +246,7 @@ def base_3(message):
                     "contents": [
                     {
                         "type": "text",
-                        "text": d[0].text,
+                        "text": str(d[0].text),
                         "size": "md",
                         "color": "#555555",
                         "margin": "none",
@@ -256,7 +256,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": d[3].text,
+                        "text": str(d[3].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -264,7 +264,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": d[2].text,
+                        "text": str(d[2].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -272,7 +272,7 @@ def base_3(message):
                     },
                     {
                         "type": "text",
-                        "text": d[1].text,
+                        "text": str(d[1].text),
                         "size": "lg",
                         "color": "#111111",
                         "align": "center",
@@ -289,7 +289,7 @@ def base_3(message):
                 "contents": [
                 {
                     "type": "text",
-                    "text": e[0].text,
+                    "text": str(e[0].text),
                     "size": "md",
                     "color": "#555555",
                     "margin": "none",
@@ -299,7 +299,7 @@ def base_3(message):
                 },
                 {
                     "type": "text",
-                    "text": e[3].text,
+                    "text": str(e[3].text),
                     "size": "lg",
                     "color": "#111111",
                     "align": "center",
@@ -307,7 +307,7 @@ def base_3(message):
                 },
                 {
                     "type": "text",
-                    "text": e[2].text,
+                    "text": str(e[2].text),
                     "size": "lg",
                     "color": "#111111",
                     "align": "center",
@@ -315,7 +315,7 @@ def base_3(message):
                 },
                 {
                     "type": "text",
-                    "text": e[1].text,
+                    "text": str(e[1].text),
                     "size": "lg",
                     "color": "#111111",
                     "align": "center",
@@ -336,11 +336,11 @@ def base_3(message):
                     "align": "start",
                     "gravity": "center",
                     "wrap": True,
-                    "text": f[0].text
+                    "text": str(f[0].text)
                 },
                 {
                     "type": "text",
-                    "text": f[3].text,
+                    "text": str(f[3].text),
                     "size": "lg",
                     "color": "#111111",
                     "align": "center",
@@ -348,7 +348,7 @@ def base_3(message):
                 },
                 {
                     "type": "text",
-                    "text": f[2].text,
+                    "text": str(f[2].text),
                     "size": "lg",
                     "color": "#111111",
                     "align": "center",
@@ -356,7 +356,7 @@ def base_3(message):
                 },
                 {
                     "type": "text",
-                    "text": f[1].text1,
+                    "text": str(f[1].text1),
                     "size": "lg",
                     "color": "#111111",
                     "align": "center",
