@@ -15,6 +15,7 @@ from blog import *
 from stock import *
 from stock_news import *
 from stock_select import *
+from stock_base import *
 #*********function*****************
 
 
@@ -149,6 +150,9 @@ def handle_message(event):
     elif re.match("選股1",message):
         sel = select_1()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(sel))
+    elif "獲利能力 " in message:
+        base = base_3(message)
+        line_bot_api.reply_message(event.reply_token,base)
     elif re.match("退出",message):
         line_bot_api.reply_message(event.reply_token,TextSendMessage("那我先休息囉!!"))
     else:
