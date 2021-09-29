@@ -650,3 +650,310 @@ def base_3(message):
             }
         )
         return message
+    elif re.match("經營能力",target):
+        soup_t1 = soup.find_all("tr",{"class":"bg_h1 fw_normal"})[7]
+        title = soup_t1.find_all("nobr")[:4]
+        soup1 = soup.find_all("tr",{"bgcolor":"white"})
+        a = soup1[57].find_all("nobr")[:4]  #應收帳款週轉率
+        b = soup1[59].find_all("nobr")[:4] #應付帳款週轉率
+        c = soup1[61].find_all("nobr")[:4] #存貨週轉率
+        d = soup1[63].find_all("nobr")[:4] #固定資產週轉率
+        e = soup1[64].find_all("nobr")[:4] #總資產週轉率
+        message = FlexSendMessage(
+            alt_text = '獲利能力',
+            contents = {
+            "type": "bubble",
+            "body": {
+                "type": "box",
+                "layout": "vertical",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": str(title_),
+                    "weight": "bold",
+                    "color": "#1DB446",
+                    "size": "md"
+                },
+                {
+                    "type": "text",
+                    "text": str(title[0].text),
+                    "weight": "bold",
+                    "size": "xxl",
+                    "margin": "md"
+                },
+                {
+                    "type": "separator",
+                    "margin": "xxl"
+                },
+                {
+                    "type": "box",
+                    "layout": "vertical",
+                    "margin": "xxl",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                        {
+                            "type": "text",
+                            "text": "期別",
+                            "size": "xl",
+                            "color": "#000000",
+                            "weight": "bold"
+                        },
+                        {
+                            "type": "text",
+                            "text": str(title[3].text),
+                            "size": "xl",
+                            "color": "#000000",
+                            "align": "center",
+                            "weight": "bold",
+                            "gravity": "center",
+                            "wrap": True
+                        },
+                        {
+                            "type": "text",
+                            "text": str(title[2].text),
+                            "size": "xl",
+                            "color": "#000000",
+                            "align": "center",
+                            "weight": "bold",
+                            "gravity": "center",
+                            "wrap": True
+                        },
+                        {
+                            "type": "text",
+                            "text": str(title[1].text),
+                            "size": "xl",
+                            "color": "#000000",
+                            "align": "center",
+                            "weight": "bold",
+                            "gravity": "center",
+                            "wrap": True
+                        }
+                        ],
+                        "spacing": "xl",
+                        "margin": "lg"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                        {
+                            "type": "text",
+                            "text": str(a[0].text),
+                            "size": "md",
+                            "color": "#555555",
+                            "align": "start",
+                            "gravity": "center",
+                            "wrap": True
+                        },
+                        {
+                            "type": "text",
+                            "text": str(a[3].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": str(a[2].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": str(a[1].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        }
+                        ],
+                        "spacing": "none",
+                        "margin": "md"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                        {
+                            "type": "text",
+                            "text": str(b[0].text),
+                            "size": "md",
+                            "color": "#555555",
+                            "margin": "none",
+                            "align": "start",
+                            "gravity": "center",
+                            "wrap": True
+                        },
+                        {
+                            "type": "text",
+                            "text": str(b[3].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": str(b[2].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": str(b[1].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        }
+                        ],
+                        "margin": "md"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                        {
+                            "type": "text",
+                            "text": str(c[0].text),
+                            "size": "md",
+                            "color": "#555555",
+                            "margin": "none",
+                            "align": "start",
+                            "gravity": "center",
+                            "wrap": True
+                        },
+                        {
+                            "type": "text",
+                            "text": str(c[3].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": str(c[2].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": str(c[1].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        }
+                        ],
+                        "margin": "md"
+                    },
+                    {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                        {
+                            "type": "text",
+                            "text": str(d[0].text),
+                            "size": "md",
+                            "color": "#555555",
+                            "margin": "none",
+                            "align": "start",
+                            "gravity": "center",
+                            "wrap": True
+                        },
+                        {
+                            "type": "text",
+                            "text": str(d[3].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": str(d[2].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        },
+                        {
+                            "type": "text",
+                            "text": str(d[1].text),
+                            "size": "lg",
+                            "color": "#111111",
+                            "align": "center",
+                            "gravity": "center"
+                        }
+                        ],
+                        "margin": "md"
+                    }
+                    ]
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(e[0].text),
+                        "size": "md",
+                        "color": "#555555",
+                        "margin": "none",
+                        "align": "start",
+                        "gravity": "center",
+                        "wrap": True
+                    },
+                    {
+                        "type": "text",
+                        "text": str(e[3].text),
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": str(e[2].text),
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": str(e[1].text),
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    }
+                    ],
+                    "margin": "md"
+                }
+                ],
+                "margin": "none",
+                "spacing": "none",
+                "borderWidth": "none",
+                "cornerRadius": "none"
+            },
+            "styles": {
+                "footer": {
+                "separator": True
+                }
+            }
+            }
+        )
+        return message
