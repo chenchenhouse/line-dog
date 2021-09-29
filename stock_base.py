@@ -23,11 +23,11 @@ def base_3(message):
     url = "https://goodinfo.tw/StockInfo/StockFinDetail.asp"
     headers = {
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36",
-        'referer': 'https://goodinfo.tw/StockInfo/StockFinDetail.asp?RPT_CAT=XX_M_QUAR_ACC&STOCK_ID=' + message
+        'referer': 'https://goodinfo.tw/StockInfo/StockFinDetail.asp?RPT_CAT=XX_M_QUAR_ACC&STOCK_ID=' + str(message)
     }
     data = {
         "STEP": "DATA",
-        "STOCK_ID": message,
+        "STOCK_ID": str(message),
         "RPT_CAT": "XX_M_YEAR"
     }
     res = requests.post(url,headers = headers,data = data)
