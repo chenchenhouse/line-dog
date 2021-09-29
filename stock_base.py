@@ -93,7 +93,8 @@ def base_3(message):
                         "color": "#000000",
                         "align": "center",
                         "weight": "bold",
-                        "gravity": "center"
+                        "gravity": "center",
+                        "wrap": True
                     },
                     {
                         "type": "text",
@@ -102,7 +103,8 @@ def base_3(message):
                         "color": "#000000",
                         "align": "center",
                         "weight": "bold",
-                        "gravity": "center"
+                        "gravity": "center",
+                        "wrap": True
                     },
                     {
                         "type": "text",
@@ -111,10 +113,11 @@ def base_3(message):
                         "color": "#000000",
                         "align": "center",
                         "weight": "bold",
-                        "gravity": "center"
+                        "gravity": "center",
+                        "wrap": True
                     }
                     ],
-                    "spacing": "xxl",
+                    "spacing": "xl",
                     "margin": "lg"
                 },
                 {
@@ -356,7 +359,7 @@ def base_3(message):
                 },
                 {
                     "type": "text",
-                    "text": str(f[1].text1),
+                    "text": str(f[1].text),
                     "size": "lg",
                     "color": "#111111",
                     "align": "center",
