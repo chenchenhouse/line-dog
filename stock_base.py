@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 import re
 from stock import *
+import pandas as pd
 
 def base_3(message):
     if not re.match(r"[+-]?\d+$", message):
@@ -42,340 +43,340 @@ def base_3(message):
     d = soup1[6].find_all("nobr")[:4] #EPS
     e = soup1[8].find_all("nobr")[:4] #ROE
     f = soup1[9].find_all("nobr")[:4] #ROA
-    # message = FlexSendMessage(
-    #     alt_text = '獲利能力',
-    #     contents = {
-    #     "type": "bubble",
-    #     "body": {
-    #         "type": "box",
-    #         "layout": "vertical",
-    #         "contents": [
-    #         {
-    #             "type": "text",
-    #             "text": title_,
-    #             "weight": "bold",
-    #             "color": "#1DB446",
-    #             "size": "md"
-    #         },
-    #         {
-    #             "type": "text",
-    #             "text": title[0].text,
-    #             "weight": "bold",
-    #             "size": "xxl",
-    #             "margin": "md"
-    #         },
-    #         {
-    #             "type": "separator",
-    #             "margin": "xxl"
-    #         },
-    #         {
-    #             "type": "box",
-    #             "layout": "vertical",
-    #             "margin": "xxl",
-    #             "spacing": "md",
-    #             "contents": [
-    #             {
-    #                 "type": "box",
-    #                 "layout": "horizontal",
-    #                 "contents": [
-    #                 {
-    #                     "type": "text",
-    #                     "text": "期別",
-    #                     "size": "xl",
-    #                     "color": "#000000",
-    #                     "flex": 0,
-    #                     "weight": "bold"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": title[3].text,
-    #                     "size": "xl",
-    #                     "color": "#000000",
-    #                     "align": "center",
-    #                     "weight": "bold",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": title[2].text,
-    #                     "size": "xl",
-    #                     "color": "#000000",
-    #                     "align": "center",
-    #                     "weight": "bold",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": title[1].text,
-    #                     "size": "xl",
-    #                     "color": "#000000",
-    #                     "align": "center",
-    #                     "weight": "bold",
-    #                     "gravity": "center"
-    #                 }
-    #                 ],
-    #                 "spacing": "xxl",
-    #                 "margin": "lg"
-    #             },
-    #             {
-    #                 "type": "box",
-    #                 "layout": "horizontal",
-    #                 "contents": [
-    #                 {
-    #                     "type": "text",
-    #                     "text": a[0].text,
-    #                     "size": "md",
-    #                     "color": "#555555",
-    #                     "align": "start",
-    #                     "gravity": "center",
-    #                     "wrap": True
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": a[3].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": a[2].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": a[1].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 }
-    #                 ],
-    #                 "spacing": "none",
-    #                 "margin": "md"
-    #             },
-    #             {
-    #                 "type": "box",
-    #                 "layout": "horizontal",
-    #                 "contents": [
-    #                 {
-    #                     "type": "text",
-    #                     "text": b[0].text,
-    #                     "size": "md",
-    #                     "color": "#555555",
-    #                     "margin": "none",
-    #                     "align": "start",
-    #                     "gravity": "center",
-    #                     "wrap": True
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": b[3].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": b[2].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": b[1].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 }
-    #                 ],
-    #                 "margin": "md"
-    #             },
-    #             {
-    #                 "type": "box",
-    #                 "layout": "horizontal",
-    #                 "contents": [
-    #                 {
-    #                     "type": "text",
-    #                     "text": c[0].text,
-    #                     "size": "md",
-    #                     "color": "#555555",
-    #                     "margin": "none",
-    #                     "align": "start",
-    #                     "gravity": "center",
-    #                     "wrap": True
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": c[3].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": c[2].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": c[1].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 }
-    #                 ],
-    #                 "margin": "md"
-    #             },
-    #             {
-    #                 "type": "box",
-    #                 "layout": "horizontal",
-    #                 "contents": [
-    #                 {
-    #                     "type": "text",
-    #                     "text": d[0].text,
-    #                     "size": "md",
-    #                     "color": "#555555",
-    #                     "margin": "none",
-    #                     "align": "start",
-    #                     "gravity": "center",
-    #                     "wrap": True
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": d[3].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": d[2].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 },
-    #                 {
-    #                     "type": "text",
-    #                     "text": d[1].text,
-    #                     "size": "lg",
-    #                     "color": "#111111",
-    #                     "align": "center",
-    #                     "gravity": "center"
-    #                 }
-    #                 ],
-    #                 "margin": "md"
-    #             }
-    #             ]
-    #         },
-    #         {
-    #             "type": "box",
-    #             "layout": "horizontal",
-    #             "contents": [
-    #             {
-    #                 "type": "text",
-    #                 "text": e[0].text,
-    #                 "size": "md",
-    #                 "color": "#555555",
-    #                 "margin": "none",
-    #                 "align": "start",
-    #                 "gravity": "center",
-    #                 "wrap": True
-    #             },
-    #             {
-    #                 "type": "text",
-    #                 "text": e[3].text,
-    #                 "size": "lg",
-    #                 "color": "#111111",
-    #                 "align": "center",
-    #                 "gravity": "center"
-    #             },
-    #             {
-    #                 "type": "text",
-    #                 "text": e[2].text,
-    #                 "size": "lg",
-    #                 "color": "#111111",
-    #                 "align": "center",
-    #                 "gravity": "center"
-    #             },
-    #             {
-    #                 "type": "text",
-    #                 "text": e[1].text,
-    #                 "size": "lg",
-    #                 "color": "#111111",
-    #                 "align": "center",
-    #                 "gravity": "center"
-    #             }
-    #             ],
-    #             "margin": "md"
-    #         },
-    #         {
-    #             "type": "box",
-    #             "layout": "horizontal",
-    #             "contents": [
-    #             {
-    #                 "type": "text",
-    #                 "size": "md",
-    #                 "color": "#555555",
-    #                 "margin": "none",
-    #                 "align": "start",
-    #                 "gravity": "center",
-    #                 "wrap": True,
-    #                 "text": f[0].text
-    #             },
-    #             {
-    #                 "type": "text",
-    #                 "text": f[3].text,
-    #                 "size": "lg",
-    #                 "color": "#111111",
-    #                 "align": "center",
-    #                 "gravity": "center"
-    #             },
-    #             {
-    #                 "type": "text",
-    #                 "text": f[2].text,
-    #                 "size": "lg",
-    #                 "color": "#111111",
-    #                 "align": "center",
-    #                 "gravity": "center"
-    #             },
-    #             {
-    #                 "type": "text",
-    #                 "text": f[1].text1,
-    #                 "size": "lg",
-    #                 "color": "#111111",
-    #                 "align": "center",
-    #                 "gravity": "center"
-    #             }
-    #             ],
-    #             "margin": "md"
-    #         }
-    #         ],
-    #         "margin": "none",
-    #         "spacing": "none",
-    #         "borderWidth": "none",
-    #         "cornerRadius": "none"
-    #     },
-    #     "styles": {
-    #         "footer": {
-    #         "separator": True
-    #         }
-    #     }
-    #     }
-    # )
+    message = FlexSendMessage(
+        alt_text = '獲利能力',
+        contents = {
+        "type": "bubble",
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "contents": [
+            {
+                "type": "text",
+                "text": title_,
+                "weight": "bold",
+                "color": "#1DB446",
+                "size": "md"
+            },
+            {
+                "type": "text",
+                "text": title[0].text,
+                "weight": "bold",
+                "size": "xxl",
+                "margin": "md"
+            },
+            {
+                "type": "separator",
+                "margin": "xxl"
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "xxl",
+                "spacing": "md",
+                "contents": [
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "期別",
+                        "size": "xl",
+                        "color": "#000000",
+                        "flex": 0,
+                        "weight": "bold"
+                    },
+                    {
+                        "type": "text",
+                        "text": title[3].text,
+                        "size": "xl",
+                        "color": "#000000",
+                        "align": "center",
+                        "weight": "bold",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": title[2].text,
+                        "size": "xl",
+                        "color": "#000000",
+                        "align": "center",
+                        "weight": "bold",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": title[1].text,
+                        "size": "xl",
+                        "color": "#000000",
+                        "align": "center",
+                        "weight": "bold",
+                        "gravity": "center"
+                    }
+                    ],
+                    "spacing": "xxl",
+                    "margin": "lg"
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": a[0].text,
+                        "size": "md",
+                        "color": "#555555",
+                        "align": "start",
+                        "gravity": "center",
+                        "wrap": True
+                    },
+                    {
+                        "type": "text",
+                        "text": a[3].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": a[2].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": a[1].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    }
+                    ],
+                    "spacing": "none",
+                    "margin": "md"
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": b[0].text,
+                        "size": "md",
+                        "color": "#555555",
+                        "margin": "none",
+                        "align": "start",
+                        "gravity": "center",
+                        "wrap": True
+                    },
+                    {
+                        "type": "text",
+                        "text": b[3].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": b[2].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": b[1].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    }
+                    ],
+                    "margin": "md"
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": c[0].text,
+                        "size": "md",
+                        "color": "#555555",
+                        "margin": "none",
+                        "align": "start",
+                        "gravity": "center",
+                        "wrap": True
+                    },
+                    {
+                        "type": "text",
+                        "text": c[3].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": c[2].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": c[1].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    }
+                    ],
+                    "margin": "md"
+                },
+                {
+                    "type": "box",
+                    "layout": "horizontal",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": d[0].text,
+                        "size": "md",
+                        "color": "#555555",
+                        "margin": "none",
+                        "align": "start",
+                        "gravity": "center",
+                        "wrap": True
+                    },
+                    {
+                        "type": "text",
+                        "text": d[3].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": d[2].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    },
+                    {
+                        "type": "text",
+                        "text": d[1].text,
+                        "size": "lg",
+                        "color": "#111111",
+                        "align": "center",
+                        "gravity": "center"
+                    }
+                    ],
+                    "margin": "md"
+                }
+                ]
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                {
+                    "type": "text",
+                    "text": e[0].text,
+                    "size": "md",
+                    "color": "#555555",
+                    "margin": "none",
+                    "align": "start",
+                    "gravity": "center",
+                    "wrap": True
+                },
+                {
+                    "type": "text",
+                    "text": e[3].text,
+                    "size": "lg",
+                    "color": "#111111",
+                    "align": "center",
+                    "gravity": "center"
+                },
+                {
+                    "type": "text",
+                    "text": e[2].text,
+                    "size": "lg",
+                    "color": "#111111",
+                    "align": "center",
+                    "gravity": "center"
+                },
+                {
+                    "type": "text",
+                    "text": e[1].text,
+                    "size": "lg",
+                    "color": "#111111",
+                    "align": "center",
+                    "gravity": "center"
+                }
+                ],
+                "margin": "md"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                {
+                    "type": "text",
+                    "size": "md",
+                    "color": "#555555",
+                    "margin": "none",
+                    "align": "start",
+                    "gravity": "center",
+                    "wrap": True,
+                    "text": f[0].text
+                },
+                {
+                    "type": "text",
+                    "text": f[3].text,
+                    "size": "lg",
+                    "color": "#111111",
+                    "align": "center",
+                    "gravity": "center"
+                },
+                {
+                    "type": "text",
+                    "text": f[2].text,
+                    "size": "lg",
+                    "color": "#111111",
+                    "align": "center",
+                    "gravity": "center"
+                },
+                {
+                    "type": "text",
+                    "text": f[1].text1,
+                    "size": "lg",
+                    "color": "#111111",
+                    "align": "center",
+                    "gravity": "center"
+                }
+                ],
+                "margin": "md"
+            }
+            ],
+            "margin": "none",
+            "spacing": "none",
+            "borderWidth": "none",
+            "cornerRadius": "none"
+        },
+        "styles": {
+            "footer": {
+            "separator": True
+            }
+        }
+        }
+    )
     return f[0].text
