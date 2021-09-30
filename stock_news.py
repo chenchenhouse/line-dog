@@ -277,7 +277,7 @@ def tw_stock():
         title.append(i.get("title"))
         address.append(base + i.get("href"))
     message = FlexSendMessage(
-        alt_text = '頭條新聞',
+        alt_text = '台股新聞',
         contents = {
         "type": "bubble",
         "hero": {
@@ -538,7 +538,7 @@ def wd_stock():
         title.append(i.get("title"))
         address.append(base + i.get("href"))
     message = FlexSendMessage(
-        alt_text = '頭條新聞',
+        alt_text = '國際新聞',
         contents = {
         "type": "bubble",
         "hero": {
