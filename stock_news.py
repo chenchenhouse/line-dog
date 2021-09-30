@@ -18,18 +18,14 @@ def headlines():
     message = FlexSendMessage(
         alt_text = '頭條新聞',
         contents = {
-            "type": "bubble",
+        "type": "bubble",
         "hero": {
-            "type": "image",
-            "url": "https://campaign.cnyes.com/topics/anuesns/images/logo-dark.png",
-            "size": "full",
-            "aspectRatio": "20:13",
-            "aspectMode": "fit",
-            "action": {
-            "type": "uri",
-            "uri": "http://linecorp.com/"
-            },
-            "margin": "none"
+        "type": "image",
+        "url": "https://talkingbiznews.com/wp-content/uploads/2015/04/Yahoo-Finance-new-logo.png",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "fit",
+        "margin": "none"
         },
         "body": {
             "type": "box",
@@ -64,6 +60,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[0])
                         }
                     }
@@ -84,6 +81,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[1])
                         }
                     }
@@ -104,6 +102,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[2])
                         }
                     }
@@ -124,6 +123,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[3])
                         }
                     }
@@ -144,6 +144,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[4])
                         }
                     }
@@ -164,6 +165,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[5])
                         }
                     }
@@ -184,6 +186,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[6])
                         }
                     }
@@ -204,6 +207,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[7])
                         }
                     }
@@ -224,6 +228,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[8])
                         }
                     }
@@ -244,6 +249,7 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
+                        "wrap": True,
                         "uri": str(address[9])
                         }
                     }
