@@ -271,12 +271,260 @@ def tw_stock():
     soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("a",{"class":"_1Zdp"},limit = 10)
     base = "https://news.cnyes.com"
-    news =  ""
+    title = []
+    address = []
     for i in soup1:
-        title = i.get("title")
-        address = base + i.get("href")
-        news += "新聞 : {} \n網址 : {} \n".format(title,address)
-    return news
+        title.append(i.get("title"))
+        address.append(base + i.get("href"))
+    message = FlexSendMessage(
+        alt_text = '頭條新聞',
+        contents = {
+        "type": "bubble",
+        "hero": {
+        "type": "image",
+        "url": "https://campaign.cnyes.com/topics/anuesns/images/logo-dark.png",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "fit",
+        "margin": "none"
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "xs",
+            "contents": [
+            {
+                "type": "text",
+                "text": "財經新聞",
+                "wrap": True,
+                "weight": "bold",
+                "gravity": "center",
+                "size": "3xl"
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[0]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[0])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[1]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[1])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[2]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[2])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[3]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[3])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[4]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[4])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[5]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[5])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[6]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[6])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[7]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[7])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[8]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[8])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[9]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[9])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                }
+                ]
+            }
+            ],
+            "margin": "none"
+        }
+        }
+    )
+    return message
 
 def wd_stock():
     url = "https://news.cnyes.com/news/cat/wd_stock"
@@ -284,12 +532,260 @@ def wd_stock():
     soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("a",{"class":"_1Zdp"},limit = 10)
     base = "https://news.cnyes.com"
-    news =  ""
+    title = []
+    address = []
     for i in soup1:
-        title = i.get("title")
-        address = base + i.get("href")
-        news += "新聞 : {} \n網址 : {} \n".format(title,address)
-    return news
+        title.append(i.get("title"))
+        address.append(base + i.get("href"))
+    message = FlexSendMessage(
+        alt_text = '頭條新聞',
+        contents = {
+        "type": "bubble",
+        "hero": {
+        "type": "image",
+        "url": "https://campaign.cnyes.com/topics/anuesns/images/logo-dark.png",
+        "size": "full",
+        "aspectRatio": "20:13",
+        "aspectMode": "fit",
+        "margin": "none"
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "xs",
+            "contents": [
+            {
+                "type": "text",
+                "text": "財經新聞",
+                "wrap": True,
+                "weight": "bold",
+                "gravity": "center",
+                "size": "3xl"
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[0]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[0])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[1]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[1])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[2]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[2])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[3]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[3])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[4]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[4])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[5]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[5])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[6]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[6])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[7]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[7])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[8]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[8])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": "◆" + str(title[9]),
+                        "color": "#0066FF",
+                        "size": "lg",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[9])
+                        },
+                        "wrap": True
+                    }
+                    ],
+                    "margin": "none"
+                }
+                ]
+            }
+            ],
+            "margin": "none"
+        }
+        }
+    )
+    return message
 
 def stock_new():
     buttons_template_message = TemplateSendMessage( 
