@@ -21,7 +21,7 @@ def headlines():
         "type": "bubble",
         "hero": {
         "type": "image",
-        "url": "https://talkingbiznews.com/wp-content/uploads/2015/04/Yahoo-Finance-new-logo.png",
+        "url": "https://campaign.cnyes.com/topics/anuesns/images/logo-dark.png",
         "size": "full",
         "aspectRatio": "20:13",
         "aspectMode": "fit",
