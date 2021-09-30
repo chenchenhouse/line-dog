@@ -143,10 +143,10 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,news)
     elif re.match("台股新聞",message):
         news = tw_stock()
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
+        line_bot_api.reply_message(event.reply_token,news)
     elif re.match("國際新聞",message):
         news = wd_stock()
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(news))
+        line_bot_api.reply_message(event.reply_token,news)
     elif re.match("選股1",message):
         sel = select_1()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(sel))
