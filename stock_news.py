@@ -54,7 +54,7 @@ def headlines():
                     {
                         "type": "text",
                         "text": str(title[0]),
-                        "color": "##0066FF",
+                        "color": "#0066FF",
                         "size": "xl",
                         "flex": 1,
                         "action": {
@@ -75,7 +75,7 @@ def headlines():
                     {
                         "type": "text",
                         "text": str(title[1]),
-                        "color": "##0066FF",
+                        "color": "#0066FF",
                         "size": "xl",
                         "flex": 1,
                         "action": {
@@ -96,7 +96,7 @@ def headlines():
                     {
                         "type": "text",
                         "text": str(title[2]),
-                        "color": "##0066FF",
+                        "color": "#0066FF",
                         "size": "xl",
                         "flex": 1,
                         "action": {
@@ -117,7 +117,7 @@ def headlines():
                     {
                         "type": "text",
                         "text": str(title[3]),
-                        "color": "##0066FF",
+                        "color": "#0066FF",
                         "size": "xl",
                         "flex": 1,
                         "action": {
