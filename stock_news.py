@@ -55,7 +55,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[0]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
@@ -76,7 +76,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[1]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
@@ -97,7 +97,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[2]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
@@ -118,7 +118,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[3]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
@@ -139,7 +139,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[4]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
@@ -160,7 +160,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[5]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
@@ -181,7 +181,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[6]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
@@ -202,7 +202,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[7]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
@@ -223,7 +223,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[8]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
@@ -244,7 +244,7 @@ def headlines():
                         "type": "text",
                         "text": "◆" + str(title[9]),
                         "color": "#0066FF",
-                        "size": "xl",
+                        "size": "lg",
                         "flex": 1,
                         "action": {
                         "type": "uri",
