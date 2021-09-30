@@ -60,9 +60,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[0])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
@@ -81,9 +81,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[1])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
@@ -102,9 +102,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[2])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
@@ -123,9 +123,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[3])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
@@ -144,9 +144,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[4])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
@@ -165,9 +165,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[5])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
@@ -186,9 +186,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[6])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
@@ -207,9 +207,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[7])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
@@ -228,9 +228,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[8])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
@@ -249,9 +249,9 @@ def headlines():
                         "action": {
                         "type": "uri",
                         "label": "action",
-                        "wrap": True,
                         "uri": str(address[9])
-                        }
+                        },
+                        "wrap": True
                     }
                     ],
                     "margin": "none"
