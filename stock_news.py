@@ -10,12 +10,254 @@ def headlines():
     soup = BeautifulSoup(res.text,"html.parser")
     soup1 = soup.find_all("a",{"class":"_1Zdp"},limit = 10)
     base = "https://news.cnyes.com"
-    news =  ""
+    title = []
+    address = []
     for i in soup1:
-        title = i.get("title")
-        address = base + i.get("href")
-        news += "新聞 : {} \n網址 : {} \n".format(title,address)
-    return news
+        title.append(i.get("title"))
+        address.append(base + i.get("href"))
+    message = FlexSendMessage(
+        alt_text = '頭條新聞',
+        contents = {
+            "type": "bubble",
+        "hero": {
+            "type": "image",
+            "url": "https://campaign.cnyes.com/topics/anuesns/images/logo-dark.png",
+            "size": "full",
+            "aspectRatio": "20:13",
+            "aspectMode": "fit",
+            "action": {
+            "type": "uri",
+            "uri": "http://linecorp.com/"
+            },
+            "margin": "none"
+        },
+        "body": {
+            "type": "box",
+            "layout": "vertical",
+            "spacing": "xs",
+            "contents": [
+            {
+                "type": "text",
+                "text": "財經新聞",
+                "wrap": True,
+                "weight": "bold",
+                "gravity": "center",
+                "size": "3xl"
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "lg",
+                "spacing": "sm",
+                "contents": [
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[0]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[0])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[1]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[1])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[2]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[2])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[3]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[3])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[4]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[4])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[5]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[5])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[6]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[6])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[7]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[7])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[8]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[8])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                },
+                {
+                    "type": "box",
+                    "layout": "baseline",
+                    "spacing": "md",
+                    "contents": [
+                    {
+                        "type": "text",
+                        "text": str(title[9]),
+                        "color": "#00DD00",
+                        "size": "xl",
+                        "flex": 1,
+                        "action": {
+                        "type": "uri",
+                        "label": "action",
+                        "uri": str(address[9])
+                        }
+                    }
+                    ],
+                    "margin": "none"
+                }
+                ]
+            }
+            ],
+            "margin": "none"
+        }
+        }
+    )
+    return message
 
 def tw_stock():
     url = "https://news.cnyes.com/news/cat/tw_stock"
