@@ -14,4 +14,4 @@ pyimgur
 mpl_finance
 arrow
 jieba
-mysql
+mysql.connector
