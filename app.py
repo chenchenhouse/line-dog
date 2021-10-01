@@ -16,6 +16,7 @@ from stock import *
 from stock_news import *
 from stock_select import *
 from stock_base import *
+from stock_list import *
 #*********function*****************
 
 
@@ -158,7 +159,13 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,base) 
     elif "經營能力 " in message:
         base = base_3(message)
-        line_bot_api.reply_message(event.reply_token,base)           
+        line_bot_api.reply_message(event.reply_token,base) 
+    elif "關注 " in message:
+        add = stock_database_add(message[3:])
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(add))
+    elif "取消關注 " in message:
+        delt = stock_database_del(message[5:])
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(delt))
     elif re.match("退出",message):
         line_bot_api.reply_message(event.reply_token,TextSendMessage("那我先休息囉!!"))
     else:
