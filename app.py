@@ -160,12 +160,12 @@ def handle_message(event):
     elif "經營能力 " in message:
         base = base_3(message)
         line_bot_api.reply_message(event.reply_token,base) 
-    elif "關注 " in message:
-        add = stock_database_add(message[3:])
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(add))
     elif "取消關注 " in message:
         delt = stock_database_del(message[5:])
         line_bot_api.reply_message(event.reply_token,TextSendMessage(delt))
+    elif "關注 " in message:
+        add = stock_database_add(message[3:])
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(add))
     elif re.match("查詢關注",message):
         find = find_list()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(find))
