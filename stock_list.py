@@ -46,7 +46,7 @@ def stock_database_del(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
     connection = mysql.connector.connect(host = "us-cdbr-east-04.cleardb.com",
-                                        port = "3306",
+                                         port = "3306",
                                         user = "b86c99dac9f77e",
                                         password = "b183a5fc",
                                         database = "heroku_f983eed4d77f4a1",
