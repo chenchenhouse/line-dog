@@ -279,7 +279,8 @@ def one_new(message):
                             "type": "uri",
                             "label": "action",
                             "uri": str(address[0])
-                            }
+                            },
+                            "wrap": True
                         }
                         ]
                     },
@@ -304,7 +305,8 @@ def one_new(message):
                                 "type": "uri",
                                 "label": "action",
                                 "uri": str(address[1])
-                                }
+                                },
+                                "wrap": True
                             }
                             ]
                         }
@@ -331,7 +333,8 @@ def one_new(message):
                                 "type": "uri",
                                 "label": "action",
                                 "uri": str(address[2])
-                                }
+                                },
+                                "wrap": True
                             }
                             ]
                         }
@@ -358,7 +361,8 @@ def one_new(message):
                                 "type": "uri",
                                 "label": "action",
                                 "uri": str(address[3])
-                                }
+                                },
+                                "wrap": True
                             }
                             ]
                         }
@@ -385,7 +389,8 @@ def one_new(message):
                                 "type": "uri",
                                 "label": "action",
                                 "uri": str(address[4])
-                                }
+                                },
+                                "wrap": True
                             }
                             ]
                         }
@@ -412,7 +417,8 @@ def one_new(message):
                                 "type": "uri",
                                 "label": "action",
                                 "uri": str(address[5])
-                                }
+                                },
+                                "wrap": True
                             }
                             ]
                         }
@@ -439,7 +445,8 @@ def one_new(message):
                                 "type": "uri",
                                 "label": "action",
                                 "uri": str(address[6])
-                                }
+                                },
+                                "wrap": True
                             }
                             ]
                         }
@@ -466,7 +473,8 @@ def one_new(message):
                                 "type": "uri",
                                 "label": "action",
                                 "uri": str(address[7])
-                                }
+                                },
+                                "wrap": True
                             }
                             ]
                         }
@@ -493,7 +501,8 @@ def one_new(message):
                                 "type": "uri",
                                 "label": "action",
                                 "uri": str(address[8])
-                                }
+                                },
+                                "wrap": True
                             }
                             ]
                         }
@@ -520,7 +529,8 @@ def one_new(message):
                                 "type": "uri",
                                 "label": "action",
                                 "uri": str(address[9])
-                                }
+                                },
+                                "wrap": True
                             }
                             ]
                         }
