@@ -78,7 +78,7 @@ def handle_message(event):
     elif "個股新聞 " in message:
         new_one = one_new(message[5:])
         cont = continue_after(message[5:])
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(new_one),cont])
+        line_bot_api.reply_message(event.reply_token,[new_one,cont])
     elif "平均股利 " in message:
         contiun = contiun_dividend(message[5:])
         dividend_one = average_dividend(message[5:])
