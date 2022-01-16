@@ -110,11 +110,11 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,flex_message)
     elif "最新法人買賣超 " in message:
         inv = investors(message[8:])
-        cont = continue_after(message[8:])
+        cont = continue_after_BS(message[8:])
         line_bot_api.reply_message(event.reply_token,[inv,cont])
     elif "歷年法人買賣超 " in message:
         t_d = total_data(message[8:])
-        cont = continue_after(message[8:])
+        cont = continue_after_BS(message[8:])
         line_bot_api.reply_message(event.reply_token,[t_d,cont])
     elif "外資買賣超 " in message:
         t_m = total_major(message[6:])
