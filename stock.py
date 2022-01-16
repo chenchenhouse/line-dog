@@ -1189,7 +1189,7 @@ def continue_after_BS(message):
             ),
             MessageAction( 
                 label="不用了", 
-                text= "是否繼續查詢" + message
+                text= "是否繼續查詢 " + message
             ) 
         ]    
     ) )
