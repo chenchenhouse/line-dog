@@ -172,6 +172,8 @@ def handle_message(event):
     elif re.match("查詢關注",message):
         find = find_list()
         line_bot_api.reply_message(event.reply_token,TextSendMessage(find))
+    elif re.match("操作說明",message):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage("抱歉>_<我們正盡速製作中"))
     elif re.match("退出",message):
         line_bot_api.reply_message(event.reply_token,TextSendMessage("那我先休息囉!!"))
     else:
