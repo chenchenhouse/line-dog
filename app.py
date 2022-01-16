@@ -135,7 +135,10 @@ def handle_message(event):
         t_m = total_major(message[8:])
         m_i = major_inv(message[8:],t_m)
         cont = continue_after(message[8:])
-        line_bot_api.reply_message(event.reply_token,[m_i,cont])  
+        line_bot_api.reply_message(event.reply_token,[m_i,cont])
+    elif "是否繼續查詢 " in message:
+        cont = continue_after(message[7:])
+        line_bot_api.reply_message(event.reply_token,cont)
     elif re.match("新聞",message):
         news = stock_new()
         line_bot_api.reply_message(event.reply_token,news)
