@@ -20,7 +20,7 @@ def select_1():
       soup1 = soup.find("tr",{"id":"hrow0"}).text
   except:
       print("目前無符合標準的個股")
-  jieba.load_userdict(r'C:\Users\adsad\OneDrive\Desktop\機器學習\line\斷字.txt')
+  jieba.load_userdict('./斷字.txt')
   seg_list = jieba.lcut(soup1)
   stock_id = []
   stock_name = []
