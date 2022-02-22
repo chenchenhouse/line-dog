@@ -14,7 +14,7 @@ def flex():
                     "action": 
                     {
                         "type": "uri",
-                        "uri": "https://linecorp.com"
+                        "uri": "https://chenchenhouse.com//"
                     },
                     "url": "https://chenchenhouse.com//wp-content/uploads/2020/10/%E5%9C%96%E7%89%871-2.png"
                 },
@@ -26,7 +26,7 @@ def flex():
                     "action": 
                     {
                         "type": "uri",
-                        "uri": "https://linecorp.com"
+                        "uri": "https://chenchenhouse.com//"
                     },
                     "contents": 
                     [
