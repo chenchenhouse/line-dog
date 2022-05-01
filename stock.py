@@ -116,36 +116,37 @@ def average_dividend(message):
 def year_dividend(message):
     if not re.match(r"[+-]?\d+$", message):
         message = stock_change(message)
-    url = "https://tw.stock.yahoo.com/quote/" + str(message) + "/dividend"
-    headers = {
-        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36"
-    }
-    res = requests.get(url,headers= headers)
-    while str(res) != "<Response [200]>":
-        res = requests.get(url,headers= headers)
-    soup = BeautifulSoup(res.text,"html.parser")
-    soup_period = soup.find_all("div",{"class" :"D(f) W(98px) Ta(start)"})[1:]
-    period = []
-    for i in soup_period:
-        period.append(i.text)
-    soup_dividend = soup.find_all("div",{"class":"Fxg(1) Fxs(1) Fxb(0%) Ta(end) Mend($m-table-cell-space) Mend(0):lc Miw(68px)"})[3:]
-    cash_dividend = []
-    stock_dividend = []
-    Interest_days = []
-    for i in range(0,len(soup_dividend),3):
-        cash_dividend.append(soup_dividend[i].text)
-        stock_dividend.append(soup_dividend[i+1].text)
-        Interest_days.append(soup_dividend[i+2].text)
-    soup_date = soup.find_all("div",{"class":"Fxg(1) Fxs(1) Fxb(0%) Ta(end) Mend($m-table-cell-space) Mend(0):lc Miw(108px)"})[2:]
-    Ex_dividend_date = []
-    Dividend_payment_date = []
-    for i in range(0,len(soup_date),2):
-        Ex_dividend_date.append(soup_date[i].text)
-        Dividend_payment_date.append(soup_date[i+1].text)
-    df = pd.DataFrame({"股利所屬期間":period,"現金股利":cash_dividend,"股票股利":stock_dividend,"填息天數":Interest_days,
-                       "除權息日":Ex_dividend_date,"股利發放日":Dividend_payment_date})
-    df.index = df["股利所屬期間"]
-    df.drop("股利所屬期間",axis = 1,inplace=True)
+    chrome_options = Options()
+    chrome_options.binary_location = GOOGLE_CHROME_BIN
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--no-sandbox')
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+    data_all = []
+    browser.get("https://goodinfo.tw/tw/StockDividendPolicy.asp?STOCK_ID=2330")
+    soup = BeautifulSoup(browser.page_source, "lxml")
+    tr = soup.find("table", {"id": "tblDetail"}).find_all("tr", {"align": "center"})
+    for t in range(len(tr)):
+        td = tr[t].find_all("td")
+        year = td[0].text
+        cash_d = td[3].text
+        stock_d = td[7].text
+        fill_cash = td[10].text
+        fill_stock = td[11].text
+        yield_ = td[18].text
+        Earnings_ratio = td[23].text
+        data_one = {
+            "發放年份": year,
+            "現金股利": cash_d,
+            "股票股利": stock_d,
+            "填息日數": fill_cash,
+            "填權日數": fill_stock,
+            "年均殖利率": yield_,
+            "盈餘分配率": Earnings_ratio
+        }
+        data_all.append(data_one)
+    df = pd.DataFrame(data_all)
+    df.index = df["發放年份"]
+    df.drop(["發放年份"], axis=1, inplace=True)
     plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei'] 
     plt.rcParams['axes.unicode_minus'] = False
     plt.figure('歷年股利')            # 視窗名稱
