@@ -24,11 +24,11 @@ from stock_list import *
 app = Flask(__name__)
 
 # 必須放上自己的Channel Access Token
-line_bot_api = LineBotApi('GMa6mfFfZZqtABUP9FgglJT5hDxbk5CgbkEqAJKtbbwS1RFNDlATTsdymJaJL7sb/OLwdPJ8hvIS9TYMAnj9ZLb9QuFbL4dCLf2TbyBnuq+XtKBhfotGSkdBJflw0QGQxbKocTXOfPmT6IqkkMG1BAdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('自己的Channel Access Token')
 # 必須放上自己的Channel Secret
-handler = WebhookHandler('4f5e5ee97334958569ff5a80f5744880')
+handler = WebhookHandler('自己的Channel Secret')
 
-line_bot_api.push_message('Ub2085f17e1830eb1e1612d30130cc761', TextSendMessage(text='你可以開始了'))
+line_bot_api.push_message('自己的UNIQUE ID', TextSendMessage(text='你可以開始了'))
 
 
 # 監聽所有來自 /callback 的 Post Request
