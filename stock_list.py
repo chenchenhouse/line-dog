@@ -11,11 +11,11 @@ def stock_database_add(message):
     try:
         if not re.match(r"[+-]?\d+$", message):
             message = stock_change(message)
-            connection = mysql.connector.connect(host = "us-cdbr-east-04.cleardb.com",
-                                                port = "3306",
-                                                user = "b86c99dac9f77e",
-                                                password = "b183a5fc",
-                                                database = "heroku_f983eed4d77f4a1",
+            connection = mysql.connector.connect(host = "",
+                                                port = "",
+                                                user = "",
+                                                password = "",
+                                                database = "",
                                                 charset = 'utf8')
             cursor = connection.cursor()
             url_ = "https://isin.twse.com.tw/isin/class_main.jsp?owncode=&stockname=&isincode=&market=1&issuetype=1&industry_code=&Page=1&chklike=Y"
